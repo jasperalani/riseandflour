@@ -1,0 +1,6 @@
+{
+    "require-dev": {
+        "php-stubs/wordpress-stubs": "^6.7",
+        "squizlabs/php_codesniffer": "^2.2"
+    }
+}

@@ -1,0 +1,42 @@
+#menu {
+	h1 {
+		margin: 0 0 50px 0;
+	}
+
+	h4 {
+		padding-left: 50px;
+		i {
+			font-family: "Roboto", sans-serif;
+		}
+	}
+
+	.row:not(:first-child) {
+		margin-top: 50px;
+	}
+
+	.menu-item {
+		padding: 20px 50px;
+
+		p {
+			font-size: 20px;
+
+			&.item-price {
+				margin-right: 10px;
+			}
+		}
+
+		.menu-feature-image {
+			width: 100%;
+		}
+
+		&.menu-item-addons {
+			p {
+				font-size: 22px;
+			}
+		}
+	}
+
+	.item-desc {
+		font-family: $roboto;
+	}
+}

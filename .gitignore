@@ -1,0 +1,8 @@
+composer.lock
+/vendor
+.env
+/.idea
+/img
+/plugins
+/old
+/uploads
