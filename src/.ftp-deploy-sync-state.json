@@ -1,7 +1,7 @@
 {
     "description": "DO NOT DELETE THIS FILE. This file is used to keep track of which files have been synced in the most recent deployment. If you delete this file a resync will need to be done (which can take a while) - read more: https://github.com/SamKirkland/FTP-Deploy-Action",
     "version": "1.0.0",
-    "generatedTime": 1745736233074,
+    "generatedTime": 1745736684253,
     "data": [
         {
             "type": "file",
@@ -12,8 +12,8 @@
         {
             "type": "file",
             "name": ".ftp-deploy-sync-state.json",
-            "size": 12559,
-            "hash": "72a57e7be54303f9cd0c1f6d0779556ce55adab065576245540e430924b9db61"
+            "size": 12773,
+            "hash": "2429e1b30e8ed5a89f89186b512eec049a5d99e1289390c18729eb02bc060174"
         },
         {
             "type": "file",
@@ -106,10 +106,6 @@
             "name": "js"
         },
         {
-            "type": "folder",
-            "name": "languages"
-        },
-        {
             "type": "file",
             "name": "location.php",
             "size": 1904,
@@ -122,16 +118,14 @@
             "hash": "cee51cf6729a13e37a508e0bf702f6f65054fd04cf968b9e6630c733c9d0aa80"
         },
         {
+            "type": "folder",
+            "name": "languages"
+        },
+        {
             "type": "file",
             "name": "ourfood.php",
             "size": 1527,
             "hash": "5060b414c9d6982380098a56af3a27b1190e59933b9369379c94204ed7ca370d"
-        },
-        {
-            "type": "file",
-            "name": "package.json",
-            "size": 1743,
-            "hash": "f261442ab1d217f706c834d89ef8c42c18c2ebbfbf96eb3d6648d0ddd7ec76a9"
         },
         {
             "type": "file",
@@ -144,6 +138,12 @@
             "name": "phpcs.xml.dist",
             "size": 4042,
             "hash": "2e4718a891426078c2521a427d3991fd680e402a41dee168d999cc737b82dd01"
+        },
+        {
+            "type": "file",
+            "name": "package.json",
+            "size": 1743,
+            "hash": "f261442ab1d217f706c834d89ef8c42c18c2ebbfbf96eb3d6648d0ddd7ec76a9"
         },
         {
             "type": "file",
@@ -209,15 +209,15 @@
         },
         {
             "type": "file",
-            "name": "inc/jetpack.php",
-            "size": 1589,
-            "hash": "900bd6652907f4c069edf7b82349eea1c17b07d86ebd980dbcea29c050a8ef51"
-        },
-        {
-            "type": "file",
             "name": "inc/template-functions.php",
             "size": 942,
             "hash": "67dc189f046c9c62c4df75c28dc8f1373ca38a3abd8a658332ba4f2825d87ed3"
+        },
+        {
+            "type": "file",
+            "name": "inc/jetpack.php",
+            "size": 1589,
+            "hash": "900bd6652907f4c069edf7b82349eea1c17b07d86ebd980dbcea29c050a8ef51"
         },
         {
             "type": "file",
@@ -309,12 +309,6 @@
         },
         {
             "type": "file",
-            "name": "scss/style/_fonts.scss",
-            "size": 100,
-            "hash": "3128099806b96383186febb947d4cb998a189b47e837802dd0342cdb90ef0e00"
-        },
-        {
-            "type": "file",
             "name": "scss/style/_footer.scss",
             "size": 243,
             "hash": "63eb240a5eb33fcfd0f343ba96a8fbdcd699d2955cb594dab22cdca37408cded"
@@ -378,6 +372,12 @@
             "name": "scss/style/reservations.scss",
             "size": 103,
             "hash": "4a7868ba99417e8812242a21091d574d63f59aff2035313c08d99a27776744e3"
+        },
+        {
+            "type": "file",
+            "name": "scss/style/_fonts.scss",
+            "size": 100,
+            "hash": "3128099806b96383186febb947d4cb998a189b47e837802dd0342cdb90ef0e00"
         }
     ]
 }
