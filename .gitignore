@@ -6,3 +6,4 @@ composer.lock
 /plugins
 /old
 /uploads
+/node_modules

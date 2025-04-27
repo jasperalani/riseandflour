@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying the footer
  *
@@ -16,13 +17,13 @@
 
 		<div class="row">
 
-			<div class="col-lg-2 col-md-6 col-sm-12 col-12 site-title">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+			<div class="col-lg-6 col-sm-12 col-12 site-title">
+				<a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
 					Rise & Flour
 				</a>
 			</div>
 
-			<div class="col-lg-1 col-md-6" id="social-icons">
+			<div class="col-lg-6" id="social-icons">
 
 				<div style="display: flex;">
 
@@ -38,34 +39,18 @@
 
 			</div>
 
-			<div class="col-lg-9 col-md-12">
-
-				<?php
-				wp_nav_menu(
-					array(
-						'theme_location' => 'menu-1',
-						'menu_id'        => 'primary-menu',
-					)
-				);
-
-		// <div class="d-flex justify-content-center flex-column back-to-top">
-		// 	<i class="fa-solid fa-chevron-up"></i>
-		// </div> 
-
-				?>
-			</div>
-
 		</div> <!-- end row -->
 
 	</div>
 </footer><!-- #colophon -->
+
 </div><!-- #page -->
 
 <?php
 
 footer_credit();
 show_scroll_to_top_button();
-wp_footer(); 
+wp_footer();
 
 ?>
 

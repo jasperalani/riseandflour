@@ -598,4 +598,69 @@ figcaption {
 #page #careers-text-content p {
   font-family: "Roboto", sans-serif;
   font-size: 18px;
+}
+
+#events-list h1,
+#events-list h2,
+#events-list h3,
+#events-list h4,
+#events-list h5,
+#events-list a,
+#events-list p,
+#events-list div,
+#events-list span,
+#single-event h1,
+#single-event h2,
+#single-event h3,
+#single-event h4,
+#single-event h5,
+#single-event a,
+#single-event p,
+#single-event div,
+#single-event span {
+  font-family: "Roboto", sans-serif;
+}
+
+#events-list ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+#events-list ul li:first-child {
+  margin-left: 0;
+}
+#events-list ul li {
+  list-style-type: none;
+  margin: 12px;
+}
+#events-list ul li a {
+  color: black;
+  text-decoration: none;
+}
+#events-list ul li .event-content {
+  padding: 24px;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 250px;
+}
+#events-list ul li .event-content img {
+  width: 100%;
+  height: auto;
+}
+#events-list ul li .event-content .title {
+  margin-top: 12px;
+}
+#events-list ul li .event-content .content {
+  font-family: "Roboto", sans-serif;
+}
+#events-list ul li .event-content p.title,
+#events-list ul li .event-content p.content {
+  color: black;
+  text-decoration: none;
+}
+
+#single-event img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }/*# sourceMappingURL=index.css.map */

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template Name: Location
  * The template for displaying all pages
@@ -12,7 +13,6 @@
  *
  * @package riseandflour
  */
-
 get_header();
 
 $fields = get_fields();
@@ -34,7 +34,7 @@ $fields = get_fields();
 					<p>We are located at</p>
 					<h3>
 						The Elms, Shipton Rd, Milton-under-Wychwood
-						Chipping Norton OX7 6JW
+						Chipping Norton OX7 6JP
 					</h3>
 
 					<div class="d-flex" style="margin-top: 20px;"><i class="p-2 fa-solid fa-phone"></i> <a href="tel:<?= $fields['phone_number'] ?? '' ?>"><?= $fields['phone_number'] ?? '' ?></a></div>
