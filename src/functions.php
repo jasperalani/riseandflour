@@ -198,7 +198,7 @@ function footer_credit()
     ?>
     <div id="footer-credit">
         <div class="m-2 copyright text-center">
-            Rise & Flour © <?= date_i18n('Y'); ?> • Website by <a
+            © Rise & Flour <?= date_i18n('Y'); ?> • Website by <a
                     style="color: black; text-decoration: none; border-bottom: 1px solid black;"
                     href="https://github.com/jasperalani">Jasper Alani</a>
         </div>
