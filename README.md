@@ -3,8 +3,10 @@
 ## todo
 
 - change postcode to ending in 6JP in all places
-- add events page, add first event from the brochure in canva
+- done - add events page, add first event from the brochure in canva
+  - add "Passed" flag for old events
   - add categories: Brunch Talks, Supper Clubs
+  - add sorting
   - add calender
 - create email list
   - page to sign up to email list
