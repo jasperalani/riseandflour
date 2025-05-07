@@ -10,14 +10,15 @@ get_header();
     <?php
     if (have_posts()):
         while (have_posts()):
-            ?>
+            ?>  
             <?php
             the_post();
 
             $title = get_the_title() ?? 'Event title';
             $date_time = get_field('date_time') ?? '';
             $content = get_the_content() ?? '';
-            $image = get_the_post_thumbnail_url() ?? '';
+            $thumbnail_image = get_the_post_thumbnail_url() ?? '';
+            $gallery = get_field('images') ?? [];
 
             $custom_height_toggle = get_field('image_height');
             $image_height = 'auto';
@@ -34,12 +35,18 @@ get_header();
             }
 
             if ($content) {
-                echo "<p>{$title}</p>";
+                echo "<p>{$content}</p>";
             }
 
-            if ($image) {
+            if (!empty($gallery)) {
+                foreach ($gallery as $img) {
+                    ?>
+                    <img style="height: <?= $image_height ?>" src="<?= $img ?>" alt="Event image"/>
+                    <?php
+                }
+            } elseif (!empty($thumbnail_image)) {
                 ?>
-                <img style="height: <?= $image_height ?>" src="<?= $image ?>" alt="Event image"/>
+                <img style="height: <?= $image_height ?>" src="<?= $thumbnail_image ?>" alt="Event image"/>
                 <?php
             }
         endwhile;
