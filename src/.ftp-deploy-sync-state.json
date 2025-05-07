@@ -1,7 +1,7 @@
 {
     "description": "DO NOT DELETE THIS FILE. This file is used to keep track of which files have been synced in the most recent deployment. If you delete this file a resync will need to be done (which can take a while) - read more: https://github.com/SamKirkland/FTP-Deploy-Action",
     "version": "1.0.0",
-    "generatedTime": 1745736684253,
+    "generatedTime": 1745742936446,
     "data": [
         {
             "type": "file",
@@ -13,7 +13,7 @@
             "type": "file",
             "name": ".ftp-deploy-sync-state.json",
             "size": 12773,
-            "hash": "2429e1b30e8ed5a89f89186b512eec049a5d99e1289390c18729eb02bc060174"
+            "hash": "8ad74cc52e057fc9d3be2aff5c10cb9a1ce39d9877e5b03bfa6d6a89de0a50e1"
         },
         {
             "type": "file",
@@ -29,21 +29,21 @@
         },
         {
             "type": "file",
-            "name": "LICENSE",
-            "size": 18046,
-            "hash": "db296f2f7f35bca3a174efb0eb392b3b17bd94b341851429a3dff411b1c2fc73"
-        },
-        {
-            "type": "file",
             "name": "README.md",
             "size": 4485,
             "hash": "91fb21f043e1bd53b97cd251828b22a7c74d2770af3e6e02148caa310b7f4e51"
         },
         {
             "type": "file",
+            "name": "LICENSE",
+            "size": 18046,
+            "hash": "db296f2f7f35bca3a174efb0eb392b3b17bd94b341851429a3dff411b1c2fc73"
+        },
+        {
+            "type": "file",
             "name": "archive-events.php",
-            "size": 1293,
-            "hash": "6f32c4f8598a953b19bdc5c479da9399d7ab7dd3caf644f97ef5ff923b0de776"
+            "size": 1584,
+            "hash": "2938555e3e9124a10d9579645ff09bfc847474b0e602fce6c8677da46f6ce435"
         },
         {
             "type": "file",
@@ -70,14 +70,14 @@
         {
             "type": "file",
             "name": "footer.php",
-            "size": 1024,
-            "hash": "b382a32c09b0d6f04ced702d81f33429ad8459fcde6404c26274d99f9cebdbc1"
+            "size": 1098,
+            "hash": "c11445423d39bfcdbed0d5bf5e2b5be0d69e4291a5dd5f162eb15ebef2918cec"
         },
         {
             "type": "file",
             "name": "functions.php",
             "size": 7472,
-            "hash": "fab4909056a7c88ee5781b9d00a92e830261ecaa2649eac715092bd48d9507df"
+            "hash": "eb72ea061e081ac0f125c3d100807c05036987b98148f886824808f7a1251ecf"
         },
         {
             "type": "file",
@@ -106,6 +106,10 @@
             "name": "js"
         },
         {
+            "type": "folder",
+            "name": "languages"
+        },
+        {
             "type": "file",
             "name": "location.php",
             "size": 1904,
@@ -118,14 +122,16 @@
             "hash": "cee51cf6729a13e37a508e0bf702f6f65054fd04cf968b9e6630c733c9d0aa80"
         },
         {
-            "type": "folder",
-            "name": "languages"
-        },
-        {
             "type": "file",
             "name": "ourfood.php",
             "size": 1527,
             "hash": "5060b414c9d6982380098a56af3a27b1190e59933b9369379c94204ed7ca370d"
+        },
+        {
+            "type": "file",
+            "name": "package.json",
+            "size": 1743,
+            "hash": "f261442ab1d217f706c834d89ef8c42c18c2ebbfbf96eb3d6648d0ddd7ec76a9"
         },
         {
             "type": "file",
@@ -141,12 +147,6 @@
         },
         {
             "type": "file",
-            "name": "package.json",
-            "size": 1743,
-            "hash": "f261442ab1d217f706c834d89ef8c42c18c2ebbfbf96eb3d6648d0ddd7ec76a9"
-        },
-        {
-            "type": "file",
             "name": "readme.txt",
             "size": 1140,
             "hash": "7c5068780224d86a20169f3486928c0ee99ddf485639f65ed2ad52dcd4d82a34"
@@ -158,20 +158,14 @@
             "hash": "9100e22cec5df3ffd118ec37a7fd1f42b0e62a8c261079d69595f2c89f675358"
         },
         {
-            "type": "file",
-            "name": "screenshot.png",
-            "size": 264,
-            "hash": "7e4bc613f200af7487c0da58919280ce263cb66a7bc6b800922bbae6573d8bff"
-        },
-        {
             "type": "folder",
             "name": "scss"
         },
         {
             "type": "file",
             "name": "single-events.php",
-            "size": 1263,
-            "hash": "f6534afc658041dbe584be3c7b348793df0e1cdc39f9a1c6573aa6c35f390dd7"
+            "size": 1609,
+            "hash": "a4488b47ed227a2b87420b90543de55ff0f5ddf29d12493be7b35dc5c5dda01e"
         },
         {
             "type": "file",
@@ -188,6 +182,12 @@
         {
             "type": "folder",
             "name": "template-parts"
+        },
+        {
+            "type": "file",
+            "name": "screenshot.png",
+            "size": 264,
+            "hash": "7e4bc613f200af7487c0da58919280ce263cb66a7bc6b800922bbae6573d8bff"
         },
         {
             "type": "file",
@@ -209,15 +209,15 @@
         },
         {
             "type": "file",
-            "name": "inc/template-functions.php",
-            "size": 942,
-            "hash": "67dc189f046c9c62c4df75c28dc8f1373ca38a3abd8a658332ba4f2825d87ed3"
-        },
-        {
-            "type": "file",
             "name": "inc/jetpack.php",
             "size": 1589,
             "hash": "900bd6652907f4c069edf7b82349eea1c17b07d86ebd980dbcea29c050a8ef51"
+        },
+        {
+            "type": "file",
+            "name": "inc/template-functions.php",
+            "size": 942,
+            "hash": "67dc189f046c9c62c4df75c28dc8f1373ca38a3abd8a658332ba4f2825d87ed3"
         },
         {
             "type": "file",
@@ -246,14 +246,14 @@
         {
             "type": "file",
             "name": "scss/index.css",
-            "size": 13024,
-            "hash": "7cf4689e7f516d2fb99cb5271fac669ddc094148913ad71b112e53d02dcf364d"
+            "size": 13044,
+            "hash": "be59cce11f528f0fadcde6841ed683357f9446a2cb74def26ad380f31835495d"
         },
         {
             "type": "file",
             "name": "scss/index.css.map",
-            "size": 5233,
-            "hash": "004749e498035c91e2dbad56cfd0c60c5e1b245661a36cb5519c4eb071f6e60c"
+            "size": 5244,
+            "hash": "1b111a6cc5cd0f8502951bc97680563d92e0599d634a54245f3063d2cccd2762"
         },
         {
             "type": "file",
@@ -304,8 +304,14 @@
         {
             "type": "file",
             "name": "scss/style/_events.scss",
-            "size": 917,
-            "hash": "43adead0b71f67c9d2a4bb9c31dc5cf2f1c5ffa5546ffa95fd67d586f3a6b393"
+            "size": 939,
+            "hash": "54c95c90086a297f8768f899676e47e430132f1f8d9876f11c915cd1455366b1"
+        },
+        {
+            "type": "file",
+            "name": "scss/style/_fonts.scss",
+            "size": 100,
+            "hash": "3128099806b96383186febb947d4cb998a189b47e837802dd0342cdb90ef0e00"
         },
         {
             "type": "file",
@@ -327,12 +333,6 @@
         },
         {
             "type": "file",
-            "name": "scss/style/_location.scss",
-            "size": 117,
-            "hash": "373634a538b9a216a9cea7235cea056dd1b405d50796891f11239324da3fcdfd"
-        },
-        {
-            "type": "file",
             "name": "scss/style/_menu.scss",
             "size": 437,
             "hash": "4009007a292ea6e838c63933579cb1421fc93c5dd58fc2cafdcb3a4780609fad"
@@ -342,6 +342,12 @@
             "name": "scss/style/_mobile.scss",
             "size": 3357,
             "hash": "4cd4294e5c5dd88fd9504ea40e851eb2f9cf437699bf9554c1ed0ac9461a3d65"
+        },
+        {
+            "type": "file",
+            "name": "scss/style/_location.scss",
+            "size": 117,
+            "hash": "373634a538b9a216a9cea7235cea056dd1b405d50796891f11239324da3fcdfd"
         },
         {
             "type": "file",
@@ -363,21 +369,15 @@
         },
         {
             "type": "file",
-            "name": "scss/style/reservations.css.map",
-            "size": 156,
-            "hash": "8621205c86170cb9201b9b145902239d801b595aa6971dd9faff0900396535d7"
-        },
-        {
-            "type": "file",
             "name": "scss/style/reservations.scss",
             "size": 103,
             "hash": "4a7868ba99417e8812242a21091d574d63f59aff2035313c08d99a27776744e3"
         },
         {
             "type": "file",
-            "name": "scss/style/_fonts.scss",
-            "size": 100,
-            "hash": "3128099806b96383186febb947d4cb998a189b47e837802dd0342cdb90ef0e00"
+            "name": "scss/style/reservations.css.map",
+            "size": 156,
+            "hash": "8621205c86170cb9201b9b145902239d801b595aa6971dd9faff0900396535d7"
         }
     ]
 }
