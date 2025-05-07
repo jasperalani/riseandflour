@@ -27,11 +27,11 @@
 
 				<div style="display: flex;">
 
-					<a target="_blank" href="<?= get_field('instagram') ?>">
+					<a target="_blank" href="https://www.instagram.com/rise.and.flour/?hl=en">
 						<i id='instagram-icon' class="fa-brands fa-instagram"></i>
 					</a>
 
-					<a target="_blank" href="<?= get_field('facebook') ?>">
+					<a target="_blank" href="https://www.facebook.com/p/Rise-Flour-Artisan-Sourdough-Bakery-Cafe-100082989786663/">
 						<i id='facebook-icon' class="fa-brands fa-facebook"></i>
 					</a>
 
