@@ -4,7 +4,7 @@
  */
 
 get_header();
-$email_sent = form_send_email("Message from contact form: careers", "contact@riseandflour.co.uk")
+$email_sent = form_send_email("Message from contact form: careers", "joanna.alani@riseandflour.co.uk")
 
 ?>
 
@@ -32,7 +32,7 @@ $email_sent = form_send_email("Message from contact form: careers", "contact@ris
 
                     <p>If you have a love for all things culinary and want to help us create more Rise and Flour magic, we may have the perfect position for you. On one condition… you must love cookies!</p>
 
-                    <p>We're always looking for great people to join our growing team—apply today by emailing us at contact@riseandflour.co.uk</p>
+                    <p>We're always looking for great people to join our growing team—apply today by emailing us at joanna.alani@riseandflour.co.uk</p>
 
                     <p class="pt-20">Positions available:</p>
 
