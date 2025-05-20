@@ -649,6 +649,7 @@ figcaption {
   height: auto;
 }
 #events-list ul li .event-content .title {
+  text-wrap: balance;
   margin-top: 12px;
 }
 #events-list ul li .event-content .content {

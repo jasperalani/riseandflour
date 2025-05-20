@@ -1,7 +1,7 @@
 {
     "description": "DO NOT DELETE THIS FILE. This file is used to keep track of which files have been synced in the most recent deployment. If you delete this file a resync will need to be done (which can take a while) - read more: https://github.com/SamKirkland/FTP-Deploy-Action",
     "version": "1.0.0",
-    "generatedTime": 1746777682677,
+    "generatedTime": 1747701300465,
     "data": [
         {
             "type": "file",
@@ -13,7 +13,7 @@
             "type": "file",
             "name": ".ftp-deploy-sync-state.json",
             "size": 12773,
-            "hash": "198a59839811e23a0bb0d08c0a705d650742457760b0ccfab0c7894804d6728f"
+            "hash": "ff0888bab1d60f51fbc6f4ae044ff1c9c358ff32a2da46a3b10c4debf0428410"
         },
         {
             "type": "file",
@@ -48,8 +48,8 @@
         {
             "type": "file",
             "name": "careers.php",
-            "size": 1817,
-            "hash": "c64fda9a61c45cb435b824773905a509a317928f9e9062030874abc8d0602829"
+            "size": 1875,
+            "hash": "ec91cddc5395e88bc29e700b97bda7a4c209cbcb922e619e48783be3291ea2dc"
         },
         {
             "type": "file",
@@ -86,14 +86,18 @@
             "hash": "e8faf5d1e20b11c095abe13646c8fea2e7b7aecb768a12082b5849cfd7d0a20b"
         },
         {
+            "type": "file",
+            "name": "home.php",
+            "size": 3361,
+            "hash": "2ff71031e0d9ca9bd2bf2da2962254052d1b4afd4d90c9108e36934aca67ba06"
+        },
+        {
             "type": "folder",
             "name": "inc"
         },
         {
-            "type": "file",
-            "name": "index.php",
-            "size": 1279,
-            "hash": "81dbd8a7c7da8589d63e193abd77af01e520e9760870f89a21ab95f313b3be5d"
+            "type": "folder",
+            "name": "js"
         },
         {
             "type": "folder",
@@ -104,10 +108,6 @@
             "name": "location.php",
             "size": 1904,
             "hash": "10bc7f235eb4c549e007c3dabb91f3082b96a0d56f4b992aea9cf0a3046900d9"
-        },
-        {
-            "type": "folder",
-            "name": "js"
         },
         {
             "type": "file",
@@ -153,12 +153,6 @@
         },
         {
             "type": "file",
-            "name": "home.php",
-            "size": 3361,
-            "hash": "2ff71031e0d9ca9bd2bf2da2962254052d1b4afd4d90c9108e36934aca67ba06"
-        },
-        {
-            "type": "file",
             "name": "screenshot.png",
             "size": 264,
             "hash": "7e4bc613f200af7487c0da58919280ce263cb66a7bc6b800922bbae6573d8bff"
@@ -191,6 +185,12 @@
         },
         {
             "type": "file",
+            "name": "index.php",
+            "size": 1279,
+            "hash": "81dbd8a7c7da8589d63e193abd77af01e520e9760870f89a21ab95f313b3be5d"
+        },
+        {
+            "type": "file",
             "name": "fonts/core-magic.otf",
             "size": 30456,
             "hash": "4ac51cab8fd81d4ea87d15c72a34ad639633b4dedefeddd58714dc98da0467eb"
@@ -203,27 +203,15 @@
         },
         {
             "type": "file",
-            "name": "inc/jetpack.php",
-            "size": 1589,
-            "hash": "900bd6652907f4c069edf7b82349eea1c17b07d86ebd980dbcea29c050a8ef51"
-        },
-        {
-            "type": "file",
             "name": "inc/customizer.php",
             "size": 1783,
             "hash": "46248d51c5bb436ef93ab890c21f246e4fa90b575329fe69e081a95a2c8116e0"
         },
         {
             "type": "file",
-            "name": "inc/template-tags.php",
-            "size": 4883,
-            "hash": "2eda776a1e68f27509826e3a459b4fb4e8a17c678c48ac7de87767e1395aa399"
-        },
-        {
-            "type": "file",
-            "name": "languages/readme.txt",
-            "size": 322,
-            "hash": "781de5d8fb9bdd29c92f0d3f777282f47fa326a6646a3c98d18b659c6d4abfff"
+            "name": "inc/jetpack.php",
+            "size": 1589,
+            "hash": "900bd6652907f4c069edf7b82349eea1c17b07d86ebd980dbcea29c050a8ef51"
         },
         {
             "type": "file",
@@ -233,9 +221,9 @@
         },
         {
             "type": "file",
-            "name": "languages/riseandflour.pot",
-            "size": 4632,
-            "hash": "793cb3e2b944a99e072d8171e73002578a4f9b6ba0ea13f1e6aff47ad3710a31"
+            "name": "inc/template-tags.php",
+            "size": 4883,
+            "hash": "2eda776a1e68f27509826e3a459b4fb4e8a17c678c48ac7de87767e1395aa399"
         },
         {
             "type": "file",
@@ -245,21 +233,33 @@
         },
         {
             "type": "file",
+            "name": "languages/readme.txt",
+            "size": 322,
+            "hash": "781de5d8fb9bdd29c92f0d3f777282f47fa326a6646a3c98d18b659c6d4abfff"
+        },
+        {
+            "type": "file",
             "name": "scss/index.css",
-            "size": 13044,
-            "hash": "be59cce11f528f0fadcde6841ed683357f9446a2cb74def26ad380f31835495d"
+            "size": 13066,
+            "hash": "bad346557ad632c15642c433c70e8b2f195d2a591c9af5e3aca778c88b570962"
         },
         {
             "type": "file",
             "name": "scss/index.css.map",
-            "size": 5244,
-            "hash": "1b111a6cc5cd0f8502951bc97680563d92e0599d634a54245f3063d2cccd2762"
+            "size": 5255,
+            "hash": "2ef3cf048388d608c7abd78e50e034780ded08603e9a44a2b94e3dafd8a3d253"
         },
         {
             "type": "file",
             "name": "scss/index.scss",
             "size": 336,
             "hash": "eed5cefc5f580be3df66a340a576651ef3b5e01d4375474fd65899af216e097e"
+        },
+        {
+            "type": "file",
+            "name": "languages/riseandflour.pot",
+            "size": 4632,
+            "hash": "793cb3e2b944a99e072d8171e73002578a4f9b6ba0ea13f1e6aff47ad3710a31"
         },
         {
             "type": "folder",
@@ -291,15 +291,15 @@
         },
         {
             "type": "file",
-            "name": "scss/style/_easter-art-competition.scss",
-            "size": 409,
-            "hash": "aff3f4a7e1554c94720a4b59f35712756f65f5cf68903a3c913353381b5dc130"
+            "name": "scss/style/_careers.scss",
+            "size": 116,
+            "hash": "14d5f6992d3d8a99521a27a1e37659e7045b4fc809f611f0886de5b22b5ab49b"
         },
         {
             "type": "file",
-            "name": "scss/style/_events.scss",
-            "size": 939,
-            "hash": "54c95c90086a297f8768f899676e47e430132f1f8d9876f11c915cd1455366b1"
+            "name": "scss/style/_easter-art-competition.scss",
+            "size": 409,
+            "hash": "aff3f4a7e1554c94720a4b59f35712756f65f5cf68903a3c913353381b5dc130"
         },
         {
             "type": "file",
@@ -309,21 +309,27 @@
         },
         {
             "type": "file",
+            "name": "scss/style/_events.scss",
+            "size": 970,
+            "hash": "1ba5582a239222b1864694dda68f7e7671149387237e7fe0cefde94502f50ecf"
+        },
+        {
+            "type": "file",
             "name": "scss/style/_footer.scss",
             "size": 243,
             "hash": "63eb240a5eb33fcfd0f343ba96a8fbdcd699d2955cb594dab22cdca37408cded"
         },
         {
             "type": "file",
-            "name": "scss/style/_global.scss",
-            "size": 3519,
-            "hash": "d92ee5110e093678fa93fe68e692e06dceb4d27c0ab1402c8796d20b7a5dfcde"
-        },
-        {
-            "type": "file",
             "name": "scss/style/_home.scss",
             "size": 1889,
             "hash": "77dbb4689d8aef0a1993a235c22e1f70f843ad83a8ae9381f37be85882e6018d"
+        },
+        {
+            "type": "file",
+            "name": "scss/style/_global.scss",
+            "size": 3519,
+            "hash": "d92ee5110e093678fa93fe68e692e06dceb4d27c0ab1402c8796d20b7a5dfcde"
         },
         {
             "type": "file",
@@ -348,12 +354,6 @@
             "name": "scss/style/_ourfood.scss",
             "size": 48,
             "hash": "a41a37af3b8491834e3c6489830472ecb4c4b2d6bd3aee96d7c3d2513e6f96bc"
-        },
-        {
-            "type": "file",
-            "name": "scss/style/_careers.scss",
-            "size": 116,
-            "hash": "14d5f6992d3d8a99521a27a1e37659e7045b4fc809f611f0886de5b22b5ab49b"
         },
         {
             "type": "file",

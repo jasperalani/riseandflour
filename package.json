@@ -20,5 +20,8 @@
   },
   "dependencies": {
     "@samkirkland/ftp-deploy": "^1.2.4"
+  },
+  "devDependencies": {
+    "ftp-deploy": "^2.4.7"
   }
 }
