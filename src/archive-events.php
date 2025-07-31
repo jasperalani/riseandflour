@@ -27,6 +27,15 @@ get_header();
             $url = get_permalink();
             $title = get_the_title();
             $date_time = get_field('date_time');
+
+            $tz = new DateTimeZone('Europe/London'); // or 'UTC', etc.
+            $givenDate = new DateTime($date_time, $tz);
+            $now = new DateTime('now', $tz);
+            $datePassedText = "";
+
+            if($givenDate < $now){
+                $datePassedText = "EVENT PASSED";
+            }
             ?>
             <a href="<?= $url ?>">
                 <div class="event-content">
@@ -38,6 +47,10 @@ get_header();
                     </h4>
                     <p class="content">
                         <?= $date_time ?>
+                        <?php if($datePassedText != ""){
+                            echo "<br>";
+                            echo "<b>" . $datePassedText . "</b>";
+                        } ?>
                     </p>
                 </div>
             </a>

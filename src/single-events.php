@@ -16,6 +16,14 @@ get_header();
 
             $title = get_the_title() ?? 'Event title';
             $date_time = get_field('date_time') ?? '';
+            $tz = new DateTimeZone('Europe/London'); // or 'UTC', etc.
+            $givenDate = new DateTime($date_time, $tz);
+            $now = new DateTime('now', $tz);
+            $datePassedText = "";
+
+            if($givenDate < $now){
+                $datePassedText = "EVENT PASSED";
+            }
             $content = get_the_content() ?? '';
             $thumbnail_image = get_the_post_thumbnail_url() ?? '';
             $gallery = get_field('images') ?? [];
@@ -32,6 +40,12 @@ get_header();
 
             if ($date_time) {
                 echo "<p class='date-time'>Date: {$date_time}</p>";
+            }
+
+            if($datePassedText !== ""){
+                echo "<br>";
+                echo "<b style='font-size: 2rem'>" . $datePassedText . "</b>";
+                echo "<br>";
             }
 
             if ($content) {
