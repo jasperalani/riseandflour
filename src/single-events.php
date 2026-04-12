@@ -10,8 +10,14 @@ get_header();
     <?php
     if (have_posts()):
         while (have_posts()):
-            ?>  
+            ?>
+        <a id="events-back-btn" href="/events">
+            <button class="button-45" role="button">Return to events list</button>
+        </a>
+
+
             <?php
+
             the_post();
 
             $title = get_the_title() ?? 'Event title';
@@ -22,7 +28,7 @@ get_header();
             $datePassedText = "";
 
             if($givenDate < $now){
-                $datePassedText = "EVENT PASSED";
+                $datePassedText = "This event has passed.";
             }
             $content = get_the_content() ?? '';
             $thumbnail_image = get_the_post_thumbnail_url() ?? '';
@@ -35,7 +41,7 @@ get_header();
             }
 
             if ($title) {
-                echo "<h2>{$title}</h2>";
+                echo "<h2 id='event-title'>{$title}</h2>";
             }
 
             if ($date_time) {

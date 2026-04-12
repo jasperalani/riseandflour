@@ -7,3 +7,5 @@ composer.lock
 /old
 /uploads
 /node_modules
+*.css
+*.css.map

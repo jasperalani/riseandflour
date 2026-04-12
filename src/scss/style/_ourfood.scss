@@ -1,5 +1,9 @@
 #ourfood {
 	.img-element {
 		padding: 10px;
+		img {
+			height: 500px;
+			object-fit: cover;
+		}
 	}
 }
