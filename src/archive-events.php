@@ -103,6 +103,10 @@ get_header();
 
             <?php
                 }
+            }else{
+                ?>
+                <h2 class="events-no-events-found">There are no events upcoming, check back here soon!</h2>
+                    <?php
             }
 
             ?>
