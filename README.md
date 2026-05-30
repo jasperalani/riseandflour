@@ -1,20 +1,7 @@
 # r&f
 
-## todo
-
-- done - add events page, add first event from the brochure in canva
-  - add categories: Brunch Talks, Supper Clubs
-  - add sorting
-  - add calender
-- create email list
-  - page to sign up to email list
-  - page to remove from email list
-
-## dev guide
-
-theme is located in `./src`</br>
-</br>
-Start:
+## Deployment
+FTP-Deploy github action is setup and should deploy on push to main.
 
 ```bash
 # Start
@@ -26,6 +13,15 @@ docker compose down
 # Restart
 docker compose restart
 ```
+## todo
+
+- done - add events page, add first event from the brochure in canva
+  - add categories: Brunch Talks, Supper Clubs
+  - add sorting
+  - add calender
+- create email list
+  - page to sign up to email list
+  - page to remove from email list
 
 ## requirements
 
