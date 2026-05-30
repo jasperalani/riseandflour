@@ -68,13 +68,14 @@ get_header();
         </div>
 
         <!-- ── Upcoming events ─────────────────────────────── -->
-        <div class="events-grid">
+
 
             <?php
 
             if(sizeof($events) > 0){
                 foreach($events as $event){
                     ?>
+        <div class="events-grid">
 
                     <article class="event-card event-card--upcoming">
                         <!-- Replace src with your actual image path -->
@@ -101,6 +102,8 @@ get_header();
                         </div>
                     </article>
 
+        </div><!-- /.events-grid (upcoming) -->
+
             <?php
                 }
             }else{
@@ -111,7 +114,7 @@ get_header();
 
             ?>
 
-        </div><!-- /.events-grid (upcoming) -->
+
 
         <!-- ── Past events ─────────────────────────────────── -->
         <div class="past-events">
