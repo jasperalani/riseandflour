@@ -1,19 +1,19 @@
 
 :root {
-  --bg-page:        #f5f2e8;
-  --bg-card:        #fffef9;
+  --bg-page: #f5f2e8;
+  --bg-card: #fffef9;
   --bg-placeholder: #e8dfc8;
-  --border-subtle:  #d6c9b0;
-  --border-hover:   #7a5c3a;
-  --accent-brown:   #7a5c3a;
-  --text-dark:      #2a1f14;
-  --text-mid:       #5c4a30;
-  --text-muted:     #9a8f7e;
-  --passed-bg:      #f7eded;
-  --passed-text:    #9b3a3a;
-  --upcoming-bg:    #edf4ed;
-  --upcoming-text:  #3a6b3a;
-  --upcoming-accent:#7a5c3a;
+  --border-subtle: #d6c9b0;
+  --border-hover: #7a5c3a;
+  --accent-brown: #7a5c3a;
+  --text-dark: #2a1f14;
+  --text-mid: #5c4a30;
+  --text-muted: #9a8f7e;
+  --passed-bg: #f7eded;
+  --passed-text: #9b3a3a;
+  --upcoming-bg: #edf4ed;
+  --upcoming-text: #3a6b3a;
+  --upcoming-accent: #7a5c3a;
 }
 
 #events-list,
@@ -71,7 +71,7 @@
         .title {
           text-wrap: balance;
           margin-top: 12px;
-        } 
+        }
 
         .content {
           font-family: "Roboto", sans-serif;
@@ -99,32 +99,32 @@
   }
 }
 
- /* CSS */
+/* CSS */
 .button-45 {
- align-items: center;
- background-color: #FFE7E7;
- background-position: 0 0;
- border: 1px solid #FEE0E0;
- border-radius: 11px;
- box-sizing: border-box;
- color: #D33A2C;
- cursor: pointer;
- display: flex;
- font-size: 1rem;
- font-weight: 700;
- line-height: 33.4929px;
- list-style: outside url(https://www.smashingmagazine.com/images/bullet.svg) none;
- padding: 2px 12px;
- text-align: left;
- text-decoration: none;
- text-shadow: none;
- text-underline-offset: 1px;
- transition: border .2s ease-in-out,box-shadow .2s ease-in-out;
- user-select: none;
- -webkit-user-select: none;
- touch-action: manipulation;
- white-space: nowrap;
- word-break: break-word;
+  align-items: center;
+  background-color: #FFE7E7;
+  background-position: 0 0;
+  border: 1px solid #FEE0E0;
+  border-radius: 11px;
+  box-sizing: border-box;
+  color: #D33A2C;
+  cursor: pointer;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 33.4929px;
+  list-style: outside url(https://www.smashingmagazine.com/images/bullet.svg) none;
+  padding: 2px 12px;
+  text-align: left;
+  text-decoration: none;
+  text-shadow: none;
+  text-underline-offset: 1px;
+  transition: border .2s ease-in-out, box-shadow .2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  word-break: break-word;
 }
 
 .button-45:active,
@@ -196,7 +196,10 @@
   padding-bottom: 1px;
   transition: opacity 0.15s;
 }
-.events-see-all:hover { opacity: 0.65; }
+
+.events-see-all:hover {
+  opacity: 0.65;
+}
 
 /* ── Card grid ────────────────────────────────────── */
 .events-grid {
@@ -215,7 +218,10 @@
   flex-direction: column;
   transition: border-color 0.2s;
 }
-.event-card:hover { border-color: var(--border-hover); }
+
+.event-card:hover {
+  border-color: var(--border-hover);
+}
 
 /* Upcoming cards get a left accent stripe */
 .event-card--upcoming {
@@ -286,10 +292,12 @@
   color: black !important;
   font-weight: 100 !important;
 }
+
 .badge--passed {
   background: var(--passed-bg);
   color: var(--passed-text);
 }
+
 .badge--upcoming {
   background: var(--upcoming-bg);
   color: var(--upcoming-text);
@@ -312,6 +320,7 @@
   transition: background 0.15s, color 0.15s;
   white-space: nowrap;
 }
+
 .event-card__btn:hover {
   background: var(--text-dark);
   color: var(--bg-card);
@@ -323,6 +332,7 @@
   padding-top: 1.5rem;
   border-top: 0.5px solid var(--border-subtle);
 }
+
 .past-events__label {
   font-size: 14px;
   letter-spacing: 0.1em;
