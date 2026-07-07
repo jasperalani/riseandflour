@@ -27,5 +27,4 @@ docker compose restart
 
 - docker
 - vs code sass watch extension
-- acf pro (full version found on github for free)
 - `composer require squizlabs/php_codesniffer --dev`
