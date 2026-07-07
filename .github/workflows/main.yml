@@ -11,8 +11,8 @@ jobs:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
-          server: "ftp.riseandflour.co.uk"
-          username: "jasper-deploy-phpstorm@riseandflour.co.uk"
+          server: ${{ secrets.ftp_sever }}
+          username: ${{ secrets.ftp_username }}
           password: ${{ secrets.ftp_password }}
           local-dir: "./src/"
-          server-dir: "/riseandflour.co.uk/public_html/wp-content/themes/riseandflour/"
+          server-dir: ${{ secrets.ftp_server_dir }}
