@@ -1,0 +1,69 @@
+{
+    "saved": "2026-08-22T11:35:07+00:00",
+    "front": "home",
+    "pages": [
+        {
+            "slug": "sample-page",
+            "title": "Sample Page",
+            "status": "publish",
+            "menu_order": 0,
+            "content": "<!-- wp:paragraph -->\n<p>This is an example page. It's different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:quote -->\n<blockquote class=\"wp-block-quote\">\n<!-- wp:paragraph -->\n<p>Hi there! I'm a bike messenger by day, aspiring actor by night, and this is my website. I live in Los Angeles, have a great dog named Jack, and I like pi&#241;a coladas. (And gettin' caught in the rain.)</p>\n<!-- /wp:paragraph -->\n</blockquote>\n<!-- /wp:quote -->\n\n<!-- wp:paragraph -->\n<p>...or something like this:</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:quote -->\n<blockquote class=\"wp-block-quote\">\n<!-- wp:paragraph -->\n<p>The XYZ Doohickey Company was founded in 1971, and has been providing quality doohickeys to the public ever since. Located in Gotham City, XYZ employs over 2,000 people and does all kinds of awesome things for the Gotham community.</p>\n<!-- /wp:paragraph -->\n</blockquote>\n<!-- /wp:quote -->\n\n<!-- wp:paragraph -->\n<p>As a new WordPress user, you should go to <a href=\"http://localhost:8080/wp-admin/\">your dashboard</a> to delete this page and create new pages for your content. Have fun!</p>\n<!-- /wp:paragraph -->"
+        },
+        {
+            "slug": "privacy-policy",
+            "title": "Privacy Policy",
+            "status": "draft",
+            "menu_order": 0,
+            "content": "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Who we are</h2>\n<!-- /wp:heading -->\n<!-- wp:paragraph -->\n<p><strong class=\"privacy-policy-tutorial\">Suggested text: </strong>Our website address is: http://localhost:8080.</p>\n<!-- /wp:paragraph -->\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Comments</h2>\n<!-- /wp:heading -->\n<!-- wp:paragraph -->\n<p><strong class=\"privacy-policy-tutorial\">Suggested text: </strong>When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor&#8217;s IP address and browser user agent string to help spam detection.</p>\n<!-- /wp:paragraph -->\n<!-- wp:paragraph -->\n<p>An anonymized string created from your email address (also called a hash) may be provided to the Gravatar service to see if you are using it. The Gravatar service privacy policy is available here: https://automattic.com/privacy/. After approval of your comment, your profile picture is visible to the public in the context of your comment.</p>\n<!-- /wp:paragraph -->\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Media</h2>\n<!-- /wp:heading -->\n<!-- wp:paragraph -->\n<p><strong class=\"privacy-policy-tutorial\">Suggested text: </strong>If you upload images to the website, you should avoid uploading images with embedded location data (EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website.</p>\n<!-- /wp:paragraph -->\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Cookies</h2>\n<!-- /wp:heading -->\n<!-- wp:paragraph -->\n<p><strong class=\"privacy-policy-tutorial\">Suggested text: </strong>If you leave a comment on our site you may opt-in to saving your name, email address and website in cookies. These are for your convenience so that you do not have to fill in your details again when you leave another comment. These cookies will last for one year.</p>\n<!-- /wp:paragraph -->\n<!-- wp:paragraph -->\n<p>If you visit our login page, we will set a temporary cookie to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser.</p>\n<!-- /wp:paragraph -->\n<!-- wp:paragraph -->\n<p>When you log in, we will also set up several cookies to save your login information and your screen display choices. Login cookies last for two days, and screen options cookies last for a year. If you select &quot;Remember Me&quot;, your login will persist for two weeks. If you log out of your account, the login cookies will be removed.</p>\n<!-- /wp:paragraph -->\n<!-- wp:paragraph -->\n<p>If you edit or publish an article, an additional cookie will be saved in your browser. This cookie includes no personal data and simply indicates the post ID of the article you just edited. It expires after 1 day.</p>\n<!-- /wp:paragraph -->\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Embedded content from other websites</h2>\n<!-- /wp:heading -->\n<!-- wp:paragraph -->\n<p><strong class=\"privacy-policy-tutorial\">Suggested text: </strong>Articles on this site may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website.</p>\n<!-- /wp:paragraph -->\n<!-- wp:paragraph -->\n<p>These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracking your interaction with the embedded content if you have an account and are logged in to that website.</p>\n<!-- /wp:paragraph -->\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Who we share your data with</h2>\n<!-- /wp:heading -->\n<!-- wp:paragraph -->\n<p><strong class=\"privacy-policy-tutorial\">Suggested text: </strong>If you request a password reset, your IP address will be included in the reset email.</p>\n<!-- /wp:paragraph -->\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">How long we retain your data</h2>\n<!-- /wp:heading -->\n<!-- wp:paragraph -->\n<p><strong class=\"privacy-policy-tutorial\">Suggested text: </strong>If you leave a comment, the comment and its metadata are retained indefinitely. This is so we can recognize and approve any follow-up comments automatically instead of holding them in a moderation queue.</p>\n<!-- /wp:paragraph -->\n<!-- wp:paragraph -->\n<p>For users that register on our website (if any), we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information at any time (except they cannot change their username). Website administrators can also see and edit that information.</p>\n<!-- /wp:paragraph -->\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">What rights you have over your data</h2>\n<!-- /wp:heading -->\n<!-- wp:paragraph -->\n<p><strong class=\"privacy-policy-tutorial\">Suggested text: </strong>If you have an account on this site, or have left comments, you can request to receive an exported file of the personal data we hold about you, including any data you have provided to us. You can also request that we erase any personal data we hold about you. This does not include any data we are obliged to keep for administrative, legal, or security purposes.</p>\n<!-- /wp:paragraph -->\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Where your data is sent</h2>\n<!-- /wp:heading -->\n<!-- wp:paragraph -->\n<p><strong class=\"privacy-policy-tutorial\">Suggested text: </strong>Visitor comments may be checked through an automated spam detection service.</p>\n<!-- /wp:paragraph -->\n"
+        },
+        {
+            "slug": "menu",
+            "title": "Menu",
+            "status": "publish",
+            "menu_order": 0,
+            "content": ""
+        },
+        {
+            "slug": "events",
+            "title": "Events",
+            "status": "publish",
+            "menu_order": 0,
+            "content": ""
+        },
+        {
+            "slug": "location",
+            "title": "Location",
+            "status": "publish",
+            "menu_order": 0,
+            "content": ""
+        },
+        {
+            "slug": "about",
+            "title": "About",
+            "status": "publish",
+            "menu_order": 0,
+            "content": "<!-- wp:acf/rf-text {\"name\":\"acf/rf-text\",\"data\":{\"eyebrow\":\"· Our story ·\",\"_eyebrow\":\"field_rf_text_eyebrow\",\"heading\":\"First a bakery, now a café\",\"_heading\":\"field_rf_text_heading\",\"body\":\"We opened with an oven and a queue. The queue wanted somewhere to sit, so we found chairs. These days the baking is just for our own tables — coffee, lunch, and cake, seven doors up from where we started.\",\"_body\":\"field_rf_text_body\",\"variant\":\"\",\"_variant\":\"field_rf_text_variant\",\"align\":\"center\",\"_align\":\"field_rf_text_align\",\"tag\":\"h2\",\"_tag\":\"field_rf_text_tag\",\"spacing\":\"default\",\"_spacing\":\"field_rf_text_spacing\"},\"mode\":\"preview\"} /-->\n\n<!-- wp:acf/rf-image-text {\"name\":\"acf/rf-image-text\",\"data\":{\"image\":\"\",\"_image\":\"field_rf_it_image\",\"media_position\":\"left\",\"_media_position\":\"field_rf_it_media_position\",\"eyebrow\":\"· The room ·\",\"_eyebrow\":\"field_rf_it_eyebrow\",\"heading\":\"Stay as long as you like\",\"_heading\":\"field_rf_it_heading\",\"body\":\"Sixteen tables, a shelf of borrowed books, and no wifi password on the wall — ask, and we'll tell you. Mornings are busy; afternoons are yours.\",\"_body\":\"field_rf_it_body\",\"link_text\":\"Find us\",\"_link_text\":\"field_rf_it_link_text\",\"link_url\":\"http://localhost:8080/location/\",\"_link_url\":\"field_rf_it_link_url\",\"spacing\":\"xl\",\"_spacing\":\"field_rf_it_spacing\"},\"mode\":\"preview\"} /-->\n\n<!-- wp:acf/rf-image {\"name\":\"acf/rf-image\",\"data\":{\"image\":\"\",\"_image\":\"field_rf_img_image\",\"caption\":\"· The counter, early ·\",\"_caption\":\"field_rf_img_caption\",\"width\":\"contained\",\"_width\":\"field_rf_img_width\",\"spacing\":\"xl\",\"_spacing\":\"field_rf_img_spacing\"},\"mode\":\"preview\"} /-->"
+        },
+        {
+            "slug": "home",
+            "title": "Home",
+            "status": "publish",
+            "menu_order": 0,
+            "content": "<!-- wp:acf/rf-hero {\"name\":\"acf/rf-hero\",\"data\":{\"image\":328,\"_image\":\"field_rf_hero_image\",\"show_logo\":\"1\",\"_show_logo\":\"field_rf_hero_show_logo\",\"logo\":\"\",\"_logo\":\"field_rf_hero_logo\",\"caption\":\"· A café in Oxfordshire ·\",\"_caption\":\"field_rf_hero_caption\"},\"mode\":\"preview\"} /-->\n\n<!-- wp:acf/rf-text {\"name\":\"acf/rf-text\",\"data\":{\"eyebrow\":\"· Est. Oxfordshire·\",\"_eyebrow\":\"field_rf_text_eyebrow\",\"heading\":\"A café on the Market Place\",\"_heading\":\"field_rf_text_heading\",\"body\":\"We began as a bakery. These days we keep the ovens for ourselves and set the tables for you — the kitchen open all day, the counter full by nine.\",\"_body\":\"field_rf_text_body\",\"variant\":\"intro\",\"_variant\":\"field_rf_text_variant\",\"align\":\"center\",\"_align\":\"field_rf_text_align\",\"tag\":\"h1\",\"_tag\":\"field_rf_text_tag\",\"spacing\":\"none\",\"_spacing\":\"field_rf_text_spacing\"},\"mode\":\"preview\"} /-->\n\n<!-- wp:acf/rf-image-text {\"name\":\"acf/rf-image-text\",\"data\":{\"image\":178,\"_image\":\"field_rf_it_image\",\"media_position\":\"left\",\"_media_position\":\"field_rf_it_media_position\",\"eyebrow\":\"The kitchen\",\"_eyebrow\":\"field_rf_it_eyebrow\",\"heading\":\"Short menu, long mornings\",\"_heading\":\"field_rf_it_heading\",\"body\":\"Everything is made in-house, in small amounts, and changes with the season. When something runs out, it runs out.\",\"_body\":\"field_rf_it_body\",\"link_text\":\"View the menu\",\"_link_text\":\"field_rf_it_link_text\",\"link_url\":\"http://localhost:8080/menu/\",\"_link_url\":\"field_rf_it_link_url\",\"spacing\":\"none\",\"_spacing\":\"field_rf_it_spacing\"},\"mode\":\"preview\"} /-->\n\n<!-- wp:acf/rf-carousel {\"name\":\"acf/rf-carousel\",\"data\":{\"eyebrow\":\"· The room ·\",\"_eyebrow\":\"field_rf_car_eyebrow\",\"heading\":\"From the café\",\"_heading\":\"field_rf_car_heading\",\"slides_0_image\":166,\"_slides_0_image\":\"field_rf_car_slide_image\",\"slides_0_caption\":\"Breakfast!\",\"_slides_0_caption\":\"field_rf_car_slide_caption\",\"slides_1_image\":354,\"_slides_1_image\":\"field_rf_car_slide_image\",\"slides_1_caption\":\"Coffee \\u0026 cakes!\",\"_slides_1_caption\":\"field_rf_car_slide_caption\",\"slides_2_image\":347,\"_slides_2_image\":\"field_rf_car_slide_image\",\"slides_2_caption\":\"Outdoor seating\",\"_slides_2_caption\":\"field_rf_car_slide_caption\",\"slides_3_image\":310,\"_slides_3_image\":\"field_rf_car_slide_image\",\"slides_3_caption\":\"Private Catering\",\"_slides_3_caption\":\"field_rf_car_slide_caption\",\"slides\":4,\"_slides\":\"field_rf_car_slides\",\"spacing\":\"xl\",\"_spacing\":\"field_rf_car_spacing\"},\"mode\":\"preview\"} /-->"
+        }
+    ],
+    "options": {
+        "_options_footer_address": "field_rf_opt_address",
+        "_options_footer_email": "field_rf_opt_email",
+        "_options_footer_est_line": "field_rf_opt_est_line",
+        "_options_footer_hours": "field_rf_opt_hours",
+        "_options_footer_phone": "field_rf_opt_phone",
+        "_options_footer_slim_line": "field_rf_opt_slim_line",
+        "options_footer_address": "The Elms, Shipton Rd, Milton-under-Wychwood\r\nChipping Norton OX7 6JP",
+        "options_footer_email": "hello@riseandflour.co.uk",
+        "options_footer_est_line": "· Est. Oxfordshire ·",
+        "options_footer_hours": "Monday - Friday, 8:30 am – 3 pm\r\nSaturday, 9 am – 3 pm\r\nSunday, 9 am – 2:30 pm",
+        "options_footer_phone": "01285 000 000",
+        "options_footer_slim_line": "The Elms, Shipton Rd, Milton-under-Wychwood"
+    }
+}
