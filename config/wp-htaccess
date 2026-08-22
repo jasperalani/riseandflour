@@ -1,0 +1,18 @@
+# Standard WordPress rewrite rules, mounted into the container at
+# /var/www/html/.htaccess by compose.yml.
+#
+# Kept on the host so pretty permalinks survive `docker compose down -v`.
+# WP-CLI can't regenerate .htaccess in the official image, and without this
+# every URL except the homepage falls through to the front page.
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+# END WordPress
