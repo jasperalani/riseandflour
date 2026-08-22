@@ -40,60 +40,63 @@
   }
 }
 
-.block-location__details {
-  margin: 24px 0 0;
-}
+// Stacked groups: a terracotta caps label over Garamond lines, generous
+// space between groups and no rules — the footer's "Find us" treatment at
+// page scale.
+.block-location__details { margin: 0; }
 
 .block-location__row {
-  display: grid;
-  grid-template-columns: 96px minmax(0, 1fr);
-  gap: 24px;
-  padding: 18px 0;
-  border-top: 1px solid var(--border-default);
-
-  &:last-child { border-bottom: 1px solid var(--border-default); }
+  & + & { margin-top: 40px; }
 
   dt {
-    @include caps-label(11px);
-    color: var(--text-muted);
-    // Sit on the first line of the value.
-    padding-top: 5px;
+    @include caps-label(13px);
+    color: var(--rf-terracotta);
+    margin-bottom: 14px;
   }
 
   dd {
     margin: 0;
-    font-size: 17px;
-    line-height: 1.7;
+    font-size: 18px;
+    line-height: 1.8;
     color: var(--text-heading);
   }
 
   a {
     color: var(--text-heading);
+    border-bottom: 0; // no editorial underline on contact details
     &:hover { color: var(--rf-terracotta); }
   }
 }
 
-.block-location__note {
-  margin-top: 24px;
-
-  p {
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--text-body);
-    margin: 0 0 12px;
-  }
-
-  p:last-child { margin-bottom: 0; }
+.block-location__accent {
+  color: var(--rf-terracotta) !important;
+  &:hover { color: var(--rf-terracotta-deep) !important; }
 }
 
-.block-location__directions { margin-top: 28px; }
+.block-location__note p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-body);
+  margin: 0 0 12px;
 
-// The map fills a fixed-height box like the Image + Text photo; the
-// cream-deep fill shows while the iframe loads (it's lazy).
+  &:last-child { margin-bottom: 0; }
+}
+
+// When the block has no heading of its own the details start at the top;
+// with one, leave room beneath it.
+.block-location__body > h1 + .block-location__details,
+.block-location__body > h2 + .block-location__details,
+.block-location__intro + .block-location__details { margin-top: 40px; }
+
+.block-location__directions { margin-top: 40px; }
+
+// The map in a terracotta frame; the cream-deep fill shows while the
+// iframe loads (it's lazy).
 .block-location__map {
   height: 520px;
   background: var(--rf-cream-deep);
-  border-radius: var(--radius-sm);
+  border: 1px solid var(--rf-terracotta);
+  border-radius: 2px;
   overflow: hidden;
 
   iframe {
@@ -143,12 +146,9 @@
   }
 
   .block-location__row {
-    grid-template-columns: 1fr;
-    gap: 6px;
-    padding: 16px 0;
-
-    dt { padding-top: 0; }
-    dd { font-size: 16px; }
+    & + & { margin-top: 28px; }
+    dt { margin-bottom: 10px; }
+    dd { font-size: 17px; }
   }
 
   .block-location__map { height: 320px; }

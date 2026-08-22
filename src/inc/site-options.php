@@ -105,6 +105,24 @@ function rise_and_flour_register_site_options() {
 					'instructions'  => __( 'The slim footer used everywhere except the front page.', 'rise-and-flour' ),
 					'default_value' => '14 Market Place · Cirencester',
 				),
+
+				array(
+					'key'   => 'field_rf_opt_tab_legal',
+					'label' => __( 'Legal pages', 'rise-and-flour' ),
+					'type'  => 'tab',
+				),
+				array(
+					'key'           => 'field_rf_opt_terms_page',
+					'label'         => __( 'Terms of Use page', 'rise-and-flour' ),
+					'name'          => 'terms_page',
+					'type'          => 'post_object',
+					'post_type'     => array( 'page' ),
+					'post_status'   => array( 'publish', 'draft', 'pending', 'private' ),
+					'return_format' => 'id',
+					'allow_null'    => 1,
+					'ui'            => 1,
+					'instructions'  => __( 'Linked from the footer beside the Privacy Policy, once the page is published. The Privacy Policy page itself is chosen under Settings → Privacy.', 'rise-and-flour' ),
+				),
 			),
 			'location' => array(
 				array(

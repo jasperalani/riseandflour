@@ -1,12 +1,13 @@
-## Block ideas — brainstorm, nothing implemented
+## Block ideas
 
-Grounded in what the site actually needs. The current theme has five blocks  
-(Hero, Text, Image + Text, Image, Carousel) and only **Home** and **About**  
-use them. **Menu, Events, Location** and **Privacy Policy** are empty pages  
-right now, and the old theme served them with hard-coded page templates  
+Grounded in what the site actually needs. The theme started with five blocks  
+(Hero, Text, Image + Text, Image, Carousel); **Tier 1 is now built** (see the  
+✅ DONE notes on each — Menu, Events, Location, Contact form, and hours from  
+Site Details), which replaces the old theme's hard-coded page templates  
 (`menu.php`, `archive-events.php`, `location.php`, `reservations.php`,  
-`ourfood.php`, `careers.php` at commit `63033b0`). So the first tier below  
-is "blocks that replace those templates"; the rest is nice-to-have.
+`ourfood.php`, `careers.php` at commit `63033b0`). Photo grid is the one  
+Tier 1 item still open. Tiers 2 and 3 are nice-to-have; the "- yes" notes  
+are the café's picks. Deferred work lives in `TODO.md`.
 
 Constraints every idea respects: café not bakery, **no ecommerce**, flat  
 colours, near-square corners, modest 150–200ms motion, Montserrat caps for  
@@ -16,7 +17,14 @@ legitimately appear in body content.
 
 ## Tier 1 — needed to rebuild the empty pages
 
-### 1\. Menu - yes
+### 1\. Menu - yes — ✅ DONE (22 Aug 2026)
+
+Built as the **structured** version (`acf/rf-menu`): sections → dishes with  
+name in Core Magic, price, description, vegetarian chip, "Add" extras and a  
+note; hours panel (falls back to Site Details) and closing notes; optional  
+PDF download. Seeded from the print menu. Plus **Site Details → Menu  
+import**: upload the menu PDF, Claude reads it, review the diff, apply.  
+Images on the menu page are in `TODO.md`.
 
 The old site showed the menu as a single uploaded image. Two ways to go, and  
 a block could support both:
@@ -34,7 +42,14 @@ a block could support both:
 Fields: `mode` (image / list), then the relevant set. Mention in the  
 README that prices are text, not a shop — no ecommerce.
 
-### 2\. Events list - yes
+### 2\. Events list - yes — ✅ DONE (22 Aug 2026)
+
+Built as the **CPT** version: `rf_event` post type (dates, location, price,  
+capacity, eyebrow/subtitle, "On the night" lines, booking link) with the  
+Events block (`acf/rf-events`, upcoming then past) and `single-rf_event.php`  
+following the Claude Design "Supper Club" page; mobile list layout from the  
+Claude Design mobile screen. Seeded with the old site's past events. Open  
+in `TODO.md`: booking functionality, show-more, calendar selector.
 
 The old theme had an `events` custom post type with an ACF `date_time` and  
 split upcoming vs past ("This event has passed"). Two options:
@@ -52,7 +67,14 @@ split upcoming vs past ("This event has passed"). Two options:
 Recommend the CPT — it's what they had, and the automatic upcoming/past  
 split is the feature they'll miss otherwise.
 
-### 3\. Location / Find us - yes
+### 3\. Location / Find us - yes — ✅ DONE (22 Aug 2026)
+
+Built (`acf/rf-location`): terracotta-labelled Address / Hours / Getting  
+here / Contact beside a Google Map in a terracotta frame; address, hours,  
+phone and email all fall back to Site Details; map accepts the embed URL or  
+the whole iframe (Google/OSM only); directions link; map left/right.  
+Seeded with the café's real pin. Needs a Terms of Use page for Google Maps  
+— in `TODO.md`.
 
 Replaces `location.php`. Two columns: address + phone + email + opening  
 hours on one side, map on the other. Fields: `map_embed` (the Google Maps  
@@ -61,7 +83,14 @@ embed URL — the old one is in `location.php`), `heading`, `show_hours`
 "step-free access"), `directions_link`. Image-side/text-side toggle like  
 Image + Text. Map iframe gets `loading="lazy"` and a flat cream border.
 
-### 4\. Opening hours - yes these are the opening hours:  
+### 4\. Opening hours - yes — ➖ PARTLY DONE
+
+Those hours are in **Site Details** and are read by the footer, the Location  
+block, the Menu block's hours panel and the Contact block — one source, no  
+retyping. Not built: the standalone Opening Hours block, and the structured  
+day/time repeater (in `TODO.md` under Site Details).
+
+These are the opening hours:  
 Monday - Friday, 8:30 am – 3 pm  
 Saturday, 9 am – 3 pm  
 Sunday, 9 am – 2:30 pm
@@ -72,7 +101,16 @@ hours; this puts them on Location and possibly Home without re-typing.
 Optional ACF `hours` repeater on Site Details (`days`, `times`) replacing  
 the free-text textarea, so one source feeds footer, block and JSON-LD.
 
-### 5\. Contact / enquiry form - yes - do we need a wordpress plugin for this?
+### 5\. Contact / enquiry form - yes - do we need a wordpress plugin for this? — ✅ DONE (22 Aug 2026)
+
+No form plugin needed — built in the theme (`acf/rf-contact` +  
+`inc/contact.php`): details column from Site Details plus extra notes, form  
+(name, email, subject dropdown, message) in a dotted terracotta panel,  
+nonce + honeypot + fill-timer, sends via `wp_mail()`, redirects to a  
+thank-you state. The only plugin involved is for *delivery*: FluentSMTP  
+routes `wp_mail()` through Microsoft 365 (setup steps in `TODO.md`).  
+Contact page created. Fifield Room hire / careers can reuse it with a  
+different subject list or recipient.
 
 Replaces the hand-rolled `form_send_email()` in `reservations.php` and  
 `careers.php`. Fields: `heading`, `intro`, `recipient` (email), `subject`,  
@@ -176,23 +214,26 @@ caption.
 Replaces the hard-coded `<ul>` in `careers.php`. Could just be Text +  
 Contact form instead — borderline.
 
-## Suggested order
+## Status
 
-1.  **Menu** and **Events** — they're the two empty pages the café cares about.
-2.  **Location** + **Opening hours** (hours repeater on Site Details first, so  
-    footer and block share it).
-3.  **Contact form** — unblocks Fifield Room hire and Careers.
-4.  **Photo grid**, **Call to action**, **Quote** — quick, and Home/About  
-    immediately look richer.
-5.  Everything else as wanted.
+Done: **Menu**, **Events** (CPT + list + single), **Location**, **Contact  
+form**, and hours shared from Site Details. Decisions that were pending are  
+settled: Events = CPT, Menu = structured (+ PDF import), Forms = own code  
+with FluentSMTP for delivery.
 
-Things to decide before building any of them:
+Next, in the order that pays off fastest:
 
-*   **Events: CPT or repeater?** (see 2)
-*   **Menu: image, structured, or both?** (see 1)
-*   **Forms: own code or a plugin wrapper?** (see 5)
-*   Whether to move footer hours to a structured repeater (affects 4 and  
-    `footer.php`, plus a snapshot refresh).
+1.  **Photo grid** (6) — the last Tier 1 item; also wanted on About.
+2.  **Call to action** (10), **Quote / reviews** (8), **Feature trio** (7) —  
+    quick, and Home/About immediately look richer.
+3.  **Notice bar** (15), **FAQ accordion** (16), **Divider** (18) — small  
+    utilities the café asked for.
+4.  **Team** (11), **Timeline** (12, needs the café's copy), **Statement**  
+    (9), **Diptych** (13), **Instagram strip** (14).
+5.  Low priority: Download (17), Map only (19), Careers (20).
+
+Still to decide: whether to move footer hours to a structured repeater  
+(affects 4 and `footer.php`, plus a snapshot refresh).
 
 Adding a block is: folder in `src/blocks/<name>/` (block.json + render.php),  
 a template part in `src/template-parts/blocks/`, a field group in  

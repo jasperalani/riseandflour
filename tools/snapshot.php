@@ -80,15 +80,17 @@ foreach ( $rf_events as $rf_event ) {
 	);
 }
 
-// The Site Details options page (footer address, hours, contact…). ACF
-// stores each field twice: options_<name> holds the value, _options_<name>
-// the field key — both are needed for get_field() to format the value.
+// The Site Details options page (footer address, hours, contact, legal
+// pages…). ACF stores each field twice: options_<name> holds the value,
+// _options_<name> the field key — both are needed for get_field() to format
+// the value. Note options_terms_page is a page ID, which won't survive a
+// database wipe — footer.php falls back to the /terms-of-use/ slug.
 global $wpdb;
 
 $rf_rows = $wpdb->get_results(
 	"SELECT option_name, option_value FROM {$wpdb->options}
-	 WHERE option_name LIKE 'options\_footer\_%'
-	    OR option_name LIKE '\_options\_footer\_%'"
+	 WHERE option_name LIKE 'options\_%'
+	    OR option_name LIKE '\_options\_%'"
 );
 
 $rf_out['options'] = array();

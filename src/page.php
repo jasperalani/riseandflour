@@ -25,7 +25,8 @@ get_header();
 		$rise_and_flour_own_title = $rise_and_flour_has_hero
 			|| has_block( 'acf/rf-menu', get_post() )
 			|| has_block( 'acf/rf-location', get_post() )
-			|| has_block( 'acf/rf-events', get_post() );
+			|| has_block( 'acf/rf-events', get_post() )
+			|| has_block( 'acf/rf-contact', get_post() );
 		?>
 
 		<?php if ( ! $rise_and_flour_own_title ) : ?>

@@ -22,6 +22,13 @@
    rendered server-side via --rel, so it looks right here without main.js.
    Slides are edited through the block's fields, not by scrolling the stage. */
 
+/* wp-admin's forms.css paints its own chevron on every <select>; with the
+   theme's `appearance: none` it tiles across the contact form's Subject
+   field. The theme draws its own chevron, so drop the admin one here. */
+.editor-styles-wrapper .block-contact__select select {
+  background-image: none;
+}
+
 /* Placeholders should read clearly as "nothing set yet" while editing. */
 .editor-styles-wrapper .ph {
   outline: 1px dashed rgba(46, 62, 69, 0.25);

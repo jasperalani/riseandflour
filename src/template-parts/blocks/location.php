@@ -30,6 +30,7 @@ $rf = wp_parse_args(
 		'phone'          => '',
 		'email'          => '',
 		'show_hours'     => true,
+		'note_label'     => '',
 		'note'           => '',
 		'directions_url' => '',
 		'map'            => '',
@@ -118,24 +119,27 @@ $rf_tel = preg_replace( '/[^0-9+]/', '', (string) $rf_phone );
 				</div>
 			<?php endif; ?>
 
-			<?php if ( $rf_phone ) : ?>
+			<?php if ( $rf['note'] ) : ?>
 				<div class="block-location__row">
-					<dt><?php esc_html_e( 'Phone', 'rise-and-flour' ); ?></dt>
-					<dd><a href="tel:<?php echo esc_attr( $rf_tel ); ?>"><?php echo esc_html( $rf_phone ); ?></a></dd>
+					<dt><?php echo esc_html( $rf['note_label'] ? $rf['note_label'] : __( 'Getting here', 'rise-and-flour' ) ); ?></dt>
+					<dd class="block-location__note"><?php echo wp_kses_post( wpautop( $rf['note'] ) ); ?></dd>
 				</div>
 			<?php endif; ?>
 
-			<?php if ( $rf_email ) : ?>
+			<?php if ( $rf_email || $rf_phone ) : ?>
 				<div class="block-location__row">
-					<dt><?php esc_html_e( 'Email', 'rise-and-flour' ); ?></dt>
-					<dd><a href="mailto:<?php echo esc_attr( $rf_email ); ?>"><?php echo esc_html( $rf_email ); ?></a></dd>
+					<dt><?php esc_html_e( 'Contact', 'rise-and-flour' ); ?></dt>
+					<dd>
+						<?php if ( $rf_email ) : ?>
+							<a class="block-location__accent" href="mailto:<?php echo esc_attr( $rf_email ); ?>"><?php echo esc_html( $rf_email ); ?></a><br>
+						<?php endif; ?>
+						<?php if ( $rf_phone ) : ?>
+							<a href="tel:<?php echo esc_attr( $rf_tel ); ?>"><?php echo esc_html( $rf_phone ); ?></a>
+						<?php endif; ?>
+					</dd>
 				</div>
 			<?php endif; ?>
 		</dl>
-
-		<?php if ( $rf['note'] ) : ?>
-			<div class="block-location__note"><?php echo wp_kses_post( wpautop( $rf['note'] ) ); ?></div>
-		<?php endif; ?>
 
 		<?php if ( $rf['directions_url'] ) : ?>
 			<a class="link-caps block-location__directions" href="<?php echo esc_url( $rf['directions_url'] ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Get directions', 'rise-and-flour' ); ?></a>

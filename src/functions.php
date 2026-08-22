@@ -32,8 +32,10 @@ function rise_and_flour_setup() {
 	add_theme_support( 'responsive-embeds' );
 
 	// Load the site stylesheet into the editor so ACF block previews render
-	// as they will on the front end.
+	// as they will on the front end. The web fonts go in too — main.css only
+	// names them, and the front-end enqueue doesn't run in the editor.
 	add_theme_support( 'editor-styles' );
+	add_editor_style( 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap' );
 	add_editor_style( 'css/main.css' );
 
 	// The design has one fixed content width; no user-selectable widths.
@@ -244,3 +246,4 @@ require get_template_directory() . '/inc/acf-fields.php';
 require get_template_directory() . '/inc/site-options.php';
 require get_template_directory() . '/inc/menu-import.php';
 require get_template_directory() . '/inc/events.php';
+require get_template_directory() . '/inc/contact.php';

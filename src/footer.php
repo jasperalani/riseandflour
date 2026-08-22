@@ -24,6 +24,39 @@ $rise_and_flour_wordmark = sprintf(
 	esc_html__( 'Rise %s Flour', 'rise-and-flour' ),
 	'<span class="amp">&amp;</span>'
 );
+
+// Legal links: the Privacy Policy page WordPress knows about (Settings →
+// Privacy) and the Terms of Use page chosen under Site Details → Legal
+// pages (falling back to a page at /terms-of-use/). Each appears only once
+// published, so nothing links to a draft.
+$rise_and_flour_legal = array();
+
+$rise_and_flour_privacy_url = get_privacy_policy_url();
+if ( $rise_and_flour_privacy_url ) {
+	$rise_and_flour_legal[ $rise_and_flour_privacy_url ] = __( 'Privacy Policy', 'rise-and-flour' );
+}
+
+$rise_and_flour_terms_id = (int) rise_and_flour_option( 'terms_page', 0 );
+$rise_and_flour_terms    = $rise_and_flour_terms_id ? get_post( $rise_and_flour_terms_id ) : get_page_by_path( 'terms-of-use' );
+if ( $rise_and_flour_terms && 'page' === $rise_and_flour_terms->post_type && 'publish' === $rise_and_flour_terms->post_status ) {
+	$rise_and_flour_legal[ get_permalink( $rise_and_flour_terms ) ] = __( 'Terms of Use', 'rise-and-flour' );
+}
+
+/**
+ * Print the legal links row, if there are any.
+ *
+ * @param array $links URL => label.
+ */
+function rise_and_flour_footer_legal( $links ) {
+	if ( ! $links ) {
+		return;
+	}
+	echo '<nav class="site-footer__legal" aria-label="' . esc_attr__( 'Legal', 'rise-and-flour' ) . '">';
+	foreach ( $links as $url => $label ) {
+		printf( '<a href="%s">%s</a>', esc_url( $url ), esc_html( $label ) );
+	}
+	echo '</nav>';
+}
 ?>
 
 <footer id="colophon" class="site-footer <?php echo $rise_and_flour_full ? 'site-footer--full' : 'site-footer--slim'; ?>">
@@ -50,13 +83,15 @@ $rise_and_flour_wordmark = sprintf(
 		</div>
 
 		<div class="site-footer__baseline">
-			<span><?php echo wp_kses_post( $rise_and_flour_wordmark ); ?></span>
+			<a class="site-footer__home" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php echo wp_kses_post( $rise_and_flour_wordmark ); ?></a>
+			<?php rise_and_flour_footer_legal( $rise_and_flour_legal ); ?>
 			<span><?php echo esc_html( $rise_and_flour_est_line ); ?></span>
 		</div>
 
 	<?php else : ?>
 		<div class="site-footer__baseline">
-			<span><?php echo wp_kses_post( $rise_and_flour_wordmark ); ?></span>
+			<a class="site-footer__home" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php echo wp_kses_post( $rise_and_flour_wordmark ); ?></a>
+			<?php rise_and_flour_footer_legal( $rise_and_flour_legal ); ?>
 			<span><?php echo esc_html( $rise_and_flour_slim ); ?></span>
 		</div>
 	<?php endif; ?>

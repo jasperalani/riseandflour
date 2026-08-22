@@ -153,6 +153,7 @@ function rise_and_flour_allowed_blocks( $allowed, $context ) {
 		'acf/rf-menu',
 		'acf/rf-location',
 		'acf/rf-events',
+		'acf/rf-contact',
 		// Core escape hatches for one-off content.
 		'core/paragraph',
 		'core/heading',

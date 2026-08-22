@@ -6,6 +6,39 @@ list as they come up; move an item out when it's done. (Block ideas live in
 
 ## Site-wide
 
+- **Finish setting up FluentSMTP with the Microsoft 365 mailer.** The
+  Contact form sends through `wp_mail()`, which FluentSMTP takes over; until
+  the mailer is authenticated, submissions show "couldn't be sent". Needs a
+  Microsoft 365 **Global Administrator** (or Application Administrator)
+  account — being logged into the mailbox isn't enough.
+
+  1. Sign in at https://entra.microsoft.com as the admin. *Identity →
+     Applications → App registrations → New registration*. Name it
+     "Rise & Flour website mail"; account type **single tenant**; Redirect
+     URI platform **Web**, value = the Redirect URL FluentSMTP shows next to
+     its Client ID / Secret fields (copy it exactly). Register.
+  2. *Overview* → **Application (client) ID** → FluentSMTP's *Application
+     Client ID*.
+  3. *Certificates & secrets → New client secret*. Max expiry is 24 months —
+     put a reminder in the diary, mail stops when it lapses. Copy the
+     **Value** column (shown once), not "Secret ID" → *Application Client
+     Secret*.
+  4. *API permissions → Add → Microsoft Graph → Delegated*: `Mail.Send` and
+     `offline_access` (check FluentSMTP's own doc for its exact list), then
+     **Grant admin consent**.
+  5. In FluentSMTP paste both values, set From Email to the sending
+     mailbox, save, then click its **Authenticate** button and sign in as
+     that mailbox (e.g. contact@riseandflour.co.uk) and accept consent.
+  6. FluentSMTP → *Email Test* to hello@/contact@, then submit the Contact
+     page; it should show the thank-you screen.
+
+  Line-up on our side: the From address must be the mailbox authenticated
+  in step 5 (the theme sets no From header, and Reply-To is the visitor).
+  Messages go to **Site Details → Email** (currently hello@) unless the
+  block's *Send messages to* field is set — if the real inbox is contact@,
+  change Site Details, which also updates the footer, Location and Contact
+  pages.
+
 - **Google Analytics support.** A `ga_measurement_id` field on Site Details
   (G-XXXXXXX); when set, `header.php` prints the gtag.js snippet via
   `wp_head`, skipped for logged-in users so admin visits don't count. Keep
@@ -21,12 +54,11 @@ list as they come up; move an item out when it's done. (Block ideas live in
   Terms of Use meeting these requirements the Google Maps Platform APIs
   should not be used. (The checkbox on the Maps Platform sign-up — "By
   checking this box, I am confirming that I understand Google's
-  requirements" — is confirming exactly this.) Plan: a *Terms of Use* page
-  built from Text blocks, linked from the footer beside Privacy Policy, with
-  a paragraph along the lines of "This site uses Google Maps. By using it
-  you agree to be bound by Google's Terms of Service
-  (https://www.google.com/intl/en/policies/terms/)". The Privacy Policy
-  should mention Google Maps too, since the embed sets cookies.
+  requirements" — is confirming exactly this.) ✅ Written 22 Aug 2026
+  (Gutenberg markup supplied in chat) with the Google Maps clause, and the
+  Privacy Policy already covers the map's cookies. To do: create a *Terms of
+  Use* page, paste the markup into its Code editor, publish, and link it
+  from the footer beside Privacy Policy.
 
 ## Menu
 
@@ -45,14 +77,22 @@ list as they come up; move an item out when it's done. (Block ideas live in
 - Menu import: read a photo of the printed menu (JPEG/PNG) as well as a PDF.
 - Drinks / cakes sections once the café has a printed version of them.
 
-- **Privacy Policy: check the contact-us link.** The page is still the
-  WordPress default draft; make sure its "contact us" link points at the
-  right place (the Location page, or the email in Site Details) before it's
-  published and linked from the footer.
-- **Privacy Policy: check the contact email.** The policy answers "What is
-  the email address users should contact in case they have questions about
-  your policy?" — make sure it's the real address (and the same one as in
-  Site Details), not a placeholder.
+- **Privacy Policy — final checks before it goes live.** Rewritten on
+  22 Aug 2026 for the café's real setup (contact form → Microsoft 365,
+  SiteGround hosting, Google Maps embed, events/private-hire enquiries) and
+  pasted into the Privacy Policy page; rights requests go to
+  `contact@riseandflour.co.uk`, no `privacy@` mailbox or DSAR form needed.
+  Still to do: make Site Details → Email match `contact@` (it says
+  `hello@`), optionally add the Companies House number after "Rise and
+  Flour Ltd" in *Who we are*, confirm the two-year retention line, publish
+  the page, and link it from the footer alongside the Terms of Use.
+- **Footer links to Privacy Policy and Terms of Use.** ✅ Added to the
+  footer baseline (both variants) on 22 Aug 2026. Each link appears only
+  once its page is published: Privacy Policy comes from *Settings → Privacy*
+  (make sure that setting points at the policy page), Terms of Use from the
+  page picked under *Site Details → Legal pages* (falls back to the slug
+  `terms-of-use`). A draft Terms of Use page with the full text is already
+  created — review and publish it.
 
 ## Events
 

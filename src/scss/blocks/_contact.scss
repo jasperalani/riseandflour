@@ -1,0 +1,333 @@
+@use '../abstracts/mixins' as *;
+
+// =============================================================
+// BLOCK: Contact form
+// ACF fields: eyebrow, heading, tag, intro, recipient, show_contact,
+// phone_note, show_visit, extras, subjects, button_text, reply_note,
+// success_text.
+//
+// Details column on the left — terracotta caps labels over Garamond
+// values — and the form on the right in a dotted terracotta panel.
+// Inputs are bare: a bottom rule, italic Garamond placeholder.
+// =============================================================
+
+.block-contact {
+  @include wrap;
+}
+
+.block-contact__head {
+  max-width: 640px;
+  margin-inline: auto;
+  margin-bottom: 64px;
+  text-align: center;
+
+  .eyebrow { margin-bottom: 22px; }
+
+  h1,
+  h2 {
+    font-size: 26px;
+    margin: 0;
+  }
+}
+
+.block-contact__eyebrow {
+  &::before { content: '· '; }
+  &::after { content: ' ·'; }
+}
+
+.block-contact__intro {
+  margin-top: 24px;
+
+  p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text-body);
+  }
+
+  p + p { margin-top: 16px; }
+}
+
+.block-contact__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 72px;
+  align-items: start;
+}
+
+// --- Details ---------------------------------------------------
+.block-contact__item + .block-contact__item { margin-top: 40px; }
+
+.block-contact__label {
+  @include caps-label(13px);
+  color: var(--rf-terracotta);
+  margin: 0 0 14px;
+}
+
+.block-contact__value {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--text-heading);
+
+  a {
+    color: var(--text-heading);
+    border-bottom: 0; // no editorial underline on contact details
+    &:hover { color: var(--rf-terracotta); }
+  }
+}
+
+.block-contact__accent {
+  color: var(--rf-terracotta) !important;
+  &:hover { color: var(--rf-terracotta-deep) !important; }
+}
+
+.block-contact__note {
+  margin-top: 8px;
+  font-size: 15px;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.block-contact__text p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-body);
+  margin: 0 0 12px;
+
+  &:last-child { margin-bottom: 0; }
+}
+
+// --- Panel + form ----------------------------------------------
+.block-contact__panel {
+  padding: 56px 64px;
+  border: 1px dotted var(--rf-terracotta);
+  border-radius: 4px;
+}
+
+.block-contact__row + .block-contact__row { margin-top: 44px; }
+
+.block-contact__row--split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.block-contact__field label {
+  @include caps-label(13px);
+  display: block;
+  color: var(--text-heading);
+  margin-bottom: 14px;
+}
+
+.block-contact__field input,
+.block-contact__field select,
+.block-contact__field textarea {
+  display: block;
+  width: 100%;
+  padding: 10px 0 12px;
+  border: 0;
+  border-bottom: 1.5px solid var(--text-heading);
+  border-radius: 0;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 19px;
+  line-height: 1.4;
+  color: var(--text-heading);
+  transition: border-color var(--ease);
+
+  &::placeholder {
+    font-style: italic;
+    color: var(--text-muted);
+    opacity: 1;
+  }
+
+  &:focus {
+    outline: none;
+    border-bottom-color: var(--rf-terracotta);
+  }
+}
+
+.block-contact__field textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+// The native select, with our own chevron.
+.block-contact__select {
+  position: relative;
+
+  select {
+    appearance: none;
+    padding-right: 32px;
+    cursor: pointer;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    width: 9px;
+    height: 9px;
+    border-right: 1.5px solid var(--text-heading);
+    border-bottom: 1.5px solid var(--text-heading);
+    transform: translateY(-70%) rotate(45deg);
+    pointer-events: none;
+  }
+}
+
+.block-contact__field.has-error {
+  input,
+  select,
+  textarea { border-bottom-color: var(--rf-terracotta-deep); }
+}
+
+.block-contact__error {
+  margin-top: 8px;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--rf-terracotta-deep);
+}
+
+.block-contact__error--form {
+  margin: 0 0 28px;
+  font-size: 16px;
+}
+
+.block-contact__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  margin-top: 52px;
+}
+
+.block-contact__button {
+  @include caps-label(13px);
+  display: inline-block;
+  padding: 20px 44px;
+  background: var(--rf-terracotta);
+  color: var(--rf-cream);
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background var(--ease);
+
+  &:hover { background: var(--rf-terracotta-deep); }
+
+  &:focus-visible {
+    outline: 1.5px solid var(--rf-terracotta-deep);
+    outline-offset: 4px;
+  }
+
+  &[disabled] {
+    cursor: default;
+    opacity: 0.6;
+  }
+}
+
+.block-contact__reply {
+  font-size: 16px;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+// Visually gone, still in the DOM for bots to find.
+.block-contact__hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.block-contact__sent {
+  text-align: center;
+  padding: 24px 0;
+
+  p {
+    font-size: 19px;
+    line-height: 1.7;
+    color: var(--text-heading);
+  }
+}
+
+.block-contact__sent-mark {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 24px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-round);
+  border: 1.5px solid var(--rf-terracotta);
+  color: var(--rf-terracotta);
+  font-size: 22px;
+}
+
+// --- Responsive ----------------------------------------------
+@include tablet {
+  .block-contact { padding-inline: 32px; }
+
+  .block-contact__head { margin-bottom: 48px; }
+
+  .block-contact__grid { gap: 40px; }
+
+  .block-contact__panel { padding: 40px 36px; }
+
+  .block-contact__row--split { gap: 28px; }
+}
+
+@media (max-width: 860px) {
+  .block-contact__grid { grid-template-columns: 1fr; }
+
+  // Details read better as a row of short items when they sit above the form.
+  .block-contact__aside {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 40px;
+  }
+
+  .block-contact__item + .block-contact__item { margin-top: 0; }
+}
+
+@include mobile {
+  .block-contact { padding-inline: 20px; }
+
+  .block-contact__head {
+    margin-bottom: 36px;
+
+    h1,
+    h2 { font-size: 22px; }
+  }
+
+  .block-contact__aside {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .block-contact__value { font-size: 17px; }
+
+  .block-contact__panel { padding: 32px 20px; }
+
+  .block-contact__row--split {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .block-contact__row + .block-contact__row { margin-top: 32px; }
+
+  .block-contact__field input,
+  .block-contact__field select,
+  .block-contact__field textarea { font-size: 17px; }
+
+  .block-contact__actions {
+    margin-top: 36px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .block-contact__button {
+    width: 100%;
+    padding: 18px 24px;
+  }
+}

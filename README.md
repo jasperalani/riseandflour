@@ -168,6 +168,18 @@ Blocks live under **Rise & Flour** in the block inserter:
 | Menu | `eyebrow`, `heading`, `tag` (h1/h2), `intro`, `sections` (repeater: title, note, `items` repeater: name, price, description, vegetarian, extras, note), `hours_heading`, `hours` (falls back to Site Details), `notes`, `file` (PDF), `spacing` |
 | Location | `eyebrow`, `heading`, `tag` (h1/h2), `intro`, `address`, `phone`, `email` (all fall back to Site Details), `show_hours` (from Site Details), `note`, `directions_url`, `map` (Google Maps embed URL or iframe), `map_position` (left/right), `spacing` |
 | Events | `eyebrow`, `heading`, `tag` (h1/h2), `intro`, `show` (both/upcoming/past), `limit`, `past_heading`, `empty_text`, `spacing` — lists the **Events** post type |
+| Contact form | `eyebrow`, `heading`, `tag` (h1/h2), `intro`, `recipient` (falls back to Site Details), `show_contact`, `phone_note`, `show_visit`, `extras` (repeater: label + text), `subjects` (one per line), `button_text`, `reply_note`, `success_text`, `spacing` |
+
+### Contact form
+
+The Contact form block posts back to the page it's on; `inc/contact.php`
+validates it (nonce, honeypot, minimum fill time) and sends it with
+`wp_mail()`, then redirects to `?contact=sent`. **Delivery is whatever handles
+`wp_mail()`** — on this site that's WP Mail SMTP, configured under its own
+settings; the theme sets no From header so the plugin's authenticated sender
+is used, and Reply-To is the visitor. The recipient is the block's field or
+the Site Details email and never appears in the markup. Several forms on one
+page need distinct anchors so a submission finds its own block.
 
 ### Events
 
@@ -273,7 +285,11 @@ Headers and footers are **not** blocks — they're `header.php` / `footer.php`.
 The footer's address, hours, contact and baseline lines are editable under
 **Site Details** in wp-admin (an ACF Pro options page, registered in
 `inc/site-options.php`); unset fields fall back to the design's original
-values.
+values. The footer baseline also carries **Privacy Policy** and **Terms of
+Use** links: the privacy page is the one set under Settings → Privacy, the
+terms page is chosen on Site Details → Legal pages (falling back to a page
+with the slug `terms-of-use`). Each link only appears once its page is
+published.
 
 ## Removed from the underscores scaffold
 

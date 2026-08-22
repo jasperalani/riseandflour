@@ -19,6 +19,7 @@ get_template_part(
 		'phone'          => get_field( 'phone' ),
 		'email'          => get_field( 'email' ),
 		'show_hours'     => null === get_field( 'show_hours' ) ? true : (bool) get_field( 'show_hours' ),
+		'note_label'     => get_field( 'note_label' ),
 		'note'           => get_field( 'note' ),
 		'directions_url' => get_field( 'directions_url' ),
 		'map'            => get_field( 'map' ),

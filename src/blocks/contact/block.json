@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "acf/rf-contact",
+  "title": "Contact form",
+  "description": "A message form beside the café's contact details. Sends by email.",
+  "category": "rise-and-flour",
+  "icon": "email",
+  "keywords": ["contact", "form", "email", "enquiry", "message"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php"
+  },
+  "supports": {
+    "align": false,
+    "anchor": true,
+    "customClassName": true,
+    "jsx": false
+  }
+}
