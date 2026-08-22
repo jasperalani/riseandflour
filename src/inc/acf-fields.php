@@ -329,12 +329,6 @@ function rise_and_flour_register_fields() {
 			'title'    => __( 'Carousel', 'rise-and-flour' ),
 			'fields'   => array(
 				array(
-					'key'   => 'field_rf_car_eyebrow',
-					'label' => __( 'Eyebrow', 'rise-and-flour' ),
-					'name'  => 'eyebrow',
-					'type'  => 'text',
-				),
-				array(
 					'key'   => 'field_rf_car_heading',
 					'label' => __( 'Heading', 'rise-and-flour' ),
 					'name'  => 'heading',

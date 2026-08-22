@@ -12,7 +12,7 @@
  * the first) so there's no layout flash before main.js takes over, and the
  * block looks right in the editor where main.js never runs.
  *
- * ACF fields: eyebrow · heading · slides (repeater: image + caption)
+ * ACF fields: heading · slides (repeater: image + caption)
  *
  * @package Rise_&_Flour
  *
@@ -22,7 +22,6 @@
 $rf = wp_parse_args(
 	$args ?? array(),
 	array(
-		'eyebrow' => '',
 		'heading' => '',
 		'slides'  => array(),
 		'classes' => '',
@@ -56,13 +55,9 @@ $rf_total = count( $rf_slides );
 >
 
 	<?php // Only emitted with something to show — an empty head would still carry its margin. ?>
-	<?php if ( $rf['eyebrow'] || $rf['heading'] || $rf_total > 1 ) : ?>
+	<?php if ( $rf['heading'] || $rf_total > 1 ) : ?>
 		<div class="carousel__head">
 			<div>
-				<?php if ( $rf['eyebrow'] ) : ?>
-					<p class="eyebrow"><?php echo esc_html( $rf['eyebrow'] ); ?></p>
-				<?php endif; ?>
-
 				<?php if ( $rf['heading'] ) : ?>
 					<h2><?php echo esc_html( $rf['heading'] ); ?></h2>
 				<?php endif; ?>

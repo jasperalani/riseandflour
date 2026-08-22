@@ -40,7 +40,6 @@ get_template_part(
 	'template-parts/blocks/carousel',
 	null,
 	array(
-		'eyebrow' => get_field( 'eyebrow' ),
 		'heading' => get_field( 'heading' ),
 		'slides'  => $rf_slides,
 		'classes' => rise_and_flour_block_classes( $block ),

@@ -164,7 +164,7 @@ Blocks live under **Rise & Flour** in the block inserter:
 | Text | `eyebrow`, `heading`, `body`, `variant` (default/intro), `align`, `tag` (h1–h3), `spacing` |
 | Image + Text | `image`, `media_position` (left/right), `eyebrow`, `heading`, `body`, `link_text`, `link_url`, `spacing` |
 | Image | `image`, `caption`, `width` (contained/full), `spacing` |
-| Carousel | `eyebrow`, `heading`, `slides` (repeater: image + caption), `spacing` |
+| Carousel | `heading`, `slides` (repeater: image + caption), `spacing` |
 
 `show_logo` toggles `.hero--no-logo`; `media_position` toggles
 `.block-image-text--media-right`; `width` toggles `.block-image--full`; `spacing`

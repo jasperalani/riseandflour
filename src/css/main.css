@@ -1023,13 +1023,13 @@ body.admin-bar .site-header.is-floating {
   }
 }
 .carousel {
-  --slide-w: min(62vw, 720px);
-  --slide-h: 480px;
-  --slide-gap: 28px;
-  --peek: 180px;
-  --stage-w: calc(var(--slide-w) + 2 * (var(--slide-gap) + var(--peek)));
+  --slide-w: min(72vw, 1260px);
+  --slide-h: min(calc(var(--slide-w) * 2 / 3), 82vh);
+  --slide-gap: 64px;
   --caption-overhang: 140px;
   --focus-left: calc((100% - var(--slide-w)) / 2);
+  --edge-min: 48px;
+  --edge: max(var(--edge-min), calc(var(--focus-left) - var(--caption-overhang)));
   --slide-motion: 560ms cubic-bezier(0.65, 0, 0.35, 1);
   --caption-motion: 480ms cubic-bezier(0.65, 0, 0.35, 1);
   position: relative;
@@ -1040,17 +1040,12 @@ body.admin-bar .site-header.is-floating {
 }
 
 .carousel__head {
-  max-width: var(--wrap);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
+  padding-inline: var(--edge);
   margin-bottom: 40px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: 24px;
-}
-.carousel__head .eyebrow {
-  margin-bottom: 16px;
 }
 .carousel__head h2,
 .carousel__head h3 {
@@ -1092,8 +1087,6 @@ body.admin-bar .site-header.is-floating {
 .carousel__stage {
   position: relative;
   height: var(--slide-h);
-  max-width: var(--stage-w);
-  margin-inline: auto;
   overflow: hidden;
   touch-action: pan-y;
   user-select: none;
@@ -1150,10 +1143,10 @@ body.admin-bar .site-header.is-floating {
 .carousel__captions {
   position: absolute;
   z-index: 3;
-  left: calc(var(--focus-left) - var(--caption-overhang));
+  left: var(--edge);
   top: 50%;
   transform: translateY(-50%);
-  width: min(46vw, 480px);
+  width: min(46vw, 560px);
   display: grid;
   pointer-events: none;
 }
@@ -1185,7 +1178,7 @@ body.admin-bar .site-header.is-floating {
   display: flex;
   gap: 10px;
   margin-top: 40px;
-  padding-left: calc(var(--focus-left) - var(--caption-overhang));
+  padding-left: var(--edge);
 }
 
 .carousel__dash {
@@ -1216,14 +1209,13 @@ body.admin-bar .site-header.is-floating {
 
 @media (max-width: 1024px) {
   .carousel {
-    --slide-w: min(66vw, 600px);
-    --slide-h: 400px;
-    --peek: 120px;
+    --slide-w: min(76vw, 800px);
+    --slide-gap: 48px;
     --caption-overhang: 80px;
+    --edge-min: 32px;
     padding: 52px 0 48px;
   }
   .carousel__head {
-    padding-inline: 32px;
     margin-bottom: 32px;
   }
   .carousel__captions {
@@ -1235,11 +1227,11 @@ body.admin-bar .site-header.is-floating {
 }
 @media (max-width: 640px) {
   .carousel {
-    --slide-w: 78vw;
-    --slide-h: 300px;
-    --slide-gap: 16px;
-    --peek: 28px;
+    --slide-w: 84vw;
+    --slide-h: min(var(--slide-w), 60vh);
+    --slide-gap: 24px;
     --caption-overhang: -20px;
+    --edge-min: 20px;
     padding: 44px 0 40px;
   }
   .carousel__head {
