@@ -164,10 +164,16 @@ Blocks live under **Rise & Flour** in the block inserter:
 | Text | `eyebrow`, `heading`, `body`, `variant` (default/intro), `align`, `tag` (h1–h3), `spacing` |
 | Image + Text | `image`, `media_position` (left/right), `eyebrow`, `heading`, `body`, `link_text`, `link_url`, `spacing` |
 | Image | `image`, `caption`, `width` (contained/full), `spacing` |
-| Carousel | `heading`, `slides` (repeater: image + caption), `spacing` |
+| Carousel | `heading`, `slides` (repeater: image + caption), `size` (large/small), `pager` (dash/dot/diamond), `spacing` |
+| Menu | `eyebrow`, `heading`, `tag` (h1/h2), `intro`, `sections` (repeater: title, note, `items` repeater: name, price, description, vegetarian, extras, note), `hours_heading`, `hours` (falls back to Site Details), `notes`, `file` (PDF), `spacing` |
+| Location | `eyebrow`, `heading`, `tag` (h1/h2), `intro`, `address`, `phone`, `email` (all fall back to Site Details), `show_hours` (from Site Details), `note`, `directions_url`, `map` (Google Maps embed URL or iframe), `map_position` (left/right), `spacing` |
 
 `show_logo` toggles `.hero--no-logo`; `media_position` toggles
-`.block-image-text--media-right`; `width` toggles `.block-image--full`; `spacing`
+`.block-image-text--media-right`; `width` toggles `.block-image--full`; the
+carousel's `size` toggles `.carousel--small` (Large fills most of the screen
+with the next image running off the page edge; Small is the tighter strip with
+a fixed peek of the next image) and its `pager` toggles
+`.carousel--pager-dot|diamond` (dashes need no class); `spacing`
 maps to `.section--tight|default|loose|xl`, so the same block sits tight or loose
 per page rather than having margin baked in.
 
@@ -225,6 +231,20 @@ in `tools/` stays outside the theme so it never deploys.
 - `wp_insert_post()` unslashes its input, so block markup must be passed through
   `wp_slash()` — otherwise `é` loses its backslash and `café` renders as
   `cafu00e9`. `tools/seed.php` handles this.
+
+### Menu import (PDF → Menu block)
+
+**Site Details → Menu import** updates a page's Menu block from the print
+menu PDF. Claude reads the PDF and returns the dishes in the block's own
+structure; the page then shows what would be added, removed or changed
+against the menu on the site, and nothing is written until **Apply**. The
+PDF can also be attached as the block's "Download the menu" link.
+
+It needs an Anthropic API key — define `RF_ANTHROPIC_API_KEY` in
+`wp-config.php` (preferred) or paste it into the settings box on the page.
+The model defaults to `claude-sonnet-5`. Code: `inc/menu-import.php`; the
+PDF is never parsed in PHP — the designed two-column layout makes local text
+extraction unreliable.
 
 Headers and footers are **not** blocks — they're `header.php` / `footer.php`.
 The footer's address, hours, contact and baseline lines are editable under
