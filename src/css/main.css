@@ -2143,9 +2143,26 @@ body.admin-bar .site-header.is-floating {
 }
 
 .event__passed {
-  font-style: italic;
-  font-size: 17px;
-  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  font-weight: 500;
+  display: inline-block;
+  padding: 16px 36px;
+  background: var(--rf-cream-deep);
+  border-top: 1.5px solid var(--rf-terracotta);
+  border-bottom: 1.5px solid var(--rf-terracotta);
+  color: var(--text-heading);
+  margin: 0;
+}
+.event__passed::before {
+  content: "· ";
+  color: var(--rf-terracotta);
+}
+.event__passed::after {
+  content: " ·";
+  color: var(--rf-terracotta);
 }
 
 @media (max-width: 1024px) {

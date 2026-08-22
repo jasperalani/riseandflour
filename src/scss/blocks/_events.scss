@@ -334,10 +334,27 @@
   color: var(--text-muted);
 }
 
+// Stands where the reserve button would be, so it carries similar weight:
+// a caps line on the cream-deep panel with the date strip's terracotta rules.
 .event__passed {
-  font-style: italic;
-  font-size: 17px;
-  color: var(--text-muted);
+  @include caps-label(13px);
+  display: inline-block;
+  padding: 16px 36px;
+  background: var(--rf-cream-deep);
+  border-top: 1.5px solid var(--rf-terracotta);
+  border-bottom: 1.5px solid var(--rf-terracotta);
+  color: var(--text-heading);
+  margin: 0;
+
+  &::before {
+    content: '· ';
+    color: var(--rf-terracotta);
+  }
+
+  &::after {
+    content: ' ·';
+    color: var(--rf-terracotta);
+  }
 }
 
 // --- Responsive ----------------------------------------------
