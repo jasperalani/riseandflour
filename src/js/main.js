@@ -267,7 +267,20 @@
       pointerId = null;
       axis = null;
 
-      if (cancelled || !owned || Math.abs(dx) < SWIPE) return;
+      if (cancelled) return;
+
+      // A press that never picked an axis is a click or tap. On the
+      // peeking slide that means "show me that one"; elsewhere it's
+      // nothing. Handled here rather than with a click listener so a
+      // swipe that ends over the next slide can't double-fire.
+      if (!owned) {
+        var hit = e.target.closest ? e.target.closest('[data-carousel-slide]') : null;
+        var i = hit ? slides.indexOf(hit) : -1;
+        if (i > index) goTo(i);
+        return;
+      }
+
+      if (Math.abs(dx) < SWIPE) return;
       goTo(index + (dx < 0 ? 1 : -1));
     }
 

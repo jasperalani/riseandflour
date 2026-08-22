@@ -36,11 +36,22 @@
   transform: translateY(-100%);
   transition: transform 200ms ease-out;
 
-  &.is-pinned { transform: translateY(0); }
+  // `none` rather than translateY(0): a transformed element becomes the
+  // containing block for fixed descendants, which would pin the mobile
+  // nav panel (fixed, inset 0) to the header's box instead of the viewport.
+  // The transition still runs — `none` animates as the identity transform.
+  &.is-pinned { transform: none; }
 
   // Applied for one frame when entering/leaving floating mode so
   // the position swap itself never animates.
   &.no-anim { transition: none; }
+}
+
+// While the panel is open the header must stay put and untransformed,
+// whatever the scroll state — the panel lives inside it.
+body.nav-open .site-header.is-floating {
+  transform: none;
+  transition: none;
 }
 
 // Clear the admin bar when previewing while logged in.

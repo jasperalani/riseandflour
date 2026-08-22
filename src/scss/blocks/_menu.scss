@@ -1,0 +1,274 @@
+@use '../abstracts/mixins' as *;
+
+// =============================================================
+// BLOCK: Menu
+// ACF fields: eyebrow, heading, tag, intro, sections (repeater of
+// title + note + items), hours_heading, hours, notes, file.
+//
+// A structured menu: sections of dishes flowing in two columns on
+// desktop, one on mobile, with hours and closing notes in an aside
+// beneath. Dish names are set in Core Magic — the one place the
+// brand face appears in body content (logo and product names only).
+// Everything else is the usual Montserrat caps + EB Garamond.
+// =============================================================
+
+.block-menu {
+  @include wrap;
+}
+
+// --- Head ----------------------------------------------------
+.block-menu__head {
+  max-width: 640px;
+  margin-inline: auto;
+  margin-bottom: 72px;
+  text-align: center;
+
+  .eyebrow { margin-bottom: 22px; }
+
+  h1,
+  h2 {
+    font-size: 26px;
+    margin: 0;
+  }
+}
+
+.block-menu__intro {
+  margin-top: 24px;
+
+  p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text-body);
+  }
+
+  p + p { margin-top: 16px; }
+}
+
+// --- Sections ------------------------------------------------
+.block-menu__section + .block-menu__section { margin-top: 72px; }
+
+.block-menu__section-head {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.block-menu__section-title {
+  font-size: 20px;
+
+  // A short terracotta rule beneath, in place of the print menu's band.
+  &::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    margin: 18px auto 0;
+    background: var(--rf-terracotta);
+  }
+}
+
+.block-menu__section-note {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+// Dishes flow down the left column then the right, like the print
+// menu; break-inside keeps a dish from splitting across the fold.
+.block-menu__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  column-count: 2;
+  column-gap: 72px;
+}
+
+.block-menu__item {
+  break-inside: avoid;
+  padding-bottom: 28px;
+
+  // Visible separation comes from spacing, not rules — the menu should
+  // read as a page, not a table.
+}
+
+.block-menu__item-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+// Core Magic: the brand face, reserved for product names, and only ever
+// on the dish name. It's a caps-only slab with generous built-in spacing,
+// so it runs wide — hence the modest size and balanced wrapping.
+.block-menu__name {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--text-heading);
+  margin: 0;
+  text-wrap: balance;
+}
+
+// Dotted leader running out to the price.
+.block-menu__leader {
+  flex: 1 1 auto;
+  min-width: 24px;
+  border-bottom: 1px dotted var(--rf-ink-faint);
+  // Sits on the baseline of the name rather than the bottom of the line box.
+  transform: translateY(-5px);
+}
+
+.block-menu__price {
+  @include caps-label(14px, 0.04em);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-heading);
+  margin: 0;
+  white-space: nowrap;
+}
+
+// The vegetarian mark: a small outlined chip after the name.
+.block-menu__tag {
+  display: inline-block;
+  vertical-align: 0.2em;
+  margin-left: 6px;
+  padding: 1px 5px;
+  border: 1px solid var(--rf-terracotta);
+  border-radius: var(--radius-sm);
+  @include caps-label(10px, 0.08em);
+  color: var(--rf-terracotta);
+
+  abbr { text-decoration: none; }
+}
+
+.block-menu__desc {
+  margin-top: 8px;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text-body);
+}
+
+.block-menu__extras,
+.block-menu__note {
+  margin-top: 8px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.block-menu__note { font-style: italic; }
+
+// The "Add" label before optional extras.
+.block-menu__label {
+  @include caps-label(11px);
+  color: var(--rf-terracotta);
+  margin-right: 4px;
+}
+
+// --- Aside: hours + notes -----------------------------------
+.block-menu__aside {
+  margin-top: 72px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: start;
+}
+
+.block-menu__aside-title {
+  font-size: 16px;
+  margin-bottom: 18px;
+}
+
+// Flat cream-deep panel, as the print menu's band — but no colour fill
+// the brand doesn't own.
+.block-menu__hours {
+  padding: 36px 40px;
+  background: var(--rf-cream-deep);
+  border-radius: var(--radius-sm);
+
+  p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-body);
+  }
+
+  p + p { margin-top: 14px; }
+
+  strong {
+    @include caps-label(12px);
+    display: block;
+    color: var(--text-heading);
+    margin-bottom: 6px;
+
+    // wpautop turns the newline after the label into a <br>; the label is
+    // already a block, so that would be an empty line.
+    + br { display: none; }
+  }
+}
+
+.block-menu__notes {
+  padding: 36px 0;
+  text-align: center;
+
+  p {
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--text-heading);
+  }
+
+  p + p { margin-top: 14px; }
+
+  .link-caps { margin-top: 28px; }
+}
+
+// --- Responsive ----------------------------------------------
+@include tablet {
+  .block-menu { padding-inline: 32px; }
+
+  .block-menu__head { margin-bottom: 56px; }
+
+  .block-menu__items { column-gap: 48px; }
+
+  .block-menu__section + .block-menu__section,
+  .block-menu__aside { margin-top: 56px; }
+
+  .block-menu__aside { gap: 32px; }
+
+  .block-menu__hours { padding: 28px 32px; }
+}
+
+@include mobile {
+  .block-menu { padding-inline: 20px; }
+
+  .block-menu__head {
+    margin-bottom: 44px;
+
+    h1,
+    h2 { font-size: 22px; }
+  }
+
+  .block-menu__items { column-count: 1; }
+
+  .block-menu__name { font-size: 18px; }
+
+  .block-menu__item { padding-bottom: 24px; }
+
+  .block-menu__section + .block-menu__section { margin-top: 44px; }
+
+  .block-menu__aside {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 40px;
+  }
+
+  .block-menu__hours { padding: 28px 24px; }
+
+  .block-menu__notes {
+    padding: 28px 0;
+
+    p { font-size: 18px; }
+  }
+}

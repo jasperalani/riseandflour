@@ -42,6 +42,8 @@ get_template_part(
 	array(
 		'heading' => get_field( 'heading' ),
 		'slides'  => $rf_slides,
+		'size'    => get_field( 'size' ),
+		'pager'   => get_field( 'pager' ),
 		'classes' => rise_and_flour_block_classes( $block ),
 		'anchor'  => rise_and_flour_block_anchor( $block ),
 	)

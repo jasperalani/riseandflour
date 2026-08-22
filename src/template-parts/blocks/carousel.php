@@ -24,6 +24,11 @@ $rf = wp_parse_args(
 	array(
 		'heading' => '',
 		'slides'  => array(),
+		// 'large' (default) or 'small' — see the Size field. Anything else,
+		// including content saved before the field existed, renders large.
+		'size'    => 'large',
+		// 'dash' (default), 'dot' or 'diamond' — the Pager style field.
+		'pager'   => 'dash',
 		'classes' => '',
 		'anchor'  => '',
 	)
@@ -31,6 +36,14 @@ $rf = wp_parse_args(
 
 if ( empty( $rf['slides'] ) ) {
 	return;
+}
+
+if ( 'small' === $rf['size'] ) {
+	$rf['classes'] = trim( 'carousel--small ' . $rf['classes'] );
+}
+
+if ( in_array( $rf['pager'], array( 'dot', 'diamond' ), true ) ) {
+	$rf['classes'] = trim( 'carousel--pager-' . $rf['pager'] . ' ' . $rf['classes'] );
 }
 
 $rf_slides = array();
@@ -66,8 +79,13 @@ $rf_total = count( $rf_slides );
 			<?php if ( $rf_total > 1 ) : ?>
 				<?php // aria-disabled rather than disabled: a disabled control drops keyboard focus, which would strand arrow-key users at either end. ?>
 				<div class="carousel__controls">
-					<button class="carousel__btn" type="button" data-carousel-prev aria-label="<?php esc_attr_e( 'Previous slide', 'rise-and-flour' ); ?>" aria-disabled="true">&#8592;</button>
-					<button class="carousel__btn" type="button" data-carousel-next aria-label="<?php esc_attr_e( 'Next slide', 'rise-and-flour' ); ?>" aria-disabled="false">&#8594;</button>
+					<?php // Drawn arrows rather than text glyphs, so they centre in the circle regardless of font metrics. ?>
+					<button class="carousel__btn" type="button" data-carousel-prev aria-label="<?php esc_attr_e( 'Previous slide', 'rise-and-flour' ); ?>" aria-disabled="true">
+						<svg viewBox="0 0 18 12" aria-hidden="true" focusable="false"><path d="M17 6H1M7 1 1 6l6 5" /></svg>
+					</button>
+					<button class="carousel__btn" type="button" data-carousel-next aria-label="<?php esc_attr_e( 'Next slide', 'rise-and-flour' ); ?>" aria-disabled="false">
+						<svg viewBox="0 0 18 12" aria-hidden="true" focusable="false"><path d="M1 6h16M11 1l6 5-6 5" /></svg>
+					</button>
 				</div>
 			<?php endif; ?>
 		</div>
