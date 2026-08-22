@@ -1,5 +1,5 @@
 {
-    "saved": "2026-08-22T14:06:55+00:00",
+    "saved": "2026-08-22T14:30:30+00:00",
     "front": "home",
     "pages": [
         {
@@ -21,7 +21,7 @@
             "title": "Events",
             "status": "publish",
             "menu_order": 0,
-            "content": ""
+            "content": "<!-- wp:acf/rf-events {\"name\":\"acf/rf-events\",\"data\":{\"eyebrow\":\"What's on\",\"_eyebrow\":\"field_rf_ev_eyebrow\",\"heading\":\"Events\",\"_heading\":\"field_rf_ev_heading\",\"tag\":\"h1\",\"_tag\":\"field_rf_ev_tag\",\"intro\":\"\",\"_intro\":\"field_rf_ev_intro\",\"show\":\"both\",\"_show\":\"field_rf_ev_show\",\"limit\":\"0\",\"_limit\":\"field_rf_ev_limit\",\"past_heading\":\"Past events\",\"_past_heading\":\"field_rf_ev_past_heading\",\"empty_text\":\"Nothing in the diary just yet — check back soon.\",\"_empty_text\":\"field_rf_ev_empty\",\"spacing\":\"default\",\"_spacing\":\"field_rf_ev_spacing\"},\"mode\":\"preview\"} /-->\r\n"
         },
         {
             "slug": "location",
@@ -43,6 +43,200 @@
             "status": "publish",
             "menu_order": 0,
             "content": "<!-- wp:acf/rf-hero {\"name\":\"acf/rf-hero\",\"data\":{\"image\":328,\"_image\":\"field_rf_hero_image\",\"show_logo\":\"1\",\"_show_logo\":\"field_rf_hero_show_logo\",\"logo\":\"\",\"_logo\":\"field_rf_hero_logo\",\"caption\":\"· A café in Oxfordshire ·\",\"_caption\":\"field_rf_hero_caption\"},\"mode\":\"preview\"} /-->\n\n<!-- wp:acf/rf-text {\"name\":\"acf/rf-text\",\"data\":{\"eyebrow\":\"· Est. Oxfordshire·\",\"_eyebrow\":\"field_rf_text_eyebrow\",\"heading\":\"A café on the Market Place\",\"_heading\":\"field_rf_text_heading\",\"body\":\"We began as a bakery. These days we keep the ovens for ourselves and set the tables for you — the kitchen open all day, the counter full by nine.\",\"_body\":\"field_rf_text_body\",\"variant\":\"intro\",\"_variant\":\"field_rf_text_variant\",\"align\":\"center\",\"_align\":\"field_rf_text_align\",\"tag\":\"h1\",\"_tag\":\"field_rf_text_tag\",\"spacing\":\"none\",\"_spacing\":\"field_rf_text_spacing\"},\"mode\":\"preview\"} /-->\n\n<!-- wp:acf/rf-image-text {\"name\":\"acf/rf-image-text\",\"data\":{\"image\":178,\"_image\":\"field_rf_it_image\",\"media_position\":\"left\",\"_media_position\":\"field_rf_it_media_position\",\"eyebrow\":\"The kitchen\",\"_eyebrow\":\"field_rf_it_eyebrow\",\"heading\":\"Short menu, long mornings\",\"_heading\":\"field_rf_it_heading\",\"body\":\"Everything is made in-house, in small amounts, and changes with the season. When something runs out, it runs out.\",\"_body\":\"field_rf_it_body\",\"link_text\":\"View the menu\",\"_link_text\":\"field_rf_it_link_text\",\"link_url\":\"http://localhost:8080/menu/\",\"_link_url\":\"field_rf_it_link_url\",\"spacing\":\"none\",\"_spacing\":\"field_rf_it_spacing\"},\"mode\":\"preview\"} /-->\n\n<!-- wp:acf/rf-carousel {\"name\":\"acf/rf-carousel\",\"data\":{\"heading\":\"\",\"_heading\":\"field_rf_car_heading\",\"slides_0_image\":166,\"_slides_0_image\":\"field_rf_car_slide_image\",\"slides_0_caption\":\"Breakfast!\",\"_slides_0_caption\":\"field_rf_car_slide_caption\",\"slides_1_image\":354,\"_slides_1_image\":\"field_rf_car_slide_image\",\"slides_1_caption\":\"Coffee \\u0026 cakes!\",\"_slides_1_caption\":\"field_rf_car_slide_caption\",\"slides_2_image\":347,\"_slides_2_image\":\"field_rf_car_slide_image\",\"slides_2_caption\":\"Outdoor seating\",\"_slides_2_caption\":\"field_rf_car_slide_caption\",\"slides_3_image\":310,\"_slides_3_image\":\"field_rf_car_slide_image\",\"slides_3_caption\":\"Private Catering\",\"_slides_3_caption\":\"field_rf_car_slide_caption\",\"slides\":4,\"_slides\":\"field_rf_car_slides\",\"size\":\"large\",\"_size\":\"field_rf_car_size\",\"pager\":\"diamond\",\"_pager\":\"field_rf_car_pager\",\"spacing\":\"xl\",\"_spacing\":\"field_rf_car_spacing\"},\"mode\":\"preview\"} /-->"
+        }
+    ],
+    "events": [
+        {
+            "slug": "sourdough-workshop",
+            "title": "Sourdough Workshop",
+            "status": "publish",
+            "content": "<!-- wp:paragraph --><p>A hands-on morning in the café kitchen. We start with a live sourdough starter, work through mixing, folding and shaping, and finish with a bake — you leave with a loaf, a pot of starter and the confidence to keep it going.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>Coffee and pastries included. Suitable for complete beginners; aprons provided.</p><!-- /wp:paragraph -->",
+            "excerpt": "Spend a morning with our bakers learning to mix, shape and bake a loaf to take home.",
+            "meta": {
+                "_booking_text": "field_rf_event_booking_text",
+                "_booking_url": "field_rf_event_booking_url",
+                "_end": "field_rf_event_end",
+                "_location": "field_rf_event_location",
+                "_price": "field_rf_event_price",
+                "_start": "field_rf_event_start",
+                "booking_text": "Book a place",
+                "booking_url": "mailto:hello@riseandflour.co.uk?subject=Sourdough%20Workshop",
+                "end": "2026-09-12 12:30:00",
+                "location": "",
+                "price": "£45",
+                "start": "2026-09-12 10:00:00"
+            }
+        },
+        {
+            "slug": "easter-art-competition",
+            "title": "Easter Art Competition",
+            "status": "publish",
+            "content": "<!-- wp:paragraph --><p>Every spring the café walls fill with Easter drawings from local children. Entries were pinned up through the week and the winners picked on Easter Saturday, with prizes from the counter.</p><!-- /wp:paragraph -->",
+            "excerpt": "Our annual children’s drawing competition — entries pinned up around the café all week, winners announced on Easter Saturday.",
+            "meta": {
+                "_booking_text": "field_rf_event_booking_text",
+                "_booking_url": "field_rf_event_booking_url",
+                "_end": "field_rf_event_end",
+                "_location": "field_rf_event_location",
+                "_price": "field_rf_event_price",
+                "_start": "field_rf_event_start",
+                "booking_text": "Book a place",
+                "booking_url": "",
+                "end": "",
+                "location": "",
+                "price": "Free",
+                "start": "2026-04-04 09:00:00"
+            }
+        },
+        {
+            "slug": "women-in-hospitality-food",
+            "title": "Women in Hospitality & Food",
+            "status": "publish",
+            "content": "<!-- wp:paragraph --><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><!-- /wp:paragraph -->",
+            "excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "meta": {
+                "_booking_text": "field_rf_event_booking_text",
+                "_booking_url": "field_rf_event_booking_url",
+                "_end": "field_rf_event_end",
+                "_location": "field_rf_event_location",
+                "_price": "field_rf_event_price",
+                "_start": "field_rf_event_start",
+                "booking_text": "Book a place",
+                "booking_url": "",
+                "end": "",
+                "location": "",
+                "price": "",
+                "start": "2026-06-10 18:00:00"
+            }
+        },
+        {
+            "slug": "storytelling-workshop-michael-rosenblum",
+            "title": "Storytelling Workshop with Michael Rosenblum",
+            "status": "publish",
+            "content": "<!-- wp:paragraph --><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><!-- /wp:paragraph -->",
+            "excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "meta": {
+                "_booking_text": "field_rf_event_booking_text",
+                "_booking_url": "field_rf_event_booking_url",
+                "_end": "field_rf_event_end",
+                "_location": "field_rf_event_location",
+                "_price": "field_rf_event_price",
+                "_start": "field_rf_event_start",
+                "booking_text": "Book a place",
+                "booking_url": "",
+                "end": "",
+                "location": "",
+                "price": "",
+                "start": "2026-04-30 13:00:00"
+            }
+        },
+        {
+            "slug": "groves-yard-christmas-fair",
+            "title": "Groves Yard Christmas Fair",
+            "status": "publish",
+            "content": "<!-- wp:paragraph --><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><!-- /wp:paragraph -->",
+            "excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "meta": {
+                "_booking_text": "field_rf_event_booking_text",
+                "_booking_url": "field_rf_event_booking_url",
+                "_end": "field_rf_event_end",
+                "_location": "field_rf_event_location",
+                "_price": "field_rf_event_price",
+                "_start": "field_rf_event_start",
+                "booking_text": "Book a place",
+                "booking_url": "",
+                "end": "",
+                "location": "",
+                "price": "",
+                "start": "2025-12-05 17:00:00"
+            }
+        },
+        {
+            "slug": "afternoon-tea-talk",
+            "title": "Afternoon Tea Talk",
+            "status": "publish",
+            "content": "<!-- wp:paragraph --><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><!-- /wp:paragraph -->",
+            "excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "meta": {
+                "_booking_text": "field_rf_event_booking_text",
+                "_booking_url": "field_rf_event_booking_url",
+                "_end": "field_rf_event_end",
+                "_location": "field_rf_event_location",
+                "_price": "field_rf_event_price",
+                "_start": "field_rf_event_start",
+                "booking_text": "Book a place",
+                "booking_url": "",
+                "end": "",
+                "location": "",
+                "price": "",
+                "start": "2025-07-08 13:30:00"
+            }
+        },
+        {
+            "slug": "find-the-focus-brunch-talk",
+            "title": "“Find the Focus” Brunch Talk",
+            "status": "publish",
+            "content": "<!-- wp:paragraph --><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><!-- /wp:paragraph -->",
+            "excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "meta": {
+                "_booking_text": "field_rf_event_booking_text",
+                "_booking_url": "field_rf_event_booking_url",
+                "_end": "field_rf_event_end",
+                "_location": "field_rf_event_location",
+                "_price": "field_rf_event_price",
+                "_start": "field_rf_event_start",
+                "booking_text": "Book a place",
+                "booking_url": "",
+                "end": "",
+                "location": "",
+                "price": "",
+                "start": "2025-05-14 09:30:00"
+            }
+        },
+        {
+            "slug": "supper-club-no-12",
+            "title": "Supper Club No. 12",
+            "status": "publish",
+            "content": "<!-- wp:paragraph --><p>One long table, eighteen chairs, five courses. We cook what the last warm weeks give us — tomatoes at their best, corn, plums, and herbs from the courtyard — and serve it family-style, the way we’d feed our own.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>Doors at 7pm, first plates at 7.30. Bring a bottle if you like; we’ll have a short list of ours. The menu is fixed — tell us about allergies when you book and we’ll cook around them.</p><!-- /wp:paragraph -->",
+            "excerpt": "One long table, eighteen chairs, five courses of late summer, served family-style.",
+            "meta": {
+                "_booking_note": "field_rf_event_booking_note",
+                "_booking_text": "field_rf_event_booking_text",
+                "_booking_url": "field_rf_event_booking_url",
+                "_capacity": "field_rf_event_capacity",
+                "_courses": "field_rf_event_courses",
+                "_courses_0_text": "field_rf_event_course_text",
+                "_courses_1_text": "field_rf_event_course_text",
+                "_courses_2_text": "field_rf_event_course_text",
+                "_courses_3_text": "field_rf_event_course_text",
+                "_courses_4_text": "field_rf_event_course_text",
+                "_end": "field_rf_event_end",
+                "_eyebrow": "field_rf_event_eyebrow",
+                "_location": "field_rf_event_location",
+                "_panel_label": "field_rf_event_panel_label",
+                "_panel_note": "field_rf_event_panel_note",
+                "_price": "field_rf_event_price",
+                "_start": "field_rf_event_start",
+                "_subtitle": "field_rf_event_subtitle",
+                "booking_note": "We reply within a day. No payment until the night.",
+                "booking_text": "Email to reserve",
+                "booking_url": "mailto:hello@riseandflour.co.uk?subject=Supper%20Club%20No.%2012",
+                "capacity": "18 seats",
+                "courses": "5",
+                "courses_0_text": "Tomatoes, burrata, basil oil",
+                "courses_1_text": "Sweetcorn soup, brown butter",
+                "courses_2_text": "Slow lamb shoulder, flageolets",
+                "courses_3_text": "Courtyard leaves, lemon",
+                "courses_4_text": "Plum galette, bay cream",
+                "end": "",
+                "eyebrow": "Supper club",
+                "location": "",
+                "panel_label": "On the night",
+                "panel_note": "Five courses",
+                "price": "£48",
+                "start": "2026-09-17 19:00:00",
+                "subtitle": "An evening of late summer, served family-style"
+            }
         }
     ],
     "options": {

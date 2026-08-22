@@ -167,6 +167,29 @@ Blocks live under **Rise & Flour** in the block inserter:
 | Carousel | `heading`, `slides` (repeater: image + caption), `size` (large/small), `pager` (dash/dot/diamond), `spacing` |
 | Menu | `eyebrow`, `heading`, `tag` (h1/h2), `intro`, `sections` (repeater: title, note, `items` repeater: name, price, description, vegetarian, extras, note), `hours_heading`, `hours` (falls back to Site Details), `notes`, `file` (PDF), `spacing` |
 | Location | `eyebrow`, `heading`, `tag` (h1/h2), `intro`, `address`, `phone`, `email` (all fall back to Site Details), `show_hours` (from Site Details), `note`, `directions_url`, `map` (Google Maps embed URL or iframe), `map_position` (left/right), `spacing` |
+| Events | `eyebrow`, `heading`, `tag` (h1/h2), `intro`, `show` (both/upcoming/past), `limit`, `past_heading`, `empty_text`, `spacing` — lists the **Events** post type |
+
+### Events
+
+Events are a post type (**Events** in the admin menu, `rf_event`), so each one
+has its own page at `/events/<slug>/` rendered by `single-rf_event.php`. Each
+event has a title, write-up, featured image and excerpt plus ACF fields in
+tabs: **When & where** (`start` required, `end`, `location`, `price`,
+`capacity`), **Titles** (`eyebrow`, `subtitle`), **On the night**
+(`panel_label`, `courses` repeater, `panel_note` — the ink panel, shown only
+when it has lines) and **Booking** (`booking_url`, `booking_text`,
+`booking_note`). The single page follows the design export's "Supper Club"
+layout: centred head with a bordered date strip, image, write-up, panel,
+terracotta reserve button.
+
+The Events block lists them — upcoming (soonest first) then past (most recent
+first). An event is "past" once it has ended, or with no end time once its day
+is over. The post type has no archive of its own: the page holding the block
+is the list, and the single template's "All events" link finds it. Helpers in
+`inc/events.php`: `rise_and_flour_event()` (dates formatted for print),
+`rise_and_flour_events( 'upcoming'|'past', $limit )`.
+
+Events are included in the content snapshot/restore.
 
 `show_logo` toggles `.hero--no-logo`; `media_position` toggles
 `.block-image-text--media-right`; `width` toggles `.block-image--full`; the

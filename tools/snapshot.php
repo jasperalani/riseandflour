@@ -44,6 +44,42 @@ foreach ( $rf_pages as $rf_page ) {
 	}
 }
 
+// Events: the rf_event posts with their ACF meta. Each ACF value is stored
+// alongside a _<name> key holding the field key; both are captured so the
+// restore round-trips. The courses repeater is `courses` (count) plus
+// `courses_N_text` rows, so keys are matched by prefix. Featured images are
+// attachment IDs and are skipped.
+$rf_event_meta = '/^_?(start|end|location|price|capacity|eyebrow|subtitle|panel_label|panel_note|booking_url|booking_text|booking_note|courses(_\d+_text)?)$/';
+
+$rf_events = get_posts(
+	array(
+		'post_type'   => 'rf_event',
+		'post_status' => array( 'publish', 'draft' ),
+		'numberposts' => -1,
+		'orderby'     => 'date',
+		'order'       => 'ASC',
+	)
+);
+
+$rf_out['events'] = array();
+foreach ( $rf_events as $rf_event ) {
+	$rf_meta = array();
+	foreach ( get_post_meta( $rf_event->ID ) as $rf_key => $rf_values ) {
+		if ( preg_match( $rf_event_meta, $rf_key ) ) {
+			$rf_meta[ $rf_key ] = (string) $rf_values[0];
+		}
+	}
+	ksort( $rf_meta );
+	$rf_out['events'][] = array(
+		'slug'    => $rf_event->post_name,
+		'title'   => $rf_event->post_title,
+		'status'  => $rf_event->post_status,
+		'content' => $rf_event->post_content,
+		'excerpt' => $rf_event->post_excerpt,
+		'meta'    => $rf_meta,
+	);
+}
+
 // The Site Details options page (footer address, hours, contact…). ACF
 // stores each field twice: options_<name> holds the value, _options_<name>
 // the field key — both are needed for get_field() to format the value.

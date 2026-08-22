@@ -74,6 +74,45 @@ foreach ( $rf_data['pages'] as $rf_page ) {
 }
 
 /* =============================================================
+ * Events
+ * ============================================================= */
+
+$rf_event_count = 0;
+foreach ( isset( $rf_data['events'] ) ? $rf_data['events'] : array() as $rf_event ) {
+	$rf_existing = get_posts(
+		array(
+			'post_type'   => 'rf_event',
+			'name'        => $rf_event['slug'],
+			'post_status' => 'any',
+			'numberposts' => 1,
+		)
+	);
+
+	$rf_args = array(
+		'post_type'    => 'rf_event',
+		'post_name'    => $rf_event['slug'],
+		'post_title'   => $rf_event['title'],
+		'post_content' => wp_slash( $rf_event['content'] ),
+		'post_excerpt' => wp_slash( $rf_event['excerpt'] ),
+		'post_status'  => $rf_event['status'],
+		'meta_input'   => $rf_event['meta'],
+	);
+
+	if ( $rf_existing ) {
+		$rf_args['ID'] = $rf_existing[0]->ID;
+		$rf_id         = wp_update_post( $rf_args );
+	} else {
+		$rf_id = wp_insert_post( $rf_args );
+	}
+
+	if ( $rf_id && ! is_wp_error( $rf_id ) ) {
+		$rf_event_count++;
+	} else {
+		WP_CLI::warning( "Could not seed event '{$rf_event['slug']}'." );
+	}
+}
+
+/* =============================================================
  * Front page
  * ============================================================= */
 
@@ -97,8 +136,9 @@ if ( ! empty( $rf_data['options'] ) ) {
 
 WP_CLI::success(
 	sprintf(
-		'%d pages restored from snapshot (saved %s); front page set to "%s".',
+		'%d pages and %d events restored from snapshot (saved %s); front page set to "%s".',
 		$rf_count,
+		$rf_event_count,
 		isset( $rf_data['saved'] ) ? $rf_data['saved'] : '?',
 		isset( $rf_data['front'] ) ? $rf_data['front'] : '—'
 	)
