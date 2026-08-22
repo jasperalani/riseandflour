@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "acf/rf-location",
+  "title": "Location",
+  "description": "Where to find the café — address, hours and contact beside a map.",
+  "category": "rise-and-flour",
+  "icon": "location",
+  "keywords": ["location", "map", "find us", "address", "contact", "hours"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php"
+  },
+  "supports": {
+    "align": false,
+    "anchor": true,
+    "customClassName": true,
+    "jsx": false
+  }
+}

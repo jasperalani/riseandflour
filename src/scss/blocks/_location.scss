@@ -1,0 +1,155 @@
+@use '../abstracts/mixins' as *;
+
+// =============================================================
+// BLOCK: Location
+// ACF fields: eyebrow, heading, tag, intro, address, phone, email,
+// show_hours, note, directions_url, map, map_position.
+//
+// Text column beside a map, on the Image + Text grid so the two
+// blocks rhyme. Details are a definition list with hairline rules —
+// caps labels, Garamond values — the footer's "Find us" treatment
+// at page scale.
+// =============================================================
+
+.block-location {
+  @include wrap;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 72px;
+  align-items: start;
+}
+
+.block-location__body {
+  .eyebrow { margin-bottom: 20px; }
+
+  h1,
+  h2 {
+    font-size: 24px;
+    margin: 0 0 20px;
+  }
+}
+
+.block-location__intro {
+  margin-bottom: 8px;
+
+  p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text-body);
+    margin: 0 0 16px;
+  }
+}
+
+.block-location__details {
+  margin: 24px 0 0;
+}
+
+.block-location__row {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 24px;
+  padding: 18px 0;
+  border-top: 1px solid var(--border-default);
+
+  &:last-child { border-bottom: 1px solid var(--border-default); }
+
+  dt {
+    @include caps-label(11px);
+    color: var(--text-muted);
+    // Sit on the first line of the value.
+    padding-top: 5px;
+  }
+
+  dd {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-heading);
+  }
+
+  a {
+    color: var(--text-heading);
+    &:hover { color: var(--rf-terracotta); }
+  }
+}
+
+.block-location__note {
+  margin-top: 24px;
+
+  p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-body);
+    margin: 0 0 12px;
+  }
+
+  p:last-child { margin-bottom: 0; }
+}
+
+.block-location__directions { margin-top: 28px; }
+
+// The map fills a fixed-height box like the Image + Text photo; the
+// cream-deep fill shows while the iframe loads (it's lazy).
+.block-location__map {
+  height: 520px;
+  background: var(--rf-cream-deep);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+
+  iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+}
+
+// --- Map on the left -----------------------------------------
+// Visual order only; the text stays first in the DOM.
+.block-location--map-left {
+  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+
+  .block-location__map { order: 1; }
+  .block-location__body { order: 2; }
+}
+
+@include tablet {
+  .block-location {
+    gap: 40px;
+    padding-inline: 32px;
+  }
+
+  .block-location__map { height: 440px; }
+}
+
+@include mobile {
+  .block-location {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding-inline: 20px;
+  }
+
+  // Stacked: details first, map beneath, whichever side it sat on.
+  .block-location--map-left {
+    grid-template-columns: 1fr;
+
+    .block-location__body { order: 1; }
+    .block-location__map { order: 2; }
+  }
+
+  .block-location__body {
+    h1,
+    h2 { font-size: 20px; }
+  }
+
+  .block-location__row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 16px 0;
+
+    dt { padding-top: 0; }
+    dd { font-size: 16px; }
+  }
+
+  .block-location__map { height: 320px; }
+}

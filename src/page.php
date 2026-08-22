@@ -18,11 +18,13 @@ get_header();
 	while ( have_posts() ) :
 		the_post();
 
-		// A page opening with a hero states its own title, and the Menu block
-		// carries its own heading; a second heading above either would fight
-		// the design.
+		// A page opening with a hero states its own title, and the Menu and
+		// Location blocks carry their own headings; a second heading above
+		// any of them would fight the design.
 		$rise_and_flour_has_hero  = has_block( 'acf/rf-hero', get_post() );
-		$rise_and_flour_own_title = $rise_and_flour_has_hero || has_block( 'acf/rf-menu', get_post() );
+		$rise_and_flour_own_title = $rise_and_flour_has_hero
+			|| has_block( 'acf/rf-menu', get_post() )
+			|| has_block( 'acf/rf-location', get_post() );
 		?>
 
 		<?php if ( ! $rise_and_flour_own_title ) : ?>

@@ -574,5 +574,137 @@ function rise_and_flour_register_fields() {
 			),
 		)
 	);
+
+	/* ---------------------------------------------------------
+	 * Location
+	 * --------------------------------------------------------- */
+	acf_add_local_field_group(
+		array(
+			'key'      => 'group_rf_location',
+			'title'    => __( 'Location', 'rise-and-flour' ),
+			'fields'   => array(
+				array(
+					'key'           => 'field_rf_loc_eyebrow',
+					'label'         => __( 'Eyebrow', 'rise-and-flour' ),
+					'name'          => 'eyebrow',
+					'type'          => 'text',
+					'default_value' => 'Find us',
+				),
+				array(
+					'key'           => 'field_rf_loc_heading',
+					'label'         => __( 'Heading', 'rise-and-flour' ),
+					'name'          => 'heading',
+					'type'          => 'text',
+					'default_value' => 'Location',
+				),
+				array(
+					'key'           => 'field_rf_loc_tag',
+					'label'         => __( 'Heading level', 'rise-and-flour' ),
+					'name'          => 'tag',
+					'type'          => 'button_group',
+					'instructions'  => __( 'H1 when this is the opening block of the page.', 'rise-and-flour' ),
+					'choices'       => array(
+						'h1' => 'H1',
+						'h2' => 'H2',
+					),
+					'default_value' => 'h1',
+					'allow_null'    => 0,
+				),
+				array(
+					'key'          => 'field_rf_loc_intro',
+					'label'        => __( 'Intro', 'rise-and-flour' ),
+					'name'         => 'intro',
+					'type'         => 'textarea',
+					'rows'         => 3,
+					'new_lines'    => '',
+					'instructions' => __( 'Optional paragraph beneath the heading.', 'rise-and-flour' ),
+				),
+				array(
+					'key'          => 'field_rf_loc_address',
+					'label'        => __( 'Address', 'rise-and-flour' ),
+					'name'         => 'address',
+					'type'         => 'textarea',
+					'rows'         => 3,
+					'new_lines'    => '',
+					'instructions' => __( 'Leave empty to use the address from Site Details.', 'rise-and-flour' ),
+					'wrapper'      => array( 'width' => '50' ),
+				),
+				array(
+					'key'           => 'field_rf_loc_show_hours',
+					'label'         => __( 'Show hours', 'rise-and-flour' ),
+					'name'          => 'show_hours',
+					'type'          => 'true_false',
+					'ui'            => 1,
+					'default_value' => 1,
+					'instructions'  => __( 'Opening hours come from Site Details.', 'rise-and-flour' ),
+					'wrapper'       => array( 'width' => '50' ),
+				),
+				array(
+					'key'          => 'field_rf_loc_phone',
+					'label'        => __( 'Phone', 'rise-and-flour' ),
+					'name'         => 'phone',
+					'type'         => 'text',
+					'instructions' => __( 'Leave empty to use Site Details.', 'rise-and-flour' ),
+					'wrapper'      => array( 'width' => '50' ),
+				),
+				array(
+					'key'          => 'field_rf_loc_email',
+					'label'        => __( 'Email', 'rise-and-flour' ),
+					'name'         => 'email',
+					'type'         => 'email',
+					'instructions' => __( 'Leave empty to use Site Details.', 'rise-and-flour' ),
+					'wrapper'      => array( 'width' => '50' ),
+				),
+				array(
+					'key'          => 'field_rf_loc_note',
+					'label'        => __( 'Note', 'rise-and-flour' ),
+					'name'         => 'note',
+					'type'         => 'textarea',
+					'rows'         => 3,
+					'new_lines'    => '',
+					'instructions' => __( 'Parking, access, "dogs welcome" — anything useful for a visit.', 'rise-and-flour' ),
+				),
+				array(
+					'key'          => 'field_rf_loc_directions',
+					'label'        => __( 'Directions link', 'rise-and-flour' ),
+					'name'         => 'directions_url',
+					'type'         => 'url',
+					'instructions' => __( 'A Google Maps link; shows a "Get directions" link when set.', 'rise-and-flour' ),
+				),
+				array(
+					'key'          => 'field_rf_loc_map',
+					'label'        => __( 'Map', 'rise-and-flour' ),
+					'name'         => 'map',
+					'type'         => 'textarea',
+					'rows'         => 3,
+					'new_lines'    => '',
+					'instructions' => __( 'In Google Maps: Share → Embed a map → copy. Paste the whole &lt;iframe&gt; snippet or just its URL. Empty shows a grey placeholder.', 'rise-and-flour' ),
+				),
+				array(
+					'key'           => 'field_rf_loc_map_position',
+					'label'         => __( 'Map side', 'rise-and-flour' ),
+					'name'          => 'map_position',
+					'type'          => 'button_group',
+					'instructions'  => __( 'On mobile the details always sit above the map.', 'rise-and-flour' ),
+					'choices'       => array(
+						'right' => __( 'Right', 'rise-and-flour' ),
+						'left'  => __( 'Left', 'rise-and-flour' ),
+					),
+					'default_value' => 'right',
+					'allow_null'    => 0,
+				),
+				rise_and_flour_spacing_field( 'field_rf_loc_spacing' ),
+			),
+			'location' => array(
+				array(
+					array(
+						'param'    => 'block',
+						'operator' => '==',
+						'value'    => 'acf/rf-location',
+					),
+				),
+			),
+		)
+	);
 }
 add_action( 'acf/init', 'rise_and_flour_register_fields' );
