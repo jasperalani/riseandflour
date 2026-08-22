@@ -1,0 +1,7 @@
+{
+  // PHP Tools (DEVSENSE): .stubs/ holds generated WordPress/ACF stub declarations that
+  // exist only to be indexed for IntelliSense — don't report problems (e.g. PHP1404) in them.
+  "php.problems.exclude": {
+    ".stubs/": true
+  }
+}
