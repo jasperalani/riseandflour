@@ -1,0 +1,533 @@
+@use '../abstracts/mixins' as *;
+
+// =============================================================
+// BLOCK: Events (list) + the single event template.
+// ACF fields: eyebrow, heading, tag, intro, show, limit,
+// past_heading, empty_text.
+//
+// Rows on hairline rules: a big day/month block, a landscape
+// thumbnail, then title, when/where line, excerpt and links.
+// Past events sit under a quieter sub-heading and are muted.
+// =============================================================
+
+.block-events {
+  @include wrap;
+}
+
+.block-events__head {
+  max-width: 640px;
+  margin-inline: auto;
+  margin-bottom: 56px;
+  text-align: center;
+
+  .eyebrow { margin-bottom: 22px; }
+
+  h1,
+  h2 {
+    font-size: 26px;
+    margin: 0;
+  }
+}
+
+.block-events__intro {
+  margin-top: 24px;
+
+  p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text-body);
+  }
+
+  p + p { margin-top: 16px; }
+}
+
+.block-events__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border-default);
+}
+
+.block-events__sub {
+  font-size: 16px;
+  color: var(--text-muted);
+  margin: 72px 0 24px;
+}
+
+.block-events__empty {
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 24px 0;
+}
+
+// --- Row ------------------------------------------------------
+.event-card {
+  display: grid;
+  grid-template-columns: 72px 240px minmax(0, 1fr);
+  gap: 40px;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--border-default);
+  align-items: start;
+}
+
+.event-card__date {
+  text-align: center;
+  padding-top: 2px;
+}
+
+.event-card__day {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 34px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--text-heading);
+}
+
+.event-card__month {
+  display: block;
+  @include caps-label(11px);
+  color: var(--rf-terracotta);
+  margin-top: 8px;
+}
+
+.event-card__media {
+  display: block;
+  height: 160px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  // It's a link, so the editorial underline would draw beneath the image.
+  border-bottom: 0;
+}
+
+.event-card__title {
+  font-size: 18px;
+  margin: 0 0 10px;
+
+  a {
+    color: var(--text-heading);
+    &:hover { color: var(--rf-terracotta); }
+  }
+}
+
+.event-card__meta,
+.event__meta {
+  @include caps-label(11px);
+  color: var(--text-muted);
+  line-height: 1.9;
+}
+
+.event-card__sep,
+.event__sep {
+  color: var(--rf-terracotta);
+  margin: 0 4px;
+}
+
+// Two date forms are rendered; wide screens show the long one.
+.event-card__date-short { display: none; }
+
+.event-card__excerpt {
+  margin-top: 14px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-body);
+}
+
+.event-card__actions {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+}
+
+// Past: everything steps back, and the thumbnail goes quiet.
+.event-card--past {
+  .event-card__day { color: var(--text-muted); }
+  .event-card__month { color: var(--text-muted); }
+  .event-card__media { opacity: 0.7; }
+}
+
+// --- Single event --------------------------------------------
+// The design export's "Supper Club" page: an 840px column, centred head
+// with a bordered date strip, hero image, 620px reading column, the ink
+// "On the night" panel and a terracotta reserve button.
+
+.event__inner {
+  max-width: 840px;
+  margin-inline: auto;
+  padding: 70px 24px 130px;
+}
+
+.event__back {
+  @include caps-label(12px);
+  display: inline-block;
+  color: var(--text-muted);
+  margin-bottom: 44px;
+
+  &:hover { color: var(--rf-terracotta); }
+}
+
+.event__head {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+// Eyebrows and panel labels wear the brand's middle dots: · Supper club ·
+.event__eyebrow,
+.event__panel-label {
+  &::before { content: '· '; }
+  &::after { content: ' ·'; }
+}
+
+.event__eyebrow { margin-bottom: 24px; }
+
+.event__title {
+  font-size: 34px;
+  line-height: 1.4;
+  margin: 0 0 18px;
+}
+
+.event__subtitle {
+  font-family: var(--font-body);
+  font-size: 21px;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--text-body);
+  margin: 0 0 30px;
+}
+
+.event__strip {
+  @include caps-label(13px);
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 16px 34px;
+  border-top: 1.5px solid var(--rf-terracotta);
+  border-bottom: 1.5px solid var(--rf-terracotta);
+  color: var(--text-heading);
+  margin: 0;
+}
+
+.event__dot,
+.event__accent { color: var(--rf-terracotta); }
+
+.event__media {
+  height: 440px;
+  margin-bottom: 64px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.event__body {
+  max-width: 620px;
+  margin-inline: auto;
+}
+
+// The write-up: the editor's core blocks in the reading column. Not
+// .entry-content, whose column rules would add a second gutter here.
+.event__content {
+  p,
+  li {
+    font-size: 17px;
+    line-height: 1.9;
+    color: var(--text-body);
+    text-wrap: pretty;
+  }
+
+  p { margin: 0 0 24px; }
+
+  h2,
+  h3 {
+    font-size: 18px;
+    margin: 40px 0 16px;
+  }
+
+  ul,
+  ol {
+    margin: 0 0 24px;
+    padding-left: 22px;
+  }
+
+  li + li { margin-top: 6px; }
+
+  a {
+    color: var(--rf-terracotta-deep);
+    border-bottom: 1px solid rgba(213, 132, 79, 0.5);
+    &:hover { border-bottom-color: var(--rf-terracotta); }
+  }
+
+  blockquote {
+    margin: 32px 0;
+    padding-left: 24px;
+    border-left: 1.5px solid var(--rf-terracotta);
+    font-style: italic;
+    font-size: 20px;
+    color: var(--text-heading);
+  }
+
+  > :last-child { margin-bottom: 0; }
+}
+
+// Ink panel with a hairline terracotta frame set just inside its edge.
+.event__panel {
+  margin-top: 56px;
+  padding: 6px;
+  background: var(--rf-ink);
+  border-radius: 4px;
+}
+
+.event__panel-inner {
+  padding: 44px 40px;
+  border: 1px solid var(--rf-terracotta);
+  border-radius: 2px;
+  text-align: center;
+}
+
+.event__panel-label {
+  @include caps-label(12px);
+  color: var(--rf-terracotta);
+  margin: 0 0 26px;
+}
+
+.event__panel-note { margin: 28px 0 0; }
+
+.event__courses {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--rf-cream);
+}
+
+.event__cta {
+  text-align: center;
+  margin-top: 56px;
+}
+
+.event__button {
+  @include caps-label(13px);
+  display: inline-block;
+  padding: 16px 36px;
+  background: var(--rf-terracotta);
+  color: var(--rf-cream);
+  border-radius: 4px;
+  transition: background var(--ease);
+
+  &:hover {
+    background: var(--rf-terracotta-deep);
+    color: var(--rf-cream);
+  }
+}
+
+.event__booking-note {
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.event__passed {
+  font-style: italic;
+  font-size: 17px;
+  color: var(--text-muted);
+}
+
+// --- Responsive ----------------------------------------------
+@include tablet {
+  .block-events { padding-inline: 32px; }
+
+  .event-card {
+    grid-template-columns: 64px 200px minmax(0, 1fr);
+    gap: 28px;
+    padding: 28px 0;
+  }
+
+  .event-card__media { height: 140px; }
+  .event-card__day { font-size: 30px; }
+
+  .event__media { height: 380px; }
+}
+
+// --- Small screens -------------------------------------------
+// From the design export's "Events — mobile" screen. The three-column row
+// gives way to a stacked card: full-width image with the date as a cream
+// badge in its corner, then title, a tracked one-line date/time/price,
+// excerpt and links. Past events compress to a thumbnail + title row.
+// Applied below 768px rather than the 640px mobile breakpoint — the row
+// layout's 200px thumbnail plus date column is already cramped on a
+// portrait tablet.
+@media (max-width: 768px) {
+  .block-events__list { border-top: 0; }
+
+  .event-card {
+    display: block;
+    position: relative;
+    padding: 0 0 36px;
+  }
+
+  .event-card + .event-card { margin-top: 44px; }
+
+  .event-card__date {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+    padding: 10px 14px 8px;
+    background: var(--rf-cream);
+    border-radius: var(--radius-sm);
+    text-align: center;
+  }
+
+  .event-card__day {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  .event-card__month {
+    font-size: 10px;
+    margin-top: 4px;
+  }
+
+  .event-card__media {
+    height: 220px;
+    margin-bottom: 20px;
+  }
+
+  .event-card__title {
+    font-size: 17px;
+    line-height: 1.5;
+
+    // No underline on the card title here — the whole card reads as one.
+    a { border-bottom: 0; }
+  }
+
+  .event-card__meta {
+    letter-spacing: 0.14em;
+    line-height: 1.8;
+    color: var(--text-body);
+    margin-bottom: 14px;
+  }
+
+  .event-card__date-long { display: none; }
+  .event-card__date-short { display: inline; }
+  .event-card__price { color: var(--rf-terracotta); }
+
+  .event-card__excerpt {
+    margin-top: 0;
+    font-size: 16px;
+  }
+
+  .event-card__actions {
+    margin-top: 18px;
+    gap: 12px 26px;
+
+    .link-caps {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      padding-bottom: 5px;
+      color: var(--text-heading);
+      border-bottom-color: var(--text-heading);
+    }
+
+    // The booking link keeps the terracotta.
+    .link-caps + .link-caps {
+      color: var(--rf-terracotta);
+      border-bottom-color: var(--rf-terracotta);
+    }
+  }
+
+  // Past events: thumbnail beside a smaller title and date, nothing else.
+  .block-events__sub {
+    font-size: 11px;
+    letter-spacing: var(--tracking-label);
+    margin: 48px 0 26px;
+  }
+
+  .event-card--past {
+    display: grid;
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: 16px;
+    align-items: center;
+    padding-bottom: 24px;
+
+    & + .event-card--past { margin-top: 24px; }
+
+    .event-card__date,
+    .event-card__excerpt { display: none; }
+
+    .event-card__media {
+      height: 76px;
+      margin: 0;
+      opacity: 1;
+    }
+
+    .event-card__title {
+      font-size: 14px;
+      margin-bottom: 6px;
+      a { color: var(--text-body); }
+    }
+
+    .event-card__meta {
+      font-size: 10px;
+      margin-bottom: 8px;
+      color: var(--text-muted);
+    }
+
+    .event-card__actions {
+      margin-top: 0;
+
+      .link-caps {
+        font-size: 11px;
+        padding-bottom: 3px;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--text-muted);
+      }
+    }
+  }
+}
+
+@include mobile {
+  .block-events { padding-inline: 20px; }
+
+  .block-events__head {
+    margin-bottom: 28px;
+
+    .eyebrow {
+      font-size: 11px;
+      margin-bottom: 14px;
+    }
+
+    h1,
+    h2 { font-size: 24px; }
+  }
+
+  .event__inner { padding: 44px 20px 64px; }
+  .event__back { margin-bottom: 32px; }
+  .event__head { margin-bottom: 40px; }
+  .event__title { font-size: 26px; }
+  .event__subtitle { font-size: 18px; }
+
+  .event__strip {
+    gap: 10px 12px;
+    padding: 12px 16px;
+    font-size: 11px;
+  }
+
+  .event__media {
+    height: 240px;
+    margin-bottom: 40px;
+  }
+
+  .event__panel { margin-top: 40px; }
+  .event__panel-inner { padding: 32px 20px; }
+  .event__courses { font-size: 17px; }
+  .event__cta { margin-top: 40px; }
+}

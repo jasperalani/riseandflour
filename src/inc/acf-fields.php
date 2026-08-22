@@ -706,5 +706,268 @@ function rise_and_flour_register_fields() {
 			),
 		)
 	);
+
+	/* ---------------------------------------------------------
+	 * Events (list block)
+	 * --------------------------------------------------------- */
+	acf_add_local_field_group(
+		array(
+			'key'      => 'group_rf_events',
+			'title'    => __( 'Events', 'rise-and-flour' ),
+			'fields'   => array(
+				array(
+					'key'           => 'field_rf_ev_eyebrow',
+					'label'         => __( 'Eyebrow', 'rise-and-flour' ),
+					'name'          => 'eyebrow',
+					'type'          => 'text',
+					'default_value' => "What's on",
+				),
+				array(
+					'key'           => 'field_rf_ev_heading',
+					'label'         => __( 'Heading', 'rise-and-flour' ),
+					'name'          => 'heading',
+					'type'          => 'text',
+					'default_value' => 'Events',
+				),
+				array(
+					'key'           => 'field_rf_ev_tag',
+					'label'         => __( 'Heading level', 'rise-and-flour' ),
+					'name'          => 'tag',
+					'type'          => 'button_group',
+					'instructions'  => __( 'H1 when this is the opening block of the page.', 'rise-and-flour' ),
+					'choices'       => array(
+						'h1' => 'H1',
+						'h2' => 'H2',
+					),
+					'default_value' => 'h1',
+					'allow_null'    => 0,
+				),
+				array(
+					'key'          => 'field_rf_ev_intro',
+					'label'        => __( 'Intro', 'rise-and-flour' ),
+					'name'         => 'intro',
+					'type'         => 'textarea',
+					'rows'         => 3,
+					'new_lines'    => '',
+					'instructions' => __( 'Optional paragraph beneath the heading.', 'rise-and-flour' ),
+				),
+				array(
+					'key'           => 'field_rf_ev_show',
+					'label'         => __( 'Show', 'rise-and-flour' ),
+					'name'          => 'show',
+					'type'          => 'button_group',
+					'instructions'  => __( 'Events are added under Events in the admin menu, not here.', 'rise-and-flour' ),
+					'choices'       => array(
+						'both'     => __( 'Upcoming + past', 'rise-and-flour' ),
+						'upcoming' => __( 'Upcoming only', 'rise-and-flour' ),
+						'past'     => __( 'Past only', 'rise-and-flour' ),
+					),
+					'default_value' => 'both',
+					'allow_null'    => 0,
+					'wrapper'       => array( 'width' => '60' ),
+				),
+				array(
+					'key'           => 'field_rf_ev_limit',
+					'label'         => __( 'Limit', 'rise-and-flour' ),
+					'name'          => 'limit',
+					'type'          => 'number',
+					'instructions'  => __( 'Per list. 0 shows all.', 'rise-and-flour' ),
+					'default_value' => 0,
+					'min'           => 0,
+					'step'          => 1,
+					'wrapper'       => array( 'width' => '40' ),
+				),
+				array(
+					'key'           => 'field_rf_ev_past_heading',
+					'label'         => __( 'Past events heading', 'rise-and-flour' ),
+					'name'          => 'past_heading',
+					'type'          => 'text',
+					'default_value' => 'Past events',
+					'wrapper'       => array( 'width' => '50' ),
+				),
+				array(
+					'key'           => 'field_rf_ev_empty',
+					'label'         => __( 'Nothing upcoming text', 'rise-and-flour' ),
+					'name'          => 'empty_text',
+					'type'          => 'text',
+					'default_value' => 'Nothing in the diary just yet — check back soon.',
+					'wrapper'       => array( 'width' => '50' ),
+				),
+				rise_and_flour_spacing_field( 'field_rf_ev_spacing' ),
+			),
+			'location' => array(
+				array(
+					array(
+						'param'    => 'block',
+						'operator' => '==',
+						'value'    => 'acf/rf-events',
+					),
+				),
+			),
+		)
+	);
+
+	/* ---------------------------------------------------------
+	 * Event (the post type's own fields)
+	 * --------------------------------------------------------- */
+	acf_add_local_field_group(
+		array(
+			'key'      => 'group_rf_event',
+			'title'    => __( 'Event details', 'rise-and-flour' ),
+			'position' => 'acf_after_title',
+			'fields'   => array(
+				array(
+					'key'   => 'field_rf_event_tab_when',
+					'label' => __( 'When & where', 'rise-and-flour' ),
+					'type'  => 'tab',
+				),
+				array(
+					'key'            => 'field_rf_event_start',
+					'label'          => __( 'Starts', 'rise-and-flour' ),
+					'name'           => 'start',
+					'type'           => 'date_time_picker',
+					'required'       => 1,
+					'display_format' => 'D j M Y, g:i a',
+					'return_format'  => 'Y-m-d H:i:s',
+					'first_day'      => 1,
+					'wrapper'        => array( 'width' => '50' ),
+				),
+				array(
+					'key'            => 'field_rf_event_end',
+					'label'          => __( 'Ends', 'rise-and-flour' ),
+					'name'           => 'end',
+					'type'           => 'date_time_picker',
+					'instructions'   => __( 'Optional. The event counts as past once it has ended — or, with no end, once its day is over.', 'rise-and-flour' ),
+					'display_format' => 'D j M Y, g:i a',
+					'return_format'  => 'Y-m-d H:i:s',
+					'first_day'      => 1,
+					'wrapper'        => array( 'width' => '50' ),
+				),
+				array(
+					'key'          => 'field_rf_event_location',
+					'label'        => __( 'Where', 'rise-and-flour' ),
+					'name'         => 'location',
+					'type'         => 'text',
+					'instructions' => __( 'Leave empty for "At the café".', 'rise-and-flour' ),
+					'wrapper'      => array( 'width' => '50' ),
+				),
+				array(
+					'key'          => 'field_rf_event_price',
+					'label'        => __( 'Price', 'rise-and-flour' ),
+					'name'         => 'price',
+					'type'         => 'text',
+					'instructions' => __( 'As you\'d say it: "£45", "Free", "£5 on the door".', 'rise-and-flour' ),
+					'wrapper'      => array( 'width' => '25' ),
+				),
+				array(
+					'key'          => 'field_rf_event_capacity',
+					'label'        => __( 'Capacity', 'rise-and-flour' ),
+					'name'         => 'capacity',
+					'type'         => 'text',
+					'instructions' => __( 'Optional, e.g. "18 seats". Ends the date line.', 'rise-and-flour' ),
+					'wrapper'      => array( 'width' => '25' ),
+				),
+
+				array(
+					'key'   => 'field_rf_event_tab_titles',
+					'label' => __( 'Titles', 'rise-and-flour' ),
+					'type'  => 'tab',
+				),
+				array(
+					'key'          => 'field_rf_event_eyebrow',
+					'label'        => __( 'Eyebrow', 'rise-and-flour' ),
+					'name'         => 'eyebrow',
+					'type'         => 'text',
+					'instructions' => __( 'Small terracotta line above the title, e.g. "Supper club". Shown as · Supper club ·. Empty shows "Event".', 'rise-and-flour' ),
+				),
+				array(
+					'key'          => 'field_rf_event_subtitle',
+					'label'        => __( 'Subtitle', 'rise-and-flour' ),
+					'name'         => 'subtitle',
+					'type'         => 'text',
+					'instructions' => __( 'Italic line under the title, e.g. "An evening of late summer, served family-style".', 'rise-and-flour' ),
+				),
+
+				array(
+					'key'   => 'field_rf_event_tab_panel',
+					'label' => __( 'On the night', 'rise-and-flour' ),
+					'type'  => 'tab',
+				),
+				array(
+					'key'           => 'field_rf_event_panel_label',
+					'label'         => __( 'Panel heading', 'rise-and-flour' ),
+					'name'          => 'panel_label',
+					'type'          => 'text',
+					'instructions'  => __( 'The ink panel beneath the write-up. Shown as · On the night ·. The panel only appears when it has lines.', 'rise-and-flour' ),
+					'default_value' => 'On the night',
+					'wrapper'       => array( 'width' => '50' ),
+				),
+				array(
+					'key'          => 'field_rf_event_panel_note',
+					'label'        => __( 'Panel footer', 'rise-and-flour' ),
+					'name'         => 'panel_note',
+					'type'         => 'text',
+					'instructions' => __( 'Optional closing line, e.g. "Five courses".', 'rise-and-flour' ),
+					'wrapper'      => array( 'width' => '50' ),
+				),
+				array(
+					'key'          => 'field_rf_event_courses',
+					'label'        => __( 'Lines', 'rise-and-flour' ),
+					'name'         => 'courses',
+					'type'         => 'repeater',
+					'instructions' => __( 'One per course, act, or item. Drag to reorder.', 'rise-and-flour' ),
+					'layout'       => 'table',
+					'button_label' => __( 'Add line', 'rise-and-flour' ),
+					'min'          => 0,
+					'sub_fields'   => array(
+						array(
+							'key'   => 'field_rf_event_course_text',
+							'label' => __( 'Line', 'rise-and-flour' ),
+							'name'  => 'text',
+							'type'  => 'text',
+						),
+					),
+				),
+
+				array(
+					'key'   => 'field_rf_event_tab_booking',
+					'label' => __( 'Booking', 'rise-and-flour' ),
+					'type'  => 'tab',
+				),
+				array(
+					'key'          => 'field_rf_event_booking_url',
+					'label'        => __( 'Booking link', 'rise-and-flour' ),
+					'name'         => 'booking_url',
+					'type'         => 'url',
+					'instructions' => __( 'Eventbrite, a form, or mailto:… — the button is shown while the event is upcoming.', 'rise-and-flour' ),
+					'wrapper'      => array( 'width' => '60' ),
+				),
+				array(
+					'key'           => 'field_rf_event_booking_text',
+					'label'         => __( 'Button text', 'rise-and-flour' ),
+					'name'          => 'booking_text',
+					'type'          => 'text',
+					'default_value' => 'Book a place',
+					'wrapper'       => array( 'width' => '40' ),
+				),
+				array(
+					'key'          => 'field_rf_event_booking_note',
+					'label'        => __( 'Line under the button', 'rise-and-flour' ),
+					'name'         => 'booking_note',
+					'type'         => 'text',
+					'instructions' => __( 'e.g. "We reply within a day. No payment until the night."', 'rise-and-flour' ),
+				),
+			),
+			'location' => array(
+				array(
+					array(
+						'param'    => 'post_type',
+						'operator' => '==',
+						'value'    => 'rf_event',
+					),
+				),
+			),
+		)
+	);
 }
 add_action( 'acf/init', 'rise_and_flour_register_fields' );

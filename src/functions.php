@@ -243,3 +243,4 @@ require get_template_directory() . '/inc/blocks.php';
 require get_template_directory() . '/inc/acf-fields.php';
 require get_template_directory() . '/inc/site-options.php';
 require get_template_directory() . '/inc/menu-import.php';
+require get_template_directory() . '/inc/events.php';

@@ -132,6 +132,18 @@ function rise_and_flour_allowed_blocks( $allowed, $context ) {
 		return $allowed;
 	}
 
+	// An event is a short write-up, not a composed page: core text blocks only.
+	if ( 'rf_event' === $context->post->post_type ) {
+		return array(
+			'core/paragraph',
+			'core/heading',
+			'core/list',
+			'core/list-item',
+			'core/image',
+			'core/quote',
+		);
+	}
+
 	return array(
 		'acf/rf-hero',
 		'acf/rf-text',
@@ -140,6 +152,7 @@ function rise_and_flour_allowed_blocks( $allowed, $context ) {
 		'acf/rf-carousel',
 		'acf/rf-menu',
 		'acf/rf-location',
+		'acf/rf-events',
 		// Core escape hatches for one-off content.
 		'core/paragraph',
 		'core/heading',
