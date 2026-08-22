@@ -1875,6 +1875,51 @@ body.admin-bar .site-header.is-floating {
   padding: 24px 0;
 }
 
+.block-events__more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px 28px;
+  margin-top: 40px;
+}
+
+.block-events__more-btn {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 16px 32px;
+  background: transparent;
+  color: var(--text-heading);
+  border: 1.5px solid var(--text-heading);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: color var(--ease), border-color var(--ease), opacity var(--ease);
+}
+.block-events__more-btn:hover {
+  color: var(--rf-terracotta);
+  border-color: var(--rf-terracotta);
+}
+.block-events__more-btn:focus-visible {
+  outline: 1.5px solid var(--rf-terracotta);
+  outline-offset: 4px;
+}
+.block-events__more-btn[aria-busy=true] {
+  opacity: 0.5;
+  cursor: progress;
+}
+
+.block-events__count {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
 .event-card {
   display: grid;
   grid-template-columns: 72px 240px minmax(0, 1fr);
@@ -2488,7 +2533,7 @@ body.admin-bar .site-header.is-floating {
 
 .block-contact__panel {
   padding: 56px 64px;
-  border: 1px dotted var(--rf-terracotta);
+  border: 2px dotted var(--rf-terracotta);
   border-radius: 4px;
 }
 

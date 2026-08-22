@@ -62,6 +62,48 @@
   padding: 24px 0;
 }
 
+// "Show more" beneath the past list: an outlined caps button, with a quiet
+// "Showing 3 of 9" beside it.
+.block-events__more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px 28px;
+  margin-top: 40px;
+}
+
+.block-events__more-btn {
+  @include caps-label(12px);
+  padding: 16px 32px;
+  background: transparent;
+  color: var(--text-heading);
+  border: 1.5px solid var(--text-heading);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: color var(--ease), border-color var(--ease), opacity var(--ease);
+
+  &:hover {
+    color: var(--rf-terracotta);
+    border-color: var(--rf-terracotta);
+  }
+
+  &:focus-visible {
+    outline: 1.5px solid var(--rf-terracotta);
+    outline-offset: 4px;
+  }
+
+  &[aria-busy='true'] {
+    opacity: 0.5;
+    cursor: progress;
+  }
+}
+
+.block-events__count {
+  @include caps-label(11px);
+  color: var(--text-muted);
+}
+
 // --- Row ------------------------------------------------------
 .event-card {
   display: grid;

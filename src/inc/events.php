@@ -169,29 +169,34 @@ function rise_and_flour_event_courses( $post_id ) {
 }
 
 /**
- * Events in date order.
+ * The query behind an events list.
  *
  * "Upcoming" is anything from today onwards (by start date), soonest first;
- * "past" is everything before today, most recent first.
+ * "past" is everything before today, most recent first. Returns the query
+ * so callers can read found_posts for "show more".
  *
- * @param string $which 'upcoming' | 'past'.
- * @param int    $limit 0 for all.
- * @return WP_Post[]
+ * @param string $which  'upcoming' | 'past'.
+ * @param int    $limit  0 for all.
+ * @param int    $offset Rows to skip (for loading the next batch).
+ * @return WP_Query
  */
-function rise_and_flour_events( $which = 'upcoming', $limit = 0 ) {
+function rise_and_flour_events_query( $which = 'upcoming', $limit = 0, $offset = 0 ) {
 	$today = ( new DateTimeImmutable( 'now', wp_timezone() ) )->format( 'Y-m-d 00:00:00' );
 	$past  = 'past' === $which;
 
-	return get_posts(
+	return new WP_Query(
 		array(
-			'post_type'      => 'rf_event',
-			'post_status'    => 'publish',
-			'posts_per_page' => $limit > 0 ? (int) $limit : -1,
-			'meta_key'       => 'start', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
-			'meta_type'      => 'DATETIME',
-			'orderby'        => 'meta_value',
-			'order'          => $past ? 'DESC' : 'ASC',
-			'meta_query'     => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+			'post_type'           => 'rf_event',
+			'post_status'         => 'publish',
+			'posts_per_page'      => $limit > 0 ? (int) $limit : -1,
+			'offset'              => max( 0, (int) $offset ),
+			'ignore_sticky_posts' => true,
+			'no_found_rows'       => false,
+			'meta_key'            => 'start', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+			'meta_type'           => 'DATETIME',
+			'orderby'             => 'meta_value',
+			'order'               => $past ? 'DESC' : 'ASC',
+			'meta_query'          => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 				array(
 					'key'     => 'start',
 					'value'   => $today,
@@ -202,6 +207,87 @@ function rise_and_flour_events( $which = 'upcoming', $limit = 0 ) {
 		)
 	);
 }
+
+/**
+ * Events in date order (see rise_and_flour_events_query()).
+ *
+ * @param string $which  'upcoming' | 'past'.
+ * @param int    $limit  0 for all.
+ * @param int    $offset Rows to skip.
+ * @return WP_Post[]
+ */
+function rise_and_flour_events( $which = 'upcoming', $limit = 0, $offset = 0 ) {
+	return rise_and_flour_events_query( $which, $limit, $offset )->posts;
+}
+
+/**
+ * REST: the next batch of event rows, rendered.
+ *
+ * GET /wp-json/rf/v1/events?which=past&offset=3&limit=3
+ * → { html, count, has_more, total }
+ *
+ * Public, read-only, and the rows come from the same template part the
+ * block uses, so what's appended matches what was there.
+ */
+function rise_and_flour_events_rest() {
+	register_rest_route(
+		'rf/v1',
+		'/events',
+		array(
+			'methods'             => WP_REST_Server::READABLE,
+			'permission_callback' => '__return_true',
+			'args'                => array(
+				'which'  => array(
+					'default'           => 'past',
+					'sanitize_callback' => 'sanitize_key',
+					'validate_callback' => function ( $value ) {
+						return in_array( $value, array( 'past', 'upcoming' ), true );
+					},
+				),
+				'offset' => array(
+					'default'           => 0,
+					'sanitize_callback' => 'absint',
+				),
+				'limit'  => array(
+					'default'           => 3,
+					'sanitize_callback' => 'absint',
+				),
+			),
+			'callback'            => function ( WP_REST_Request $request ) {
+				$which  = $request['which'];
+				$offset = (int) $request['offset'];
+				$limit  = min( 24, max( 1, (int) $request['limit'] ) );
+
+				$query = rise_and_flour_events_query( $which, $limit, $offset );
+
+				ob_start();
+				foreach ( $query->posts as $post ) {
+					get_template_part(
+						'template-parts/event-card',
+						null,
+						array(
+							'post'  => $post,
+							'muted' => 'past' === $which,
+						)
+					);
+				}
+				$html = ob_get_clean();
+
+				$shown = $offset + count( $query->posts );
+
+				return rest_ensure_response(
+					array(
+						'html'     => $html,
+						'count'    => count( $query->posts ),
+						'total'    => (int) $query->found_posts,
+						'has_more' => $shown < (int) $query->found_posts,
+					)
+				);
+			},
+		)
+	);
+}
+add_action( 'rest_api_init', 'rise_and_flour_events_rest' );
 
 /**
  * The page that lists events — wherever the Events block lives.

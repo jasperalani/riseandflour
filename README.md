@@ -167,7 +167,7 @@ Blocks live under **Rise & Flour** in the block inserter:
 | Carousel | `heading`, `slides` (repeater: image + caption), `size` (large/small), `pager` (dash/dot/diamond), `spacing` |
 | Menu | `eyebrow`, `heading`, `tag` (h1/h2), `intro`, `sections` (repeater: title, note, `items` repeater: name, price, description, vegetarian, extras, note), `hours_heading`, `hours` (falls back to Site Details), `notes`, `file` (PDF), `spacing` |
 | Location | `eyebrow`, `heading`, `tag` (h1/h2), `intro`, `address`, `phone`, `email` (all fall back to Site Details), `show_hours` (from Site Details), `note`, `directions_url`, `map` (Google Maps embed URL or iframe), `map_position` (left/right), `spacing` |
-| Events | `eyebrow`, `heading`, `tag` (h1/h2), `intro`, `show` (both/upcoming/past), `limit`, `past_heading`, `empty_text`, `spacing` — lists the **Events** post type |
+| Events | `eyebrow`, `heading`, `tag` (h1/h2), `intro`, `show` (both/upcoming/past), `limit` (upcoming), `past_batch` (past events per "Show more", default 3), `past_heading`, `empty_text`, `spacing` — lists the **Events** post type |
 | Contact form | `eyebrow`, `heading`, `tag` (h1/h2), `intro`, `recipient` (falls back to Site Details), `show_contact`, `phone_note`, `show_visit`, `extras` (repeater: label + text), `subjects` (one per line), `button_text`, `reply_note`, `success_text`, `spacing` |
 
 ### Contact form
@@ -197,9 +197,14 @@ terracotta reserve button.
 The Events block lists them — upcoming (soonest first) then past (most recent
 first). An event is "past" once it has ended, or with no end time once its day
 is over. The post type has no archive of its own: the page holding the block
-is the list, and the single template's "All events" link finds it. Helpers in
-`inc/events.php`: `rise_and_flour_event()` (dates formatted for print),
-`rise_and_flour_events( 'upcoming'|'past', $limit )`.
+is the list, and the single template's "All events" link finds it. Past
+events load a batch at a time: the block renders the first `past_batch`, and
+**Show more** fetches the next from `GET /wp-json/rf/v1/events?which=past&offset=N&limit=N`
+(rows rendered by `template-parts/event-card.php`, the same part the block
+uses) and appends them (`main.js`). Helpers in `inc/events.php`:
+`rise_and_flour_event()` (dates formatted for print),
+`rise_and_flour_events_query( 'upcoming'|'past', $limit, $offset )` and
+`rise_and_flour_events()`.
 
 Events are included in the content snapshot/restore.
 

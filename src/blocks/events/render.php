@@ -17,6 +17,7 @@ get_template_part(
 		'intro'        => get_field( 'intro' ),
 		'show'         => get_field( 'show' ) ? get_field( 'show' ) : 'both',
 		'limit'        => (int) get_field( 'limit' ),
+		'past_batch'   => null === get_field( 'past_batch' ) || '' === get_field( 'past_batch' ) ? 3 : (int) get_field( 'past_batch' ),
 		'past_heading' => get_field( 'past_heading' ),
 		'empty_text'   => get_field( 'empty_text' ),
 		'classes'      => rise_and_flour_block_classes( $block ),

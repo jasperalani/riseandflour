@@ -113,16 +113,11 @@ list as they come up; move an item out when it's done. (Block ideas live in
   email. Once booking exists it should open the booking form instead, and
   the line beneath ("We reply within a day…") should be rewritten to match.
   Update the seeded Supper Club No. 12 event too.
-- **"Show more" on the Events list.** Once there are lots of events the
-  page gets long — add a *Show more* button that loads the next batch
-  rather than listing everything. The block's `limit` field already caps
-  each list; the missing piece is a button beneath the upcoming and past
-  lists that fetches the next page (a small REST endpoint or `admin-ajax`
-  returning rendered rows from `rise_and_flour_events()`, appended by
-  `main.js`), hiding itself when there's nothing left. Past events are the
-  list that will actually grow, so it could apply there only, with upcoming
-  always shown in full. Touches `template-parts/blocks/events.php`,
-  `inc/events.php`, `main.js`, `_events.scss`.
+- **"Show more" on the Events list.** ✅ Done 22 Aug 2026 for past events:
+  the block shows the first batch (field *Past events per batch*, default
+  3) and a *Show more* button appends the next batch from
+  `GET /wp-json/rf/v1/events`, with a "Showing 3 of 9" count. Upcoming
+  events are always shown in full (capped only by *Upcoming limit*).
 - **Calendar selector on the Events page.** Some way to browse events by
   date rather than one long list. Options, roughly in order of effort:
   - a month picker (a row of month/year links above the list, only months

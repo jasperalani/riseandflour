@@ -291,10 +291,83 @@
     stage.addEventListener('dragstart', function (e) { e.preventDefault(); });
   }
 
+  /* -----------------------------------------------------------
+     Events: "Show more" past events
+
+     The block renders the first batch; each click fetches the
+     next from the theme's REST endpoint (already-rendered rows,
+     same template part) and appends it. The button carries its
+     own endpoint, offset and batch size, so nothing is measured
+     or configured here. Falls back to the error label on a
+     failed request and lets the user try again.
+     ----------------------------------------------------------- */
+  function initEventsMore(button) {
+    var list = button.closest('.block-events').querySelector('[data-events-past]');
+    var count = button.parentNode.querySelector('[data-events-count]');
+    if (!list) return;
+
+    var endpoint = button.getAttribute('data-endpoint');
+    var offset = parseInt(button.getAttribute('data-offset'), 10) || 0;
+    var batch = parseInt(button.getAttribute('data-batch'), 10) || 3;
+    var total = parseInt(button.getAttribute('data-total'), 10) || 0;
+    var busy = false;
+
+    function setLabel(key) {
+      button.textContent = button.getAttribute('data-' + key) || button.textContent;
+    }
+
+    button.addEventListener('click', function () {
+      if (busy) return;
+      busy = true;
+      button.setAttribute('aria-busy', 'true');
+      setLabel('loading');
+
+      var url = endpoint + (endpoint.indexOf('?') === -1 ? '?' : '&') +
+        'which=past&offset=' + offset + '&limit=' + batch;
+
+      fetch(url, { credentials: 'same-origin' })
+        .then(function (res) {
+          if (!res.ok) throw new Error(res.status);
+          return res.json();
+        })
+        .then(function (data) {
+          var tmp = document.createElement('ul');
+          tmp.innerHTML = data.html || '';
+          var first = tmp.firstElementChild;
+          while (tmp.firstElementChild) list.appendChild(tmp.firstElementChild);
+
+          offset += data.count || 0;
+          total = data.total || total;
+          if (count) {
+            count.textContent = count.textContent.replace(/\d+/, String(offset)).replace(/(\d+)(\D*)$/, total + '$2');
+          }
+
+          // Move focus to the first new row's link so keyboard and screen
+          // reader users land where the new content starts.
+          var link = first && first.querySelector('.event-card__title a');
+          if (link) link.focus({ preventScroll: true });
+
+          if (!data.has_more) {
+            button.parentNode.removeChild(button);
+          } else {
+            setLabel('label');
+          }
+        })
+        .catch(function () {
+          setLabel('error');
+        })
+        .then(function () {
+          busy = false;
+          button.removeAttribute('aria-busy');
+        });
+    });
+  }
+
   function init() {
     initNav();
     initHeaderReveal();
     document.querySelectorAll('[data-carousel]').forEach(initCarousel);
+    document.querySelectorAll('[data-events-more]').forEach(initEventsMore);
   }
 
   if (document.readyState === 'loading') {
