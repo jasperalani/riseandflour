@@ -1,29 +1,83 @@
+# Local WordPress for the new Rise & Flour theme.
+#
+#   docker compose up -d          → http://localhost:8080
+#   docker compose down           → stop (data kept in named volumes)
+#   docker compose down -v        → stop and wipe the database
+#
+# WordPress core lives in the `wp_core` volume, so plugins and uploads survive
+# restarts. Only the theme (src/) is bind-mounted — edit files on the host and
+# reload.
+
+name: riseandflour-newdesign
+
 services:
   wordpress:
-    image: wordpress:latest
+    image: wordpress:php8.3-apache
     ports:
-      - "80:80"
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DEBUG: 1
+      WORDPRESS_CONFIG_EXTRA: |
+        define( 'WP_DEBUG_LOG', true );
+        define( 'WP_DEBUG_DISPLAY', false );
+        define( 'DISALLOW_FILE_EDIT', true );
+    volumes:
+      - wp_core:/var/www/html
+      - ./src:/var/www/html/wp-content/themes/rise-and-flour
+      # Pretty permalinks. WP-CLI can't write .htaccess in this image, so it
+      # lives on the host and survives `down -v`.
+      - ./config/wp-htaccess:/var/www/html/.htaccess:ro
+      # Raises PHP's 2M default upload cap — plugin zips and photography.
+      - ./config/php-uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:ro
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: mariadb:11
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: wordpress
+      MARIADB_ROOT_PASSWORD: wordpress
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  # Opt-in helper — not started by `up`. Use for one-off commands:
+  #   docker compose --profile cli run --rm wpcli wp plugin install advanced-custom-fields --activate
+  #   docker compose --profile cli run --rm wpcli wp theme activate rise-and-flour
+  wpcli:
+    image: wordpress:cli-php8.3
+    profiles: ["cli"]
+    user: "33:33"
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
     volumes:
-      - ./src:/var/www/html/wp-content/themes/riseandflour
-      - ./plugins:/var/www/html/wp-content/plugins
+      - wp_core:/var/www/html
+      - ./src:/var/www/html/wp-content/themes/rise-and-flour
+      # Dev-only scripts, kept out of the theme so they never deploy:
+      #   docker compose --profile cli run --rm wpcli wp eval-file /tools/seed.php
+      - ./tools:/tools:ro
     depends_on:
-      - db
-
-  db:
-    image: mysql:5.7
-    command: --default-authentication-plugin=mysql_native_password
-    environment:
-      MYSQL_ROOT_PASSWORD: wordpress
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
-    volumes:
-      - db_data:/var/lib/mysql
+      db:
+        condition: service_healthy
+    # No entrypoint override — the image already wraps `wp`, so pass the
+    # full command including `wp`.
 
 volumes:
+  wp_core:
   db_data:
