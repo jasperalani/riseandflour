@@ -1,0 +1,302 @@
+@use '../abstracts/mixins' as *;
+
+// =============================================================
+// BLOCK: Image carousel
+// ACF fields: eyebrow, heading, slides (repeater of image + caption).
+//
+// One focused slide is centred on the page with the next peeking
+// in from the right. Every slide sits at the focused position and
+// is pushed right by --rel — its distance from the active slide,
+// set by main.js and server-rendered for the initial state. A
+// slide that has been passed stays where it is and wipes closed
+// from its right edge via clip-path, so its left edge never moves;
+// the next slide travels into the space it vacates. Both ride the
+// same curve, so they never overlap mid-flight.
+//
+// Captions float over the image and roll vertically in the
+// direction of travel: "next" sends the old one down and brings
+// the new one down from above; "previous" does the reverse.
+//
+// The block sits on an ink band so cream captions stay legible
+// over both the photograph and the page around it.
+// =============================================================
+
+.carousel {
+  --slide-w: min(62vw, 720px);
+  --slide-h: 480px;
+  --slide-gap: 28px;
+  // How much of the next slide shows. The stage is a centred window just
+  // wide enough for slide + gap + peek each side, so this holds at any
+  // viewport instead of growing until a third slide wanders into frame.
+  --peek: 180px;
+  --stage-w: calc(var(--slide-w) + 2 * (var(--slide-gap) + var(--peek)));
+  // How far captions (and the pager) overhang the focused slide's left edge.
+  --caption-overhang: 140px;
+  // Left edge of the focused slide within the stage — the anchor everything
+  // aligns to. Percentages resolve against whichever box consumes it, so
+  // the pager mirrors the stage's width to stay in line.
+  --focus-left: calc((100% - var(--slide-w)) / 2);
+  --slide-motion: 560ms cubic-bezier(0.65, 0, 0.35, 1);
+  --caption-motion: 480ms cubic-bezier(0.65, 0, 0.35, 1);
+
+  position: relative;
+  padding: 64px 0 60px;
+  background: var(--surface-inverse);
+  color: var(--rf-cream);
+  overflow: hidden;
+}
+
+.carousel__head {
+  @include wrap;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+
+  .eyebrow { margin-bottom: 16px; }
+
+  h2,
+  h3 {
+    font-size: 22px;
+    margin: 0;
+    color: var(--rf-cream);
+  }
+}
+
+.carousel__controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.carousel__btn {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-round);
+  border: 1.5px solid var(--rf-cream);
+  background: transparent;
+  color: var(--rf-cream);
+  font-size: 18px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: border-color var(--ease), color var(--ease), opacity var(--ease);
+
+  &:hover:not([aria-disabled='true']) {
+    border-color: var(--rf-terracotta);
+    color: var(--rf-terracotta);
+  }
+
+  // aria-disabled rather than disabled so the button keeps focus at the ends.
+  &[aria-disabled='true'] {
+    opacity: 0.3;
+    cursor: default;
+  }
+}
+
+// --- Stage ---------------------------------------------------
+.carousel__stage {
+  position: relative;
+  height: var(--slide-h);
+  max-width: var(--stage-w);
+  margin-inline: auto;
+  overflow: hidden;
+  // Vertical swipes stay with the browser so the page still scrolls;
+  // horizontal ones come to the swipe handler.
+  touch-action: pan-y;
+  user-select: none;
+
+  &.is-swipeable { cursor: grab; }
+  &.is-swipeable:active { cursor: grabbing; }
+}
+
+.carousel__slides {
+  position: absolute;
+  inset: 0;
+}
+
+.carousel__slide {
+  position: absolute;
+  top: 0;
+  left: var(--focus-left);
+  width: var(--slide-w);
+  height: 100%;
+  z-index: 1;
+  transform: translateX(calc(var(--rel, 0) * (var(--slide-w) + var(--slide-gap))));
+  clip-path: inset(0 0 0 0);
+  transition: transform var(--slide-motion), clip-path var(--slide-motion);
+
+  &.is-active { z-index: 2; }
+
+  // Passed: --rel is 0, so it stays at the focused position while
+  // the right edge wipes in to meet the left.
+  &.is-passed { clip-path: inset(0 100% 0 0); }
+
+  img { -webkit-user-drag: none; }
+
+  // A flat ink scrim (as on the hero) under the caption, on the focused
+  // slide only — the peeking slide stays clean. It lives inside the slide,
+  // so the wipe cuts it too, and it fades on the same curve as the motion.
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(32, 60, 67, 0.22);
+    opacity: 0;
+    transition: opacity var(--slide-motion);
+    pointer-events: none;
+  }
+
+  &.is-active::after { opacity: 1; }
+}
+
+// Fills the slide so the image (or placeholder) covers it — without this
+// the <img>'s height: 100% resolves to auto and landscape photos sit short.
+.carousel__media { height: 100%; }
+
+// --- Captions ------------------------------------------------
+.carousel__captions {
+  position: absolute;
+  z-index: 3;
+  left: calc(var(--focus-left) - var(--caption-overhang));
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(46vw, 480px);
+  // Every caption occupies the same cell; only the active one shows.
+  display: grid;
+  pointer-events: none;
+}
+
+.carousel__caption {
+  grid-area: 1 / 1;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--rf-cream);
+  // A tight shadow for stroke contrast plus a soft one for lift, so the
+  // caption holds up over a bright photograph.
+  text-shadow:
+    0 1px 3px rgba(32, 60, 67, 0.5),
+    0 2px 18px rgba(32, 60, 67, 0.35);
+  opacity: 0;
+  // Upcoming captions wait above the line…
+  transform: translateY(-44px);
+  transition: transform var(--caption-motion), opacity var(--caption-motion);
+
+  &.is-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  // …and passed ones have dropped below it.
+  &.is-passed { transform: translateY(44px); }
+}
+
+// --- Pager ---------------------------------------------------
+.carousel__pager {
+  display: flex;
+  gap: 10px;
+  margin-top: 40px;
+  // Full width on purpose: padding percentages resolve against the
+  // section, and because the stage is centred in the section and the
+  // slide centred in the stage, (100% - slide-w) / 2 lands on the slide's
+  // left edge here too — so the dashes line up with the captions.
+  padding-left: calc(var(--focus-left) - var(--caption-overhang));
+}
+
+.carousel__dash {
+  position: relative;
+  width: 40px;
+  height: 2px;
+  padding: 0;
+  border: 0;
+  background: rgba(250, 250, 233, 0.22);
+  cursor: pointer;
+  transition: background var(--ease);
+
+  // A 2px bar needs a more generous hit area.
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -12px 0;
+  }
+
+  &:hover { background: var(--rf-terracotta-tint); }
+  &.is-active { background: var(--rf-terracotta); }
+
+  &:focus-visible {
+    outline: 1.5px solid var(--rf-terracotta);
+    outline-offset: 8px;
+  }
+}
+
+// --- Responsive ----------------------------------------------
+@include tablet {
+  .carousel {
+    --slide-w: min(66vw, 600px);
+    --slide-h: 400px;
+    --peek: 120px;
+    --caption-overhang: 80px;
+    padding: 52px 0 48px;
+  }
+
+  .carousel__head {
+    padding-inline: 32px;
+    margin-bottom: 32px;
+  }
+
+  .carousel__captions { width: min(50vw, 420px); }
+  .carousel__caption { font-size: clamp(20px, 2.6vw, 26px); }
+}
+
+@include mobile {
+  .carousel {
+    --slide-w: 78vw;
+    --slide-h: 300px;
+    --slide-gap: 16px;
+    --peek: 28px;
+    // No room to overhang — captions and pager tuck inside the image edge.
+    --caption-overhang: -20px;
+    padding: 44px 0 40px;
+  }
+
+  .carousel__head {
+    padding-inline: 20px;
+    // Controls drop beneath the heading rather than squeezing it.
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 28px;
+
+    h2,
+    h3 { font-size: 20px; }
+  }
+
+  .carousel__btn {
+    width: 42px;
+    height: 42px;
+  }
+
+  .carousel__captions {
+    top: auto;
+    bottom: 24px;
+    transform: none;
+    width: calc(var(--slide-w) - 40px);
+  }
+
+  .carousel__caption {
+    font-size: 18px;
+    transform: translateY(-28px);
+    &.is-passed { transform: translateY(28px); }
+  }
+
+  .carousel__pager { margin-top: 28px; }
+  .carousel__dash { width: 28px; }
+}

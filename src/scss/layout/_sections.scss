@@ -1,0 +1,34 @@
+@use '../abstracts/mixins' as *;
+
+// =============================================================
+// Vertical rhythm.
+// Blocks carry no outer margin of their own — spacing is owned
+// by the page so the same block can sit tight or loose. In the
+// WP build this maps to a "spacing" select on each ACF block.
+// =============================================================
+
+.section { padding-block: 0; }
+
+.section--tight { margin-top: 72px; }
+.section--default { margin-top: 90px; }
+.section--loose { margin-top: 100px; }
+.section--xl { margin-top: 130px; }
+
+// Trailing space before the footer.
+.section--last { margin-bottom: 130px; }
+
+@include tablet {
+  .section--tight { margin-top: 56px; }
+  .section--default { margin-top: 70px; }
+  .section--loose { margin-top: 80px; }
+  .section--xl { margin-top: 96px; }
+  .section--last { margin-bottom: 96px; }
+}
+
+@include mobile {
+  .section--tight { margin-top: 44px; }
+  .section--default { margin-top: 52px; }
+  .section--loose { margin-top: 56px; }
+  .section--xl { margin-top: 64px; }
+  .section--last { margin-bottom: 64px; }
+}

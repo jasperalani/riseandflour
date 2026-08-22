@@ -1,0 +1,71 @@
+@use '../abstracts/mixins' as *;
+
+// =============================================================
+// BLOCK: Text
+// ACF fields (later): eyebrow, heading, body, align.
+// Also used for the homepage intro, which is the same block at
+// a slightly larger heading size.
+// =============================================================
+
+.block-text {
+  max-width: 640px;
+  margin-inline: auto;
+  padding-inline: 24px;
+  text-align: center;
+
+  .eyebrow { margin-bottom: 22px; }
+
+  // h1 on a page's lead block, h2 elsewhere — same size either way.
+  h1,
+  h2,
+  h3 {
+    font-size: 24px;
+    margin: 0 0 24px;
+  }
+
+  p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text-body);
+    margin: 0;
+  }
+
+  // The body field runs through wpautop, so it can be several paragraphs.
+  p + p { margin-top: 20px; }
+}
+
+.block-text__actions { margin-top: 30px; }
+
+// Left-aligned variant for denser editorial pages.
+.block-text--left {
+  text-align: left;
+  margin-inline: 0;
+}
+
+// Homepage intro sits directly under the hero and runs a touch
+// larger — same block, different rhythm.
+.block-text--intro {
+  padding-block: 120px 110px;
+
+  h1,
+  h2,
+  h3 { font-size: 26px; }
+}
+
+@include tablet {
+  .block-text--intro { padding-block: 90px 80px; }
+}
+
+@include mobile {
+  .block-text {
+    padding-inline: 20px;
+
+    h1,
+    h2,
+    h3 { font-size: 20px; }
+
+    p { font-size: 16px; }
+  }
+
+  .block-text--intro { padding-block: 64px 56px; }
+}

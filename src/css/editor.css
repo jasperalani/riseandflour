@@ -1,0 +1,29 @@
+/* =============================================================
+   Editor-only adjustments.
+   Enqueued via enqueue_block_editor_assets — never on the front end.
+   Hand-written; not generated from scss/.
+   ============================================================= */
+
+/* The hero is 100vh on the front end. Inside the editor canvas that fills
+   the whole writing area and makes the block hard to select or scroll past,
+   so it's cut down to something workable. */
+.editor-styles-wrapper .hero {
+  height: 70vh;
+  min-height: 380px;
+}
+
+/* Our blocks are full-bleed by design; the editor's default block width
+   would otherwise box them in. */
+.editor-styles-wrapper .wp-block {
+  max-width: none;
+}
+
+/* The carousel's initial state (first slide focused, next peeking) is
+   rendered server-side via --rel, so it looks right here without main.js.
+   Slides are edited through the block's fields, not by scrolling the stage. */
+
+/* Placeholders should read clearly as "nothing set yet" while editing. */
+.editor-styles-wrapper .ph {
+  outline: 1px dashed rgba(46, 62, 69, 0.25);
+  outline-offset: -1px;
+}

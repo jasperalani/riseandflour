@@ -1,32 +1,52 @@
 <?php
 /**
- * The template for displaying all pages
+ * The template for displaying pages — including the front page.
  *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site may use a
- * different template.
+ * There is deliberately no front-page.php: every page, homepage included, is
+ * built by dragging ACF blocks in the editor. header.php still switches nav
+ * variants on is_front_page().
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package riseandflour
+ * @package Rise_&_Flour
  */
 
 get_header();
-
-$fields = get_fields() ?? [];
-
 ?>
 
-<div class="container">
-	<main id="primary" class="site-main col">
+<main id="primary" class="site-main">
 
-		<div class="hero-image" style=~>
-			<img src='<?= $fields['hero_image']['url'] ?>'/>
+	<?php
+	while ( have_posts() ) :
+		the_post();
+
+		// A page opening with a hero states its own title; a second heading
+		// above it would fight the design.
+		$rise_and_flour_has_hero = has_block( 'acf/rf-hero', get_post() );
+		?>
+
+		<?php if ( ! $rise_and_flour_has_hero ) : ?>
+			<header class="block-text section--default">
+				<h1><?php the_title(); ?></h1>
+			</header>
+		<?php endif; ?>
+
+		<div class="entry-content page-blocks <?php echo $rise_and_flour_has_hero ? '' : 'section--tight'; ?>">
+			<?php
+			the_content();
+
+			wp_link_pages(
+				array(
+					'before' => '<nav class="page-links">',
+					'after'  => '</nav>',
+				)
+			);
+			?>
 		</div>
 
-	</main><!-- #main -->
-</div>
+		<?php
+	endwhile;
+	?>
+
+</main><!-- #primary -->
+
 <?php
-// get_sidebar();
 get_footer();

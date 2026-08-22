@@ -1,0 +1,156 @@
+@use '../abstracts/mixins' as *;
+
+// =============================================================
+// Editor content.
+// The design only covers composed blocks; this styles whatever
+// comes out of the WordPress editor on a normal page, plus the
+// archive fallback in index.php.
+// =============================================================
+
+// The theme's own blocks manage their own width and must run edge-to-edge;
+// everything else the editor emits (paragraphs, headings, core blocks) sits in
+// a readable column. Keeping this list in one variable means adding a block
+// only touches one line.
+$rf-blocks: '.hero, .block-image-text, .block-image, .block-text, .carousel';
+
+.entry-content {
+
+  > :not(#{$rf-blocks}) {
+    max-width: 700px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  // Flow spacing between ordinary content only — blocks use .section--*.
+  > :not(#{$rf-blocks}) + :not(#{$rf-blocks}) { margin-top: 24px; }
+
+  // Full-bleed alignment escapes the 700px column.
+  .alignwide { max-width: var(--wrap); margin-inline: calc(50% - min(50vw, var(--wrap) / 2)); }
+  .alignfull { max-width: none; margin-inline: calc(50% - 50vw); }
+
+  @include tablet {
+    > :not(#{$rf-blocks}) { padding-inline: 32px; }
+  }
+
+  @include mobile {
+    > :not(#{$rf-blocks}) { padding-inline: 20px; }
+  }
+}
+
+// Typography for whatever the editor emits. :where() zeroes the wrapper's
+// specificity so these are pure defaults: without it, compounds like
+// `.entry-content p` (0,2,1) beat block styles like `.hero__caption`
+// (0,1,0) and stomp their size and colour. A block's own rules now always
+// win the moment they declare a property.
+:where(.entry-content) {
+
+  h2,
+  h3,
+  h4 { margin-top: 48px; }
+
+  h2 { font-size: 22px; }
+  h3 { font-size: 18px; }
+  h4 { font-size: 15px; }
+
+  p,
+  li {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text-body);
+  }
+
+  ul,
+  ol {
+    padding-left: 22px;
+
+    li + li { margin-top: 8px; }
+  }
+
+  a {
+    color: var(--rf-terracotta-deep);
+    border-bottom: 1px solid rgba(213, 132, 79, 0.5);
+
+    &:hover { border-bottom-color: var(--rf-terracotta); }
+  }
+
+  img,
+  figure { margin-inline: 0; }
+
+  // Garamond italic for quotes — the brand's highlight treatment.
+  blockquote {
+    margin: 40px 0;
+    padding-left: 24px;
+    border-left: 1.5px solid var(--rf-terracotta);
+    font-style: italic;
+    font-size: 20px;
+    color: var(--text-heading);
+  }
+
+  figcaption {
+    @include caps-label(11px);
+    margin-top: 12px;
+    color: var(--text-muted);
+  }
+
+  @include mobile {
+    h2,
+    h3,
+    h4 { margin-top: 36px; }
+
+    p,
+    li { font-size: 16px; }
+
+    blockquote { font-size: 18px; margin: 28px 0; }
+  }
+}
+
+// Breathing room before the footer on block-built pages.
+.page-blocks {
+  padding-bottom: 130px;
+
+  @include tablet { padding-bottom: 96px; }
+  @include mobile { padding-bottom: 64px; }
+}
+
+// --- Archive fallback list -----------------------------------
+.entry-list {
+  max-width: 700px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+
+  @include tablet { padding-inline: 32px; }
+  @include mobile { padding-inline: 20px; }
+}
+
+.entry-list__item + .entry-list__item {
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border-default);
+}
+
+.entry-list__title {
+  font-size: 18px;
+  margin: 0 0 12px;
+}
+
+.entry-list__excerpt p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-body);
+}
+
+// --- Pagination / paged posts --------------------------------
+.pagination .nav-links,
+.page-links {
+  @include caps-label(12px);
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 56px;
+
+  a,
+  .page-numbers { color: var(--text-muted); }
+
+  a:hover,
+  .current { color: var(--rf-terracotta); }
+}

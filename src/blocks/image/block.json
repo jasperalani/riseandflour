@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "acf/rf-image",
+  "title": "Image",
+  "description": "A single image, contained or full-bleed, with an optional caption.",
+  "category": "rise-and-flour",
+  "icon": "format-image",
+  "keywords": ["image", "photo", "picture", "figure"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php"
+  },
+  "supports": {
+    "align": false,
+    "anchor": true,
+    "customClassName": true,
+    "jsx": false
+  }
+}

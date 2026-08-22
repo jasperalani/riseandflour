@@ -1,0 +1,45 @@
+@use '../abstracts/mixins' as *;
+
+// =============================================================
+// Grey image placeholder.
+// Stands in for every photograph until real media is wired up.
+// Swap `<div class="ph">` for `<img>` (or the ACF image field)
+// and nothing else in the layout needs to change — the
+// placeholder fills its parent exactly as object-fit cover does.
+// =============================================================
+
+.ph {
+  width: 100%;
+  height: 100%;
+  background: #d8d8d3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  color: #8b8b84;
+  @include caps-label(11px);
+
+  // Faint cross-hatch so a placeholder never reads as a real
+  // flat-grey design decision.
+  background-image:
+    linear-gradient(45deg, rgba(255, 255, 255, 0.35) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.35) 75%),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.35) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.35) 75%);
+  background-size: 28px 28px;
+  background-position: 0 0, 14px 14px;
+}
+
+// Darker fill for the hero, so cream nav and caption stay legible.
+.ph--hero {
+  background-color: #9a9a94;
+  color: #ececea;
+}
+
+// The real-image counterpart: an <img> dropped into any block's
+// media slot fills it exactly as the placeholder did.
+.media-fill {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

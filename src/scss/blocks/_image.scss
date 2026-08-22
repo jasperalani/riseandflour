@@ -1,0 +1,47 @@
+@use '../abstracts/mixins' as *;
+
+// =============================================================
+// BLOCK: Image
+// ACF fields (later): image, caption, width (contained|full).
+// =============================================================
+
+.block-image {
+  @include wrap;
+  // margin-block only — the shorthand would clear the
+  // `margin-inline: auto` that `wrap` relies on to centre.
+  margin-block: 0;
+}
+
+.block-image__media { height: 520px; }
+
+.block-image__caption {
+  @include caps-label(12px);
+  margin-top: 16px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+// Edge-to-edge option for a full-bleed photograph.
+.block-image--full {
+  max-width: none;
+  padding-inline: 0;
+
+  .block-image__caption { padding-inline: 20px; }
+}
+
+@include tablet {
+  .block-image { padding-inline: 32px; }
+  .block-image__media { height: 420px; }
+  .block-image--full { padding-inline: 0; }
+}
+
+@include mobile {
+  .block-image { padding-inline: 20px; }
+  .block-image__media { height: 280px; }
+  .block-image--full { padding-inline: 0; }
+
+  .block-image__caption {
+    font-size: 10px;
+    margin-top: 12px;
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "acf/rf-hero",
+  "title": "Hero",
+  "description": "Full-page image hero with an optional centred logo and a caption.",
+  "category": "rise-and-flour",
+  "icon": "cover-image",
+  "keywords": ["hero", "banner", "image", "full"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php"
+  },
+  "supports": {
+    "align": false,
+    "anchor": true,
+    "customClassName": true,
+    "jsx": false
+  }
+}

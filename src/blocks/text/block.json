@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "acf/rf-text",
+  "title": "Text",
+  "description": "A centred eyebrow, heading and paragraph. Use the Intro size directly beneath a hero.",
+  "category": "rise-and-flour",
+  "icon": "editor-paragraph",
+  "keywords": ["text", "heading", "paragraph", "intro"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php"
+  },
+  "supports": {
+    "align": false,
+    "anchor": true,
+    "customClassName": true,
+    "jsx": false
+  }
+}

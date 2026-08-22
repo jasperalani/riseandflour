@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "acf/rf-carousel",
+  "title": "Carousel",
+  "description": "One centred image at a time with the next peeking in from the right and a caption floating over it. Prev/next, dashes and swipe.",
+  "category": "rise-and-flour",
+  "icon": "images-alt2",
+  "keywords": ["carousel", "slider", "gallery", "images"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php"
+  },
+  "supports": {
+    "align": false,
+    "anchor": true,
+    "customClassName": true,
+    "jsx": false
+  }
+}

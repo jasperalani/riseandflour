@@ -1,0 +1,74 @@
+// =============================================================
+// Design tokens — mirrors the Rise & Flour Design System
+// Exposed as CSS custom properties so PHP/ACF templates and the
+// WP block editor can consume the exact same values later.
+// =============================================================
+
+:root {
+  // --- Primary palette -------------------------------------
+  --rf-ink: #2e3e45;
+  --rf-cream: #fafae9;
+  --rf-terracotta: #d5844f;
+  --rf-terracotta-deep: #c46546;
+  --rf-terracotta-tint: #f0d3bc;
+  --rf-terracotta-wash: #f8ece0;
+
+  // --- Ink scale -------------------------------------------
+  --rf-ink-soft: #48585f;
+  --rf-ink-muted: #718187;
+  --rf-ink-faint: #cdd5d7;
+
+  // --- Surfaces --------------------------------------------
+  --rf-cream-deep: #f1efd5;
+  --rf-paper: #fdfdf5;
+  --rf-white: #ffffff;
+
+  --surface-page: var(--rf-cream);
+  --surface-inverse: var(--rf-ink);
+
+  --text-heading: var(--rf-ink);
+  --text-body: var(--rf-ink-soft);
+  --text-muted: var(--rf-ink-muted);
+  --text-accent: var(--rf-terracotta);
+  --text-on-inverse: var(--rf-cream);
+
+  --border-default: rgba(46, 62, 69, 0.18);
+  --border-inverse: rgba(249, 245, 228, 0.2);
+
+  // --- Type ------------------------------------------------
+  // Core Magic is reserved for the logo and product names ONLY.
+  --font-display: 'Core Magic', 'Rockwell', serif;
+  --font-sans: 'Montserrat', 'Futura', sans-serif;
+  --font-body: 'EB Garamond', Garamond, serif;
+
+  --tracking-caps: 0.09em;   // headings
+  --tracking-label: 0.22em;  // nav, eyebrows, caps labels
+
+  // --- Shape -----------------------------------------------
+  --radius-sm: 3px;
+  --radius-round: 50%;
+
+  --shadow-hero-logo: 0 8px 40px rgba(32, 60, 67, 0.35);
+
+  // --- Motion (brand rule: 150–200ms ease-out, nothing showy)
+  --ease: 160ms ease-out;
+
+  // --- Layout ----------------------------------------------
+  --wrap: 1100px;
+  --gutter: 48px;
+}
+
+// SCSS-side spacing scale (8px base) for use in maths
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 12px;
+$space-4: 16px;
+$space-5: 24px;
+$space-6: 32px;
+$space-7: 48px;
+$space-8: 64px;
+$space-9: 96px;
+
+// Breakpoints
+$bp-tablet: 1024px;
+$bp-mobile: 640px;

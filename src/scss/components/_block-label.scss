@@ -1,0 +1,39 @@
+@use '../abstracts/mixins' as *;
+
+// =============================================================
+// Specimen label used on the Building Blocks page to annotate
+// each layout ("BLOCK · IMAGE + TEXT").
+//
+// Documentation chrome only — this does NOT ship inside the
+// blocks themselves and has no ACF equivalent.
+// =============================================================
+
+.block-label {
+  @include wrap;
+  @include caps-label(11px);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-default);
+  padding-bottom: 12px;
+  margin-bottom: 56px;
+}
+
+// Vertical rhythm between stacked specimens.
+.block-demo + .block-demo { margin-top: 120px; }
+
+@include tablet {
+  .block-label {
+    padding-inline: 32px;
+    margin-bottom: 40px;
+  }
+
+  .block-demo + .block-demo { margin-top: 90px; }
+}
+
+@include mobile {
+  .block-label {
+    padding-inline: 20px;
+    margin-bottom: 28px;
+  }
+
+  .block-demo + .block-demo { margin-top: 64px; }
+}

@@ -1,0 +1,33 @@
+// =============================================================
+// Rise & Flour — main stylesheet
+//
+// Build:  npm run build   (one-off)
+//         npm run watch   (rebuild on save)
+//
+// Structure
+//   abstracts/  tokens + mixins (no CSS output on their own)
+//   base/       reset, typography, shared type roles
+//   layout/     header, footer, section rhythm
+//   blocks/     one partial per ACF block
+//   components/ small shared pieces
+// =============================================================
+
+@use 'abstracts/tokens';
+@use 'abstracts/mixins';
+
+@use 'base/reset';
+@use 'base/typography';
+
+@use 'layout/header';
+@use 'layout/sections';
+@use 'layout/entry';
+@use 'layout/footer';
+
+@use 'blocks/hero';
+@use 'blocks/image-text';
+@use 'blocks/image';
+@use 'blocks/text';
+@use 'blocks/carousel';
+
+@use 'components/placeholder';
+@use 'components/block-label';

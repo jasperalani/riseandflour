@@ -1,0 +1,78 @@
+@use '../abstracts/mixins' as *;
+
+// =============================================================
+// BLOCK: Image + Text
+// ACF fields (later): image, media_position (left|right),
+// eyebrow, heading, body, link_text, link_url.
+// =============================================================
+
+.block-image-text {
+  @include wrap;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 72px;
+  align-items: center;
+}
+
+.block-image-text__media { height: 520px; }
+
+.block-image-text__body {
+  .eyebrow { margin-bottom: 20px; }
+
+  h2,
+  h3 {
+    font-size: 22px;
+    margin: 0 0 20px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-body);
+    margin: 0 0 30px;
+  }
+
+  // No link supplied → the paragraph shouldn't leave a gap. Consecutive
+  // paragraphs (the body runs through wpautop) space via that margin-bottom.
+  p:last-child { margin-bottom: 0; }
+}
+
+// --- Image on the right --------------------------------------
+// Source order stays text-then-image-agnostic; we reorder
+// visually only, so the DOM order remains the reading order.
+.block-image-text--media-right {
+  .block-image-text__media { order: 2; }
+  .block-image-text__body { order: 1; }
+}
+
+@include tablet {
+  .block-image-text {
+    gap: 40px;
+    padding-inline: 32px;
+  }
+
+  .block-image-text__media { height: 420px; }
+}
+
+@include mobile {
+  .block-image-text {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-inline: 20px;
+  }
+
+  .block-image-text__media { height: 320px; }
+
+  // Stacked: image always leads, whichever side it sat on.
+  .block-image-text--media-right {
+    .block-image-text__media { order: 1; }
+    .block-image-text__body { order: 2; }
+  }
+
+  .block-image-text__body {
+    h2,
+    h3 { font-size: 20px; }
+
+    p { margin-bottom: 24px; }
+  }
+}

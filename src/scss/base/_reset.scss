@@ -1,0 +1,78 @@
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--surface-page);
+  color: var(--rf-ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+svg { max-width: 100%; display: block; }
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+// Respect the brand's "modest motion" rule for users who ask for less.
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// Keyboard focus stays visible everywhere.
+:focus-visible {
+  outline: 2px solid var(--rf-terracotta);
+  outline-offset: 3px;
+}
+
+.visually-hidden,
+// WordPress/underscores markup uses this name; header.php's
+// skip-link depends on it existing.
+.screen-reader-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+// The skip link must become visible when tabbed to.
+.screen-reader-text:focus {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 100000;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 14px 22px;
+  clip: auto;
+  clip-path: none;
+  background: var(--rf-ink);
+  color: var(--rf-cream);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}

@@ -1,0 +1,239 @@
+@use '../abstracts/mixins' as *;
+
+// =============================================================
+// Site header — TWO distinct variants
+//
+//   .site-header--overlay : homepage only. Sits *inside* the
+//     full-page hero, transparent, cream text, no wordmark
+//     (the hero's centred stamp is the logo).
+//
+//   .site-header--stacked : every other page. Cream page, a
+//     centred wordmark above the nav, ink text, hairline rule
+//     underneath.
+//
+// They share .site-nav so the link treatment stays identical.
+// The nav is a <ul> because that's what wp_nav_menu() outputs.
+// =============================================================
+
+.site-header {
+  position: relative;
+  z-index: 20;
+}
+
+// --- Reveal on scroll-up -------------------------------------
+// Scrolling down lets the header leave with the page. Once it's
+// fully off-screen it swaps to fixed above the viewport
+// (.is-floating); any upward scroll pins it (.is-pinned) and it
+// slides down. At the very top it rejoins the flow — fixed and
+// natural positions coincide there, so the hand-off is seamless.
+// main.js drives the classes.
+.site-header.is-floating {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  transform: translateY(-100%);
+  transition: transform 200ms ease-out;
+
+  &.is-pinned { transform: translateY(0); }
+
+  // Applied for one frame when entering/leaving floating mode so
+  // the position swap itself never animates.
+  &.no-anim { transition: none; }
+}
+
+// Clear the admin bar when previewing while logged in.
+body.admin-bar .site-header.is-floating {
+  top: 32px;
+
+  @media (max-width: 782px) { top: 46px; }
+}
+
+// --- Shared nav ----------------------------------------------
+.site-nav {
+  display: flex;
+  justify-content: center;
+}
+
+.site-nav__list {
+  display: flex;
+  justify-content: center;
+  gap: 44px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  @include tablet { gap: 30px; }
+}
+
+.site-nav a {
+  @include caps-label(13px);
+  display: inline-block;
+  padding-bottom: 4px;
+
+  @include tablet { font-size: 12px; }
+}
+
+// Current page. `aria-current` is what the static pages use;
+// `.current-menu-item` is what WordPress adds.
+.site-nav a[aria-current='page'],
+.site-nav .current-menu-item > a,
+.site-nav .current_page_item > a { color: var(--rf-terracotta); }
+
+// --- Variant 1: overlay (homepage) ---------------------------
+.site-header--overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 30px var(--gutter);
+  // Transparent over the hero; ink when floating. The transition
+  // fades the backing out as the bar merges back at the top.
+  transition: background var(--ease);
+
+  // Floating over page content, cream links need an ink backing.
+  &.is-floating { background: var(--surface-inverse); }
+
+  .site-nav a {
+    color: var(--rf-cream);
+
+    &:hover { color: var(--rf-terracotta-tint); }
+  }
+
+  .site-nav a[aria-current='page'],
+  .site-nav .current-menu-item > a,
+  .site-nav .current_page_item > a { color: var(--rf-terracotta-tint); }
+
+  .nav-toggle-bar { background: var(--rf-cream); }
+
+  @include tablet {
+    padding: 24px 32px;
+  }
+
+  @include mobile {
+    display: flex;
+    justify-content: flex-end;
+    padding: 18px 20px;
+  }
+}
+
+// --- Variant 2: stacked (inner pages) ------------------------
+.site-header--stacked {
+  text-align: center;
+  padding: 46px 24px 0;
+
+  // In flow it sits on the cream page; floating it needs its own.
+  &.is-floating { background: var(--surface-page); }
+
+  .site-header__wordmark {
+    display: inline-block;
+
+    img {
+      width: 220px;
+      height: auto;
+    }
+  }
+
+  .site-nav {
+    max-width: var(--wrap);
+    margin: 30px auto 0;
+    padding-bottom: 34px;
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  @include tablet {
+    padding-top: 36px;
+
+    .site-header__wordmark img { width: 190px; }
+  }
+
+  @include mobile {
+    // Wordmark left, burger right — nav is no longer a centred row.
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 20px 18px;
+    border-bottom: 1px solid var(--border-default);
+
+    .site-header__wordmark img { width: 150px; }
+    .site-nav { margin: 0; padding-bottom: 0; border-bottom: 0; }
+  }
+}
+
+// --- Mobile toggle -------------------------------------------
+.nav-toggle {
+  display: none;
+  position: relative;
+  z-index: 60;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.nav-toggle-bar {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--rf-ink);
+  transition: transform var(--ease), opacity var(--ease);
+}
+
+// Burger → X
+.nav-toggle[aria-expanded='true'] {
+  .nav-toggle-bar:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-toggle-bar:nth-child(2) { opacity: 0; }
+  .nav-toggle-bar:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  // Once open, the panel is ink — bars must read cream.
+  .nav-toggle-bar { background: var(--rf-cream); }
+}
+
+@include mobile {
+  .nav-toggle { display: flex; }
+
+  // The nav becomes a full-screen ink panel on both variants.
+  .site-nav {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: var(--surface-inverse);
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--ease), visibility var(--ease);
+
+    a {
+      color: var(--rf-cream);
+      font-size: 15px;
+
+      &:hover { color: var(--rf-terracotta); }
+    }
+
+    a[aria-current='page'],
+    .current-menu-item > a,
+    .current_page_item > a { color: var(--rf-terracotta); }
+  }
+
+  .site-nav__list {
+    flex-direction: column;
+    align-items: center;
+    gap: 34px;
+  }
+
+  .site-nav.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  // Stop the page scrolling behind the open panel.
+  body.nav-open { overflow: hidden; }
+}

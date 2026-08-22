@@ -1,0 +1,111 @@
+@use '../abstracts/mixins' as *;
+
+// =============================================================
+// Site footer — two variants, both ink.
+//   --full : homepage. Stamp + three info columns + baseline.
+//   --slim : inner pages. Single baseline row.
+// =============================================================
+
+.site-footer {
+  background: var(--surface-inverse);
+  color: var(--text-on-inverse);
+}
+
+.site-footer__label {
+  @include caps-label(12px);
+  color: var(--rf-terracotta);
+  margin-bottom: 18px;
+}
+
+.site-footer__text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--rf-ink-faint);
+}
+
+// Bottom rule: wordmark left, tagline right.
+.site-footer__baseline {
+  @include caps-label(12px);
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--rf-ink-muted);
+}
+
+// --- Variant 1: full (homepage) ------------------------------
+.site-footer--full {
+  padding: 90px var(--gutter) 70px;
+
+  .site-footer__inner {
+    max-width: var(--wrap);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: auto 1fr 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .site-footer__stamp { width: 150px; height: auto; }
+
+  .site-footer__baseline {
+    max-width: var(--wrap);
+    margin: 70px auto 0;
+    padding-top: 28px;
+    border-top: 1px solid var(--border-inverse);
+  }
+
+  @include tablet {
+    padding: 70px 32px 56px;
+
+    .site-footer__inner {
+      // Stamp spans the top, info drops to a 3-up row beneath it.
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .site-footer__stamp { grid-column: 1 / -1; width: 120px; }
+  }
+
+  @include mobile {
+    padding: 56px 20px 40px;
+
+    .site-footer__inner {
+      grid-template-columns: 1fr;
+      gap: 34px;
+      text-align: center;
+      justify-items: center;
+    }
+
+    .site-footer__stamp { width: 110px; }
+
+    .site-footer__baseline {
+      margin-top: 44px;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      text-align: center;
+    }
+  }
+}
+
+// --- Variant 2: slim (inner pages) ---------------------------
+.site-footer--slim {
+  padding: 44px var(--gutter);
+
+  .site-footer__baseline {
+    max-width: var(--wrap);
+    margin-inline: auto;
+  }
+
+  @include mobile {
+    padding: 34px 20px;
+
+    .site-footer__baseline {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,68 @@
+@use '../abstracts/mixins' as *;
+
+// Core Magic is a brand-restricted face: logo and product/dish
+// names only. Never apply it to headings or running text.
+@font-face {
+  font-family: 'Core Magic';
+  src: url('../assets/fonts/CoreMagic.otf') format('opentype');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-sans);
+  color: var(--text-heading);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0;
+}
+
+p { margin: 0; text-wrap: pretty; }
+
+a {
+  color: var(--rf-ink);
+  text-decoration: none;
+  transition: color var(--ease);
+
+  &:hover { color: var(--rf-terracotta); }
+}
+
+::selection { background: var(--rf-terracotta-tint); }
+
+// --- Shared type roles ---------------------------------------
+
+// The terracotta caps line that opens nearly every section.
+.eyebrow {
+  @include caps-label(12px);
+  color: var(--text-accent);
+  margin: 0 0 20px;
+}
+
+.lede {
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text-body);
+}
+
+// Underlined caps link — the only "button" in this design.
+.link-caps {
+  @include caps-label(13px);
+  display: inline-block;
+  color: var(--rf-terracotta);
+  border-bottom: 1.5px solid var(--rf-terracotta);
+  padding-bottom: 6px;
+
+  &:hover {
+    color: var(--rf-terracotta-deep);
+    border-bottom-color: var(--rf-terracotta-deep);
+  }
+}
+
+// The ampersand is a brand character — always terracotta.
+.amp { color: var(--rf-terracotta); }
