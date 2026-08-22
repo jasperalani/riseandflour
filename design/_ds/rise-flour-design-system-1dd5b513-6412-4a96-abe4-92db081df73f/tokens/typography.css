@@ -1,0 +1,22 @@
+:root{
+--font-display:'Core Magic','Rockwell',serif;
+--font-sans:'Jost','Futura',sans-serif;
+/* Scale */
+--text-hero:clamp(44px,6vw,72px);
+--text-h1:44px;
+--text-h2:32px;
+--text-h3:24px;
+--text-lead:19px;
+--text-base:16px;
+--text-small:14px;
+--text-caption:12px;
+/* Tracking — the brand voice is spaced-out caps */
+--tracking-caps:.22em;
+--tracking-wide:.08em;
+--leading-tight:1.1;
+--leading-body:1.6;
+}
+body{font-family:var(--font-sans);color:var(--text-body);font-size:var(--text-base);line-height:var(--leading-body)}
+h1,h2,h3,h4{font-family:var(--font-display);color:var(--text-heading);line-height:var(--leading-tight);font-weight:700}
+a{color:var(--rf-terracotta-deep);text-decoration-color:rgba(213,132,79,.5);text-underline-offset:3px}
+a:hover{color:var(--rf-terracotta)}

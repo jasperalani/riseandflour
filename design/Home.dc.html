@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/rise-flour-design-system-1dd5b513-6412-4a96-abe4-92db081df73f/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/rise-flour-design-system-1dd5b513-6412-4a96-abe4-92db081df73f/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/rise-flour-design-system-1dd5b513-6412-4a96-abe4-92db081df73f/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/rise-flour-design-system-1dd5b513-6412-4a96-abe4-92db081df73f/tokens/shape.css">
+  <link rel="stylesheet" href="_ds/rise-flour-design-system-1dd5b513-6412-4a96-abe4-92db081df73f/styles.css">
+  <script src="_ds/rise-flour-design-system-1dd5b513-6412-4a96-abe4-92db081df73f/_ds_bundle.js"></script>
+  <script src="image-slot.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+    body{margin:0;background:var(--rf-cream);color:var(--rf-ink);font-family:'EB Garamond','Garamond',serif}
+    h1,h2,h3{font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:.09em;font-weight:600}
+    a{color:var(--rf-ink);text-decoration:none;transition:color 160ms ease-out}
+    a:hover{color:var(--rf-terracotta)}
+    ::selection{background:var(--rf-terracotta-tint)}
+  </style>
+</helmet>
+<div data-screen-label="Home" style="background:var(--rf-cream)">
+  <div style="position:relative;height:100vh;min-height:640px">
+    <image-slot id="home-hero" shape="rect" fit="cover" placeholder="Full-page hero — drop your image"></image-slot>
+    <div style="position:absolute;inset:0;background:rgba(32,60,67,.18);pointer-events:none"></div>
+    <nav style="position:absolute;top:0;left:0;right:0;display:flex;justify-content:center;gap:44px;padding:30px 48px;font-size:13px;letter-spacing:.22em;font-family:Montserrat,sans-serif;pointer-events:none">
+      <a href="Menu.dc.html" style="color:var(--rf-cream);pointer-events:auto">MENU</a>
+      <a href="Events.dc.html" style="color:var(--rf-cream);pointer-events:auto">EVENTS</a>
+      <a href="Location.dc.html" style="color:var(--rf-cream);pointer-events:auto">LOCATION</a>
+      <a href="Blocks.dc.html" style="color:var(--rf-cream);pointer-events:auto">ABOUT</a>
+    </nav>
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none">
+      <img src="uploads/Logo rectangular stamp.png" alt="Rise &amp; Flour" style="width:min(280px,45vw);height:auto;box-shadow:0 8px 40px rgba(32,60,67,.35)">
+    </div>
+    <div style="position:absolute;left:0;right:0;bottom:34px;text-align:center;color:var(--rf-cream);font-size:12px;letter-spacing:.22em;font-family:Montserrat,sans-serif;pointer-events:none">· A CAFÉ IN CIRENCESTER ·</div>
+  </div>
+  <section style="max-width:640px;margin:0 auto;padding:120px 24px 110px;text-align:center">
+    <div style="color:var(--rf-terracotta);font-size:12px;letter-spacing:.22em;font-family:Montserrat,sans-serif;margin-bottom:22px">· EST. CIRENCESTER ·</div>
+    <h2 style="font-size:26px;margin:0 0 24px;line-height:1.5">A café on the Market Place</h2>
+    <p style="font-size:17px;line-height:1.8;color:var(--rf-ink-soft);margin:0;text-wrap:pretty">We began as a bakery. These days we keep the ovens for ourselves and set the tables for you — the kitchen open all day, the counter full by nine.</p>
+  </section>
+  <section style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:72px;align-items:center;max-width:1100px;margin:0 auto;padding:0 48px 130px">
+    <div style="height:560px">
+      <image-slot id="home-kitchen" shape="rect" placeholder="Kitchen / plates image"></image-slot>
+    </div>
+    <div>
+      <div style="color:var(--rf-terracotta);font-size:12px;letter-spacing:.22em;font-family:Montserrat,sans-serif;margin-bottom:20px">THE KITCHEN</div>
+      <h3 style="font-size:22px;margin:0 0 20px;line-height:1.5">Short menu, long mornings</h3>
+      <p style="font-size:16px;line-height:1.8;color:var(--rf-ink-soft);margin:0 0 30px;text-wrap:pretty">Everything is made in-house, in small amounts, and changes with the season. When something runs out, it runs out.</p>
+      <a href="Menu.dc.html" style="display:inline-block;color:var(--rf-terracotta);font-size:13px;letter-spacing:.22em;font-family:Montserrat,sans-serif;border-bottom:1.5px solid var(--rf-terracotta);padding-bottom:6px">VIEW THE MENU</a>
+    </div>
+  </section>
+  <section style="padding:0 0 140px;overflow:hidden">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;max-width:1100px;margin:0 auto 40px;padding:0 48px">
+      <div>
+        <div style="color:var(--rf-terracotta);font-size:12px;letter-spacing:.22em;font-family:Montserrat,sans-serif;margin-bottom:16px">· THE ROOM ·</div>
+        <h3 style="font-size:22px;margin:0">From the café</h3>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px">
+        <span style="font-size:13px;letter-spacing:.22em;font-family:Montserrat,sans-serif;color:var(--rf-ink-muted)">{{ counter }}</span>
+        <button onClick="{{ prev }}" aria-label="Previous" style="width:46px;height:46px;border-radius:50%;border:1.5px solid var(--rf-ink);background:transparent;color:var(--rf-ink);font-size:18px;cursor:pointer;font-family:inherit" style-hover="border-color:var(--rf-terracotta);color:var(--rf-terracotta)">←</button>
+        <button onClick="{{ next }}" aria-label="Next" style="width:46px;height:46px;border-radius:50%;border:1.5px solid var(--rf-ink);background:transparent;color:var(--rf-ink);font-size:18px;cursor:pointer;font-family:inherit" style-hover="border-color:var(--rf-terracotta);color:var(--rf-terracotta)">→</button>
+      </div>
+    </div>
+    <div style="padding-left:max(48px, calc((100vw - 1100px) / 2 + 48px))">
+      <div style="{{ trackStyle }}">
+        <sc-for list="{{ slides }}" as="s" hint-placeholder-count="4">
+          <figure style="flex:0 0 min(72vw,780px);margin:0">
+            <div style="height:480px">
+              <image-slot id="{{ s.id }}" shape="rect" placeholder="{{ s.placeholder }}"></image-slot>
+            </div>
+            <figcaption style="margin-top:16px;font-size:12px;letter-spacing:.22em;font-family:Montserrat,sans-serif;color:var(--rf-ink-muted)">{{ s.caption }}</figcaption>
+          </figure>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+  <footer style="background:var(--rf-ink);color:var(--rf-cream);padding:90px 48px 70px">
+    <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:64px;align-items:start">
+      <img src="assets/logo-stamp.png" alt="Rise &amp; Flour stamp" style="width:150px;height:auto">
+      <div>
+        <div style="color:var(--rf-terracotta);font-size:12px;letter-spacing:.22em;font-family:Montserrat,sans-serif;margin-bottom:18px">FIND US</div>
+        <p style="margin:0;font-size:15px;line-height:1.9;color:var(--rf-ink-faint)">14 Market Place<br>Cirencester GL7 2NW</p>
+      </div>
+      <div>
+        <div style="color:var(--rf-terracotta);font-size:12px;letter-spacing:.22em;font-family:Montserrat,sans-serif;margin-bottom:18px">HOURS</div>
+        <p style="margin:0;font-size:15px;line-height:1.9;color:var(--rf-ink-faint)">Tue – Sat, 8am – 4pm<br>Sun, 9am – 2pm</p>
+      </div>
+      <div>
+        <div style="color:var(--rf-terracotta);font-size:12px;letter-spacing:.22em;font-family:Montserrat,sans-serif;margin-bottom:18px">SAY HELLO</div>
+        <p style="margin:0;font-size:15px;line-height:1.9;color:var(--rf-ink-faint)">hello@riseandflour.co.uk<br>01285 000 000</p>
+      </div>
+    </div>
+    <div style="max-width:1100px;margin:70px auto 0;padding-top:28px;border-top:1px solid rgba(249,245,228,.2);display:flex;justify-content:space-between;font-size:12px;letter-spacing:.22em;font-family:Montserrat,sans-serif;color:var(--rf-ink-muted)">
+      <span>RISE <span style="color:var(--rf-terracotta)">&amp;</span> FLOUR</span>
+      <span>· EST. CIRENCESTER ·</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { i: 0 };
+  slides = [
+    { id: 'carousel-1', caption: '01 — THE COUNTER', placeholder: 'Counter image' },
+    { id: 'carousel-2', caption: '02 — THE ROOM', placeholder: 'Room image' },
+    { id: 'carousel-3', caption: '03 — THE TABLE', placeholder: 'Table / food image' },
+    { id: 'carousel-4', caption: '04 — THE COURTYARD', placeholder: 'Courtyard image' }
+  ];
+  renderVals() {
+    const n = this.slides.length, i = this.state.i;
+    return {
+      slides: this.slides,
+      counter: `0${i + 1} / 0${n}`,
+      trackStyle: {
+        display: 'flex', gap: '28px',
+        transform: `translateX(calc(${i} * (-1 * min(72vw, 780px) - 28px)))`,
+        transition: 'transform 420ms ease-out'
+      },
+      prev: () => this.setState(s => ({ i: (s.i + n - 1) % n })),
+      next: () => this.setState(s => ({ i: (s.i + 1) % n }))
+    };
+  }
+}
+</script>
+</body>
+</html>

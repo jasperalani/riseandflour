@@ -1,0 +1,34 @@
+:root{
+/* Base palette */
+--rf-terracotta:#d5844f;
+--rf-terracotta-deep:#b96a37;
+--rf-terracotta-tint:#f0d3bc;
+--rf-terracotta-wash:#f8ece0;
+--rf-ink:#203c43;
+--rf-ink-soft:#3d5a61;
+--rf-ink-muted:#6b8288;
+--rf-ink-faint:#c8d3d5;
+--rf-cream:#f9f5e4;
+--rf-cream-deep:#f1ead0;
+--rf-paper:#fdfbf3;
+--rf-white:#ffffff;
+/* Semantic */
+--surface-page:var(--rf-cream);
+--surface-card:var(--rf-paper);
+--surface-raised:var(--rf-white);
+--surface-accent-wash:var(--rf-terracotta-wash);
+--surface-inverse:var(--rf-ink);
+--text-heading:var(--rf-ink);
+--text-body:var(--rf-ink-soft);
+--text-muted:var(--rf-ink-muted);
+--text-accent:var(--rf-terracotta);
+--text-on-accent:var(--rf-cream);
+--text-on-inverse:var(--rf-cream);
+--action-primary:var(--rf-terracotta);
+--action-primary-hover:var(--rf-terracotta-deep);
+--action-secondary:var(--rf-ink);
+--border-default:rgba(32,60,67,.18);
+--border-strong:var(--rf-ink);
+--border-accent:var(--rf-terracotta);
+--focus-ring:0 0 0 3px rgba(213,132,79,.35);
+}

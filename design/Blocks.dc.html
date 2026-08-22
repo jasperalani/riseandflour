@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/rise-flour-design-system-1dd5b513-6412-4a96-abe4-92db081df73f/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/rise-flour-design-system-1dd5b513-6412-4a96-abe4-92db081df73f/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/rise-flour-design-system-1dd5b513-6412-4a96-abe4-92db081df73f/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/rise-flour-design-system-1dd5b513-6412-4a96-abe4-92db081df73f/tokens/shape.css">
+  <link rel="stylesheet" href="_ds/rise-flour-design-system-1dd5b513-6412-4a96-abe4-92db081df73f/styles.css">
+  <script src="_ds/rise-flour-design-system-1dd5b513-6412-4a96-abe4-92db081df73f/_ds_bundle.js"></script>
+  <script src="image-slot.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+    body{margin:0;background:var(--rf-cream);color:var(--rf-ink);font-family:'EB Garamond','Garamond',serif}
+    h1,h2,h3{font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:.09em;font-weight:600}
+    a{color:var(--rf-ink);text-decoration:none;transition:color 160ms ease-out}
+    a:hover{color:var(--rf-terracotta)}
+    ::selection{background:var(--rf-terracotta-tint)}
+  </style>
+</helmet>
+<div data-screen-label="Content blocks" style="background:var(--rf-cream);min-height:100vh;display:flex;flex-direction:column">
+  <header style="text-align:center;padding:46px 24px 0">
+    <a href="Home.dc.html"><img src="assets/wordmark.png" alt="Rise &amp; Flour" style="width:220px;height:auto"></a>
+    <nav style="display:flex;justify-content:center;gap:44px;margin:30px auto 0;max-width:1100px;font-size:13px;letter-spacing:.22em;font-family:Montserrat,sans-serif;padding-bottom:34px;border-bottom:1px solid var(--border-default)">
+      <a href="Menu.dc.html">MENU</a>
+      <a href="Events.dc.html">EVENTS</a>
+      <a href="Location.dc.html">LOCATION</a>
+      <a href="Blocks.dc.html" style="color:var(--rf-terracotta)">ABOUT</a>
+    </nav>
+  </header>
+  <main style="flex:1;padding-bottom:60px">
+    <div style="text-align:center;max-width:640px;margin:90px auto 0;padding:0 24px">
+      <div style="color:var(--rf-terracotta);font-size:12px;letter-spacing:.22em;font-family:Montserrat,sans-serif;margin-bottom:20px">· CONTENT BLOCKS ·</div>
+      <h1 style="font-size:28px;margin:0 0 22px">Building blocks</h1>
+      <p style="font-size:16px;line-height:1.8;color:var(--rf-ink-soft);margin:0;text-wrap:pretty">Three reusable layouts for any page — image with text, image alone, text alone.</p>
+    </div>
+    <div style="max-width:1100px;margin:100px auto 0;padding:0 48px">
+      <div style="font-size:11px;letter-spacing:.22em;font-family:Montserrat,sans-serif;color:var(--rf-ink-muted);border-bottom:1px solid var(--border-default);padding-bottom:12px;margin-bottom:56px">BLOCK · IMAGE + TEXT</div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:72px;align-items:center">
+        <div style="height:520px">
+          <image-slot id="block-imagetext" shape="rect" placeholder="Block image"></image-slot>
+        </div>
+        <div>
+          <div style="color:var(--rf-terracotta);font-size:12px;letter-spacing:.22em;font-family:Montserrat,sans-serif;margin-bottom:20px">· THE ROOM ·</div>
+          <h2 style="font-size:22px;margin:0 0 20px;line-height:1.5">Stay as long as you like</h2>
+          <p style="font-size:16px;line-height:1.8;color:var(--rf-ink-soft);margin:0 0 30px;text-wrap:pretty">Sixteen tables, a shelf of borrowed books, and no wifi password on the wall — ask, and we'll tell you. Mornings are busy; afternoons are yours.</p>
+          <a href="Location.dc.html" style="display:inline-block;color:var(--rf-terracotta);font-size:13px;letter-spacing:.22em;font-family:Montserrat,sans-serif;border-bottom:1.5px solid var(--rf-terracotta);padding-bottom:6px">FIND US</a>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1100px;margin:120px auto 0;padding:0 48px">
+      <div style="font-size:11px;letter-spacing:.22em;font-family:Montserrat,sans-serif;color:var(--rf-ink-muted);border-bottom:1px solid var(--border-default);padding-bottom:12px;margin-bottom:56px">BLOCK · IMAGE</div>
+      <figure style="margin:0">
+        <div style="height:520px">
+          <image-slot id="block-image" shape="rect" placeholder="Full-width image"></image-slot>
+        </div>
+        <figcaption style="margin-top:16px;font-size:12px;letter-spacing:.22em;font-family:Montserrat,sans-serif;color:var(--rf-ink-muted);text-align:center">· THE COUNTER, EARLY ·</figcaption>
+      </figure>
+    </div>
+    <div style="max-width:1100px;margin:120px auto 0;padding:0 48px 60px">
+      <div style="font-size:11px;letter-spacing:.22em;font-family:Montserrat,sans-serif;color:var(--rf-ink-muted);border-bottom:1px solid var(--border-default);padding-bottom:12px;margin-bottom:56px">BLOCK · TEXT</div>
+      <div style="max-width:640px;margin:0 auto;text-align:center">
+        <div style="color:var(--rf-terracotta);font-size:12px;letter-spacing:.22em;font-family:Montserrat,sans-serif;margin-bottom:22px">· OUR STORY ·</div>
+        <h2 style="font-size:24px;margin:0 0 24px;line-height:1.5">First a bakery, now a café</h2>
+        <p style="font-size:17px;line-height:1.8;color:var(--rf-ink-soft);margin:0;text-wrap:pretty">We opened with an oven and a queue. The queue wanted somewhere to sit, so we found chairs. These days the baking is just for our own tables — coffee, lunch, and cake, seven doors up from where we started.</p>
+      </div>
+    </div>
+  </main>
+  <footer style="background:var(--rf-ink);color:var(--rf-cream);padding:44px 48px">
+    <div style="max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;font-size:12px;letter-spacing:.22em;font-family:Montserrat,sans-serif">
+      <span>RISE <span style="color:var(--rf-terracotta)">&amp;</span> FLOUR</span>
+      <span style="color:var(--rf-ink-muted)">14 MARKET PLACE · CIRENCESTER</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+</body>
+</html>

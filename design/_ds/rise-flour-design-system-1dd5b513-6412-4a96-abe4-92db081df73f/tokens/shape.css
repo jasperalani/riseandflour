@@ -1,0 +1,17 @@
+:root{
+/* Spacing (8px base) */
+--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--space-9:96px;
+/* Radii — stamps & pills, not soft apps */
+--radius-sm:3px;
+--radius-md:6px;
+--radius-pill:999px;
+--radius-round:50%;
+/* Borders — the double-rule stamp motif */
+--rule-thin:1px solid var(--border-default);
+--rule-strong:1.5px solid var(--rf-ink);
+--rule-accent:1.5px solid var(--rf-terracotta);
+/* Shadows — flat brand; one soft lift only */
+--shadow-card:0 1px 0 rgba(32,60,67,.08);
+--shadow-lift:0 8px 24px rgba(32,60,67,.12);
+--shadow-modal:0 20px 60px rgba(32,60,67,.25);
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/rise-flour-design-system-1dd5b513-6412-4a96-abe4-92db081df73f/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/rise-flour-design-system-1dd5b513-6412-4a96-abe4-92db081df73f/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/rise-flour-design-system-1dd5b513-6412-4a96-abe4-92db081df73f/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/rise-flour-design-system-1dd5b513-6412-4a96-abe4-92db081df73f/tokens/shape.css">
+  <link rel="stylesheet" href="_ds/rise-flour-design-system-1dd5b513-6412-4a96-abe4-92db081df73f/styles.css">
+  <script src="_ds/rise-flour-design-system-1dd5b513-6412-4a96-abe4-92db081df73f/_ds_bundle.js"></script>
+  <script src="image-slot.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+    body{margin:0;background:var(--rf-cream);color:var(--rf-ink);font-family:'EB Garamond','Garamond',serif}
+    h1,h2,h3{font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:.09em;font-weight:600}
+    a{color:var(--rf-ink);text-decoration:none;transition:color 160ms ease-out}
+    a:hover{color:var(--rf-terracotta)}
+    ::selection{background:var(--rf-terracotta-tint)}
+  </style>
+</helmet>
+<div data-screen-label="Event detail" style="background:var(--rf-cream);min-height:100vh;display:flex;flex-direction:column">
+  <header style="text-align:center;padding:46px 24px 0">
+    <a href="Home.dc.html"><img src="assets/wordmark.png" alt="Rise &amp; Flour" style="width:220px;height:auto"></a>
+    <nav style="display:flex;justify-content:center;gap:44px;margin:30px auto 0;max-width:1100px;font-size:13px;letter-spacing:.22em;font-family:Montserrat,sans-serif;padding-bottom:34px;border-bottom:1px solid var(--border-default)">
+      <a href="Menu.dc.html">MENU</a>
+      <a href="Events.dc.html" style="color:var(--rf-terracotta)">EVENTS</a>
+      <a href="Location.dc.html">LOCATION</a>
+      <a href="Blocks.dc.html">ABOUT</a>
+    </nav>
+  </header>
+  <main style="max-width:840px;margin:0 auto;padding:70px 24px 130px;width:100%;box-sizing:border-box;flex:1">
+    <a href="Events.dc.html" style="display:inline-block;font-size:12px;letter-spacing:.22em;font-family:Montserrat,sans-serif;color:var(--rf-ink-muted);margin-bottom:44px">← ALL EVENTS</a>
+    <div style="text-align:center;margin-bottom:56px">
+      <div style="color:var(--rf-terracotta);font-size:12px;letter-spacing:.22em;font-family:Montserrat,sans-serif;margin-bottom:20px">· SUPPER CLUB ·</div>
+      <h1 style="font-size:28px;margin:0 0 26px;line-height:1.5">Supper Club No. 12<br>Late Summer</h1>
+      <div style="display:flex;justify-content:center;gap:36px;font-size:13px;letter-spacing:.22em;font-family:Montserrat,sans-serif;color:var(--rf-ink-soft);flex-wrap:wrap">
+        <span>THU 17 SEP 2026</span><span style="color:var(--rf-terracotta)">·</span>
+        <span>7PM</span><span style="color:var(--rf-terracotta)">·</span>
+        <span>£48</span><span style="color:var(--rf-terracotta)">·</span>
+        <span>18 SEATS</span>
+      </div>
+    </div>
+    <div style="height:440px;margin-bottom:64px">
+      <image-slot id="event-hero" shape="rect" placeholder="Event image — the long table"></image-slot>
+    </div>
+    <div style="max-width:620px;margin:0 auto">
+      <p style="font-size:17px;line-height:1.9;color:var(--rf-ink-soft);margin:0 0 24px;text-wrap:pretty">One long table, eighteen chairs, five courses. We cook what the last warm weeks give us — tomatoes at their best, corn, plums, and herbs from the courtyard — and serve it family-style, the way we'd feed our own.</p>
+      <p style="font-size:17px;line-height:1.9;color:var(--rf-ink-soft);margin:0 0 56px;text-wrap:pretty">Doors at 7pm, first plates at 7.30. Bring a bottle if you like; we'll have a short list of ours. The menu is fixed — tell us about allergies when you book and we'll cook around them.</p>
+      <div style="border:1.5px solid var(--rf-terracotta);padding:6px">
+        <div style="border:1px solid var(--rf-terracotta);padding:40px;text-align:center">
+          <div style="font-size:12px;letter-spacing:.22em;font-family:Montserrat,sans-serif;color:var(--rf-terracotta);margin-bottom:22px">· ON THE NIGHT ·</div>
+          <div style="display:grid;gap:14px;font-size:17px;line-height:1.6;font-style:italic">
+            <span>Tomatoes, burrata, basil oil</span>
+            <span>Sweetcorn soup, brown butter</span>
+            <span>Slow lamb shoulder, flageolets</span>
+            <span>Courtyard leaves, lemon</span>
+            <span>Plum galette, bay cream</span>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:56px">
+        <a href="mailto:hello@riseandflour.co.uk?subject=Supper Club No. 12" style="display:inline-block;background:var(--rf-terracotta);color:var(--rf-cream);font-size:13px;letter-spacing:.22em;font-family:Montserrat,sans-serif;padding:16px 36px;border-radius:4px;transition:background 160ms ease-out" style-hover="background:var(--rf-terracotta-deep);color:var(--rf-cream)">EMAIL TO RESERVE</a>
+        <p style="margin:20px 0 0;font-size:13px;color:var(--rf-ink-muted)">We reply within a day. No payment until the night.</p>
+      </div>
+    </div>
+  </main>
+  <footer style="background:var(--rf-ink);color:var(--rf-cream);padding:44px 48px">
+    <div style="max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;font-size:12px;letter-spacing:.22em;font-family:Montserrat,sans-serif">
+      <span>RISE <span style="color:var(--rf-terracotta)">&amp;</span> FLOUR</span>
+      <span style="color:var(--rf-ink-muted)">14 MARKET PLACE · CIRENCESTER</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+</body>
+</html>
