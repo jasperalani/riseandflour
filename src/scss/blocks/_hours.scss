@@ -1,0 +1,252 @@
+@use '../abstracts/mixins' as *;
+
+// =============================================================
+// BLOCK: Opening hours
+// ACF fields: style (panel | framed | band), heading, tag, note.
+// Hours come from Site Details (inc/hours.php).
+//
+//   panel  — cream-deep box, every group labelled, ranges as lines.
+//   framed — cream, double terracotta frame, day / time rows on
+//            dotted rules, italic note beneath.
+//   band   — ink strip, eyebrow + note left, times in ruled
+//            columns on the right.
+// =============================================================
+
+.block-hours {
+  @include wrap;
+}
+
+.block-hours__eyebrow {
+  @include caps-label(12px);
+  color: var(--rf-terracotta);
+  margin: 0;
+
+  &::before { content: '· '; }
+  &::after { content: ' ·'; }
+}
+
+.block-hours__note {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--text-body);
+  margin: 0;
+}
+
+.block-hours__status { margin-top: 14px; }
+
+// --- Panel ------------------------------------------------------
+.block-hours--panel .block-hours__inner {
+  max-width: 860px;
+  padding: 100px 92px;
+  background: var(--rf-cream-deep);
+  border-radius: var(--radius-sm);
+}
+
+.block-hours--panel {
+  .block-hours__heading {
+    font-size: 18px;
+    margin: 0 0 56px;
+  }
+
+  .block-hours__group + .block-hours__group { margin-top: 56px; }
+
+  .block-hours__label {
+    @include caps-label(13px);
+    color: var(--text-body);
+    margin: 0 0 28px;
+  }
+
+  .block-hours__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 21px;
+    line-height: 1.5;
+    color: var(--text-heading);
+
+    li + li { margin-top: 22px; }
+  }
+
+  .block-hours__note { margin-top: 40px; }
+  .block-hours__status { margin-top: 32px; }
+}
+
+// --- Framed -----------------------------------------------------
+.block-hours--framed .block-hours__inner {
+  max-width: 690px;
+  margin-inline: auto;
+  padding: 6px;
+  // Thick outer line, hairline inside.
+  border: 2px solid var(--rf-terracotta);
+  border-radius: 4px;
+  text-align: center;
+}
+
+.block-hours--framed {
+  .block-hours__inner {
+    // Inner hairline via an inset box-shadow, so it stays 6px inside the
+    // outer border at every width. Half a pixel thinner than the outer.
+    box-shadow: inset 0 0 0 6px var(--surface-page), inset 0 0 0 6.75px var(--rf-terracotta);
+    padding: 104px 120px 96px;
+  }
+
+  .block-hours__eyebrow { margin-bottom: 64px; }
+
+  .block-hours__rows {
+    margin: 0 auto;
+    max-width: 620px;
+    text-align: left;
+  }
+
+  .block-hours__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    padding: 24px 0;
+    border-bottom: 1px dotted rgba(213, 132, 79, 0.55);
+
+    &:first-child { padding-top: 0; }
+    &:last-child { border-bottom: 0; }
+
+    dt {
+      @include caps-label(14px);
+      color: var(--text-body);
+    }
+
+    dd {
+      margin: 0;
+      font-size: 21px;
+      color: var(--text-heading);
+    }
+  }
+
+  .block-hours__note { margin-top: 40px; }
+  .block-hours__status {
+    margin-top: 24px;
+    text-align: center;
+  }
+}
+
+// --- Band -------------------------------------------------------
+// The band runs edge to edge like the carousel's ink strip; the content
+// sits in the usual page column inside it.
+.block-hours--band {
+  max-width: none;
+  padding-inline: 0;
+  background: var(--surface-inverse);
+  color: var(--text-on-inverse);
+}
+
+.block-hours--band .block-hours__inner {
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding: 96px var(--gutter);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 48px 64px;
+  align-items: center;
+}
+
+.block-hours--band {
+  .block-hours__eyebrow { margin-bottom: 22px; }
+
+  .block-hours__note {
+    color: var(--rf-ink-faint);
+    max-width: 320px;
+  }
+
+  .block-hours__status {
+    color: var(--rf-ink-faint);
+    &.is-closed { color: var(--rf-ink-muted); }
+  }
+
+  .block-hours__columns {
+    display: flex;
+    margin: 0;
+  }
+
+  .block-hours__col {
+    padding: 6px 0 6px 40px;
+    // 1.5px so the rule stays crisp when flex lands it on a half pixel.
+    border-left: 1.5px solid var(--rf-terracotta);
+  }
+
+  .block-hours__col + .block-hours__col { margin-left: 48px; }
+
+  .block-hours__col {
+
+    dt {
+      @include caps-label(14px);
+      color: var(--rf-cream);
+      margin-bottom: 22px;
+    }
+
+    dd {
+      margin: 0;
+      font-size: 26px;
+      line-height: 1;
+      color: var(--rf-cream);
+      white-space: nowrap;
+    }
+  }
+}
+
+// --- Responsive ------------------------------------------------
+@include tablet {
+  .block-hours { padding-inline: 32px; }
+
+  .block-hours--panel .block-hours__inner { padding: 64px 56px; }
+  .block-hours--framed .block-hours__inner { padding: 72px 56px 64px; }
+
+  .block-hours--band .block-hours__inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 64px 32px;
+  }
+
+  .block-hours--band .block-hours__columns { flex-wrap: wrap; gap: 24px 0; }
+}
+
+@include mobile {
+  .block-hours { padding-inline: 20px; }
+
+  .block-hours__note { font-size: 17px; }
+
+  .block-hours--panel {
+    .block-hours__inner { padding: 44px 28px; }
+    .block-hours__heading { margin-bottom: 36px; }
+    .block-hours__group + .block-hours__group { margin-top: 36px; }
+    .block-hours__list { font-size: 18px; li + li { margin-top: 14px; } }
+  }
+
+  .block-hours--framed {
+    .block-hours__inner { padding: 48px 24px 40px; }
+    .block-hours__eyebrow { margin-bottom: 36px; }
+    .block-hours__row {
+      padding: 16px 0;
+      dt { font-size: 12px; }
+      dd { font-size: 18px; }
+    }
+  }
+
+  .block-hours--band {
+    .block-hours__inner { padding: 44px 20px; }
+
+    // Columns become stacked rows with a rule on the left of each.
+    .block-hours__columns {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .block-hours__col {
+      padding: 2px 0 2px 20px;
+      dt { margin-bottom: 8px; }
+      dd { font-size: 22px; }
+    }
+
+    .block-hours__col + .block-hours__col { margin-left: 0; }
+  }
+}

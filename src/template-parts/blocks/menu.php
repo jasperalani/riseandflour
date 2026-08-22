@@ -42,7 +42,7 @@ if ( empty( $rf['sections'] ) ) {
 $rf_tag = in_array( $rf['tag'], array( 'h1', 'h2' ), true ) ? $rf['tag'] : 'h1';
 
 // Hours fall back to the Site Details value so they're never typed twice.
-$rf_hours = $rf['hours'] ? $rf['hours'] : rise_and_flour_option( 'footer_hours', '' );
+$rf_hours = $rf['hours'] ? $rf['hours'] : rise_and_flour_hours_all_text();
 
 // The ampersand is a brand character — terracotta wherever it appears.
 $rf_amp = function ( $text ) {

@@ -169,6 +169,7 @@ Blocks live under **Rise & Flour** in the block inserter:
 | Location | `eyebrow`, `heading`, `tag` (h1/h2), `intro`, `address`, `phone`, `email` (all fall back to Site Details), `show_hours` (from Site Details), `note`, `directions_url`, `map` (Google Maps embed URL or iframe), `map_position` (left/right), `spacing` |
 | Events | `eyebrow`, `heading`, `tag` (h1/h2), `intro`, `show` (both/upcoming/past), `limit` (upcoming), `past_batch` (past events per "Show more", default 3), `past_heading`, `empty_text`, `spacing` — lists the **Events** post type |
 | Contact form | `eyebrow`, `heading`, `tag` (h1/h2), `intro`, `recipient` (falls back to Site Details), `show_contact`, `phone_note`, `show_visit`, `extras` (repeater: label + text), `subjects` (one per line), `button_text`, `reply_note`, `success_text`, `spacing` |
+| Opening hours | `style` (panel / framed / band), `heading`, `tag` (h1–h3), `note`, `spacing` — hours come from Site Details → Hours; the panel lists every group, framed and band show the main one |
 
 ### Contact form
 
@@ -290,7 +291,20 @@ Headers and footers are **not** blocks — they're `header.php` / `footer.php`.
 The footer's address, hours, contact and baseline lines are editable under
 **Site Details** in wp-admin (an ACF Pro options page, registered in
 `inc/site-options.php`); unset fields fall back to the design's original
-values. The footer baseline also carries **Privacy Policy** and **Terms of
+values.
+
+**Opening hours are structured data.** Site Details → *Hours* holds groups
+("Café open", "Cooked food served") of rows — a day range, opens, closes, or
+closed — plus free-text exceptions. `inc/hours.php` generates the wording
+("Monday – Friday, 8:30am – 3pm") for the footer, Location, Contact, Menu and
+Opening hours blocks from the first group (the Menu panel shows every group),
+emits schema.org `CafeOrCoffeeShop` + `openingHoursSpecification` JSON-LD in
+`<head>` on every page for Google, and prints an "Open now · closes 3pm" line
+that `main.js` computes in the visitor's browser in the site's timezone — so
+it's right even on a cached page. With no rows, the legacy free-text Hours
+field is used instead.
+
+The footer baseline also carries **Privacy Policy** and **Terms of
 Use** links: the privacy page is the one set under Settings → Privacy, the
 terms page is chosen on Site Details → Legal pages (falling back to a page
 with the slug `terms-of-use`). Each link only appears once its page is

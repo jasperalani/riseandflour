@@ -47,7 +47,7 @@ $rf_tag = in_array( $rf['tag'], array( 'h1', 'h2' ), true ) ? $rf['tag'] : 'h1';
 $rf_address = $rf['address'] ? $rf['address'] : rise_and_flour_option( 'footer_address', '' );
 $rf_phone   = $rf['phone'] ? $rf['phone'] : rise_and_flour_option( 'footer_phone', '' );
 $rf_email   = $rf['email'] ? $rf['email'] : rise_and_flour_option( 'footer_email', '' );
-$rf_hours   = $rf['show_hours'] ? rise_and_flour_option( 'footer_hours', '' ) : '';
+$rf_hours   = $rf['show_hours'] ? rise_and_flour_hours_value() : '';
 
 $rf_lines = function ( $text ) {
 	// Collapse any existing <br>s (and the newline that follows them) to a
@@ -115,7 +115,10 @@ $rf_tel = preg_replace( '/[^0-9+]/', '', (string) $rf_phone );
 			<?php if ( $rf_hours ) : ?>
 				<div class="block-location__row">
 					<dt><?php esc_html_e( 'Hours', 'rise-and-flour' ); ?></dt>
-					<dd><?php echo $rf_lines( $rf_hours ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></dd>
+					<dd>
+						<?php echo $rf_lines( $rf_hours ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						<?php rise_and_flour_open_status( 'block-location__status' ); ?>
+					</dd>
 				</div>
 			<?php endif; ?>
 

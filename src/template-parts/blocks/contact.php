@@ -48,7 +48,7 @@ $rf_form_id = $rf['anchor'] ? $rf['anchor'] : 'contact';
 $rf_email   = rise_and_flour_option( 'footer_email', '' );
 $rf_phone   = rise_and_flour_option( 'footer_phone', '' );
 $rf_address = rise_and_flour_option( 'footer_address', '' );
-$rf_hours   = rise_and_flour_option( 'footer_hours', '' );
+$rf_hours   = rise_and_flour_hours_value();
 $rf_tel     = preg_replace( '/[^0-9+]/', '', (string) $rf_phone );
 
 // Site Details values carry <br>s; turn them into " · " joined lines.

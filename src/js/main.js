@@ -363,11 +363,73 @@
     });
   }
 
+  /* -----------------------------------------------------------
+     "Open now · closes 3pm"
+
+     Each [data-open-status] carries the main schedule as JSON
+     ([{d:[1..7], o:"08:30", c:"15:00"}]) and the site's timezone.
+     The current day and time are taken in that timezone via Intl,
+     so a visitor abroad — or a page cached for hours — still gets
+     the right answer. Rendered here rather than in PHP for exactly
+     that reason.
+     ----------------------------------------------------------- */
+  function initOpenStatus(el) {
+    var schedule;
+    try { schedule = JSON.parse(el.getAttribute('data-schedule') || '[]'); } catch (e) { return; }
+    if (!schedule.length) return;
+
+    var tz = el.getAttribute('data-tz') || 'Europe/London';
+    var DAYS = { Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6, Sun: 7 };
+    var NAMES = ['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+    function nowIn() {
+      var parts = new Intl.DateTimeFormat('en-GB', {
+        timeZone: tz, weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false
+      }).formatToParts(new Date());
+      var get = function (t) { return (parts.find(function (p) { return p.type === t; }) || {}).value; };
+      return { day: DAYS[get('weekday')] || 1, mins: (parseInt(get('hour'), 10) % 24) * 60 + parseInt(get('minute'), 10) };
+    }
+    function toMins(hm) { var p = hm.split(':'); return parseInt(p[0], 10) * 60 + parseInt(p[1], 10); }
+    function clock(hm) {
+      var p = hm.split(':'); var h = parseInt(p[0], 10); var m = p[1];
+      return (h % 12 || 12) + (m === '00' ? '' : ':' + m) + (h >= 12 ? 'pm' : 'am');
+    }
+    function rowFor(day) {
+      return schedule.find(function (r) { return r.d.indexOf(day) !== -1; });
+    }
+
+    var now = nowIn();
+    var today = rowFor(now.day);
+    var text, open = false;
+
+    if (today && now.mins >= toMins(today.o) && now.mins < toMins(today.c)) {
+      open = true;
+      text = el.getAttribute('data-open').replace('%s', clock(today.c));
+    } else if (today && now.mins < toMins(today.o)) {
+      text = el.getAttribute('data-closed').replace('%s', clock(today.o) + ' ' + el.getAttribute('data-today'));
+    } else {
+      for (var i = 1; i <= 7; i++) {
+        var day = ((now.day - 1 + i) % 7) + 1;
+        var row = rowFor(day);
+        if (row) {
+          var when = i === 1 ? el.getAttribute('data-tomorrow') : NAMES[day];
+          text = el.getAttribute('data-closed').replace('%s', clock(row.o) + ' ' + when);
+          break;
+        }
+      }
+    }
+
+    if (!text) return;
+    el.textContent = text;
+    el.classList.add(open ? 'is-open' : 'is-closed');
+  }
+
   function init() {
     initNav();
     initHeaderReveal();
     document.querySelectorAll('[data-carousel]').forEach(initCarousel);
     document.querySelectorAll('[data-events-more]').forEach(initEventsMore);
+    document.querySelectorAll('[data-open-status]').forEach(initOpenStatus);
   }
 
   if (document.readyState === 'loading') {

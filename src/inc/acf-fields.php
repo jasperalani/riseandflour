@@ -873,6 +873,71 @@ function rise_and_flour_register_fields() {
 	);
 
 	/* ---------------------------------------------------------
+	 * Opening hours
+	 * --------------------------------------------------------- */
+	acf_add_local_field_group(
+		array(
+			'key'      => 'group_rf_hours',
+			'title'    => __( 'Opening hours', 'rise-and-flour' ),
+			'fields'   => array(
+				array(
+					'key'           => 'field_rf_hrs_style',
+					'label'         => __( 'Style', 'rise-and-flour' ),
+					'name'          => 'style',
+					'type'          => 'button_group',
+					'instructions'  => __( 'Panel: cream box, every hours group with its label. Framed: terracotta frame, day and time in rows. Band: ink strip, times in columns.', 'rise-and-flour' ),
+					'choices'       => array(
+						'panel'  => __( 'Panel', 'rise-and-flour' ),
+						'framed' => __( 'Framed', 'rise-and-flour' ),
+						'band'   => __( 'Band', 'rise-and-flour' ),
+					),
+					'default_value' => 'framed',
+					'allow_null'    => 0,
+				),
+				array(
+					'key'          => 'field_rf_hrs_heading',
+					'label'        => __( 'Heading', 'rise-and-flour' ),
+					'name'         => 'heading',
+					'type'         => 'text',
+					'instructions' => __( 'Leave empty for "Hours" (panel, band) or "Opening hours" (framed).', 'rise-and-flour' ),
+					'wrapper'      => array( 'width' => '50' ),
+				),
+				array(
+					'key'           => 'field_rf_hrs_tag',
+					'label'         => __( 'Heading level', 'rise-and-flour' ),
+					'name'          => 'tag',
+					'type'          => 'button_group',
+					'choices'       => array(
+						'h2' => 'H2',
+						'h3' => 'H3',
+						'h1' => 'H1',
+					),
+					'default_value' => 'h2',
+					'allow_null'    => 0,
+					'wrapper'       => array( 'width' => '50' ),
+				),
+				array(
+					'key'          => 'field_rf_hrs_note',
+					'label'        => __( 'Note', 'rise-and-flour' ),
+					'name'         => 'note',
+					'type'         => 'text',
+					'instructions' => __( 'Italic line — under the rows in the frame, beside them in the band, e.g. "Cooked food served until 2:30pm, Sundays 2pm." The panel lists every hours group instead.', 'rise-and-flour' ),
+				),
+				rise_and_flour_spacing_field( 'field_rf_hrs_spacing' ),
+			),
+			'location' => array(
+				array(
+					array(
+						'param'    => 'block',
+						'operator' => '==',
+						'value'    => 'acf/rf-hours',
+					),
+				),
+			),
+		)
+	);
+
+	/* ---------------------------------------------------------
 	 * Events (list block)
 	 * --------------------------------------------------------- */
 	acf_add_local_field_group(

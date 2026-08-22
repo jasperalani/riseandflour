@@ -244,6 +244,7 @@ function rise_and_flour_nav() {
 require get_template_directory() . '/inc/blocks.php';
 require get_template_directory() . '/inc/acf-fields.php';
 require get_template_directory() . '/inc/site-options.php';
+require get_template_directory() . '/inc/hours.php';
 require get_template_directory() . '/inc/menu-import.php';
 require get_template_directory() . '/inc/events.php';
 require get_template_directory() . '/inc/contact.php';

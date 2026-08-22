@@ -22,20 +22,25 @@
 // =============================================================
 
 .carousel {
-  // Big: scales with the viewport up to 1260 × 840 (3:2), and never taller
-  // than the screen can show in one go.
-  --slide-w: min(72vw, 1260px);
-  --slide-h: min(calc(var(--slide-w) * 2 / 3), 82vh);
+  // Large: the focused slide is the page column — --wrap less a gutter each
+  // side — so its edges line up with the blocks above and below. 3:2, and
+  // never taller than the screen can show in one go. (The height repeats
+  // the width in vw terms because a percentage can't feed a height.)
+  --slide-w: calc(min(100%, var(--wrap)) - 2 * var(--gutter));
+  --slide-h: min(calc((min(100vw, var(--wrap)) - 2 * var(--gutter)) * 2 / 3), 82vh);
   --slide-gap: 120px;
-  // How far captions (and the pager) overhang the focused slide's left edge.
-  --caption-overhang: 140px;
+  // How far the head and captions sit outside the focused slide's left
+  // edge. Large: not at all — the head shares the column edge…
+  --caption-overhang: 0px;
+  // …and the captions tuck this far inside the image.
+  --caption-inset: var(--gutter);
   // Left edge of the focused slide — the anchor everything aligns to.
   // The stage is full width, so the next slide runs off the page edge;
-  // the 1260px cap keeps a third slide out of frame on any real screen.
+  // beyond --wrap only a sliver of it shows past the column.
   --focus-left: calc((100% - var(--slide-w)) / 2);
-  // The one left edge the head, captions and pager all share: the caption
-  // overhang point, but never tighter than the page gutter.
-  --edge-min: 48px;
+  // The one left edge the head and captions share: the caption overhang
+  // point, but never tighter than the page gutter.
+  --edge-min: var(--gutter);
   --edge: max(var(--edge-min), calc(var(--focus-left) - var(--caption-overhang)));
   // How far the focused image is zoomed in; 1 turns the effect off.
   --zoom: 1.08;
@@ -49,7 +54,8 @@
   overflow: hidden;
 }
 
-// Small: the original, more modest size. Same mechanics, smaller tokens,
+// Small: the original, more modest size with its own tokens. Same
+// mechanics, but the head and captions overhang the slide's left edge,
 // and the stage becomes a centred window framed by the block's own edges:
 // it spans exactly --caption-overhang either side of the slide, which is
 // where the head, captions and pager already sit. So the next slide's cut
@@ -65,6 +71,8 @@
   --slide-w: min(62vw, 720px);
   --slide-h: 480px;
   --slide-gap: 28px;
+  --caption-overhang: 140px;
+  --caption-inset: 0px;
   --stage-w: calc(var(--slide-w) + 2 * var(--caption-overhang));
 
   .carousel__stage {
@@ -173,7 +181,9 @@
   width: var(--slide-w);
   height: 100%;
   z-index: 1;
-  transform: translateX(calc(var(--rel, 0) * (var(--slide-w) + var(--slide-gap))));
+  // 100% here is the slide's own width (--slide-w holds a percentage of the
+  // stage, which would resolve wrongly inside a transform).
+  transform: translateX(calc(var(--rel, 0) * (100% + var(--slide-gap))));
   clip-path: inset(0 0 0 0);
   transition: transform var(--slide-motion), clip-path var(--slide-motion);
 
@@ -229,7 +239,7 @@
 .carousel__captions {
   position: absolute;
   z-index: 3;
-  left: var(--edge);
+  left: calc(var(--edge) + var(--caption-inset));
   top: 50%;
   transform: translateY(-50%);
   width: min(46vw, 560px);
@@ -334,9 +344,11 @@
 // --- Responsive ----------------------------------------------
 @include tablet {
   .carousel {
-    --slide-w: min(76vw, 800px);
+    // The column is a 32px gutter each side at this size.
+    --slide-w: calc(100% - 64px);
+    --slide-h: min(calc((100vw - 64px) * 2 / 3), 82vh);
     --slide-gap: 90px;
-    --caption-overhang: 80px;
+    --caption-inset: 32px;
     --edge-min: 32px;
     padding: 52px 0 48px;
   }
@@ -344,6 +356,8 @@
   .carousel--small {
     --slide-w: min(66vw, 600px);
     --slide-h: 400px;
+    --caption-overhang: 80px;
+    --caption-inset: 0px;
   }
 
   .carousel__head { margin-bottom: 32px; }
@@ -354,11 +368,13 @@
 
 @include mobile {
   .carousel {
-    --slide-w: 84vw;
-    --slide-h: min(var(--slide-w), 60vh);
+    // A 20px gutter each side; the slide goes square-ish.
+    --slide-w: calc(100% - 40px);
+    --slide-h: min(calc(100vw - 40px), 60vh);
     --slide-gap: 45px;
-    // No room to overhang — captions and pager tuck inside the image edge.
-    --caption-overhang: -20px;
+    // No room to overhang in either size — captions tuck inside the image.
+    --caption-overhang: 0px;
+    --caption-inset: 20px;
     --edge-min: 20px;
     padding: 44px 0 40px;
   }

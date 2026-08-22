@@ -60,6 +60,16 @@ list as they come up; move an item out when it's done. (Block ideas live in
   Use* page, paste the markup into its Code editor, publish, and link it
   from the footer beside Privacy Policy.
 
+- **Custom dropdown for the Contact form's Subject field.** The form uses
+  a native `<select>` styled with our chevron; the open list is still the
+  browser's own. Replace it with a custom dropdown in the brand style
+  (cream panel, hairline, caps options, terracotta hover) — a button +
+  listbox with full keyboard support (arrow keys, type-ahead, Escape),
+  `aria-expanded`/`aria-activedescendant`, and the native `<select>` kept
+  underneath (visually hidden) so the form still posts and works without
+  JS. Touches `template-parts/blocks/contact.php`, `_contact.scss`,
+  `main.js`.
+
 ## Menu
 
 - **Add images to the menu page.** Options, roughly in order of effort:
@@ -135,9 +145,11 @@ list as they come up; move an item out when it's done. (Block ideas live in
 
 ## Site Details
 
-- Move opening hours to a structured repeater (day ranges + times) so the
-  footer, the Menu block's hours panel and a future Opening Hours block all
-  read from one place, and JSON-LD `openingHours` can be emitted for Google.
+- ✅ **Structured opening hours** (22 Aug 2026): Site Details → Hours holds
+  groups of day-range rows; footer, Location, Contact, Menu and the Opening
+  hours block all read from it; JSON-LD `openingHoursSpecification` is
+  emitted in `<head>`; an "Open now · closes 3pm" line is computed in the
+  browser. Still free text: *Exceptions* (e.g. "Closed 24–27 December").
 
 ## Housekeeping
 

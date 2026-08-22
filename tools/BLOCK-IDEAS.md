@@ -83,12 +83,14 @@ embed URL — the old one is in `location.php`), `heading`, `show_hours`
 "step-free access"), `directions_link`. Image-side/text-side toggle like  
 Image + Text. Map iframe gets `loading="lazy"` and a flat cream border.
 
-### 4\. Opening hours - yes — ➖ PARTLY DONE
+### 4\. Opening hours - yes — ✅ DONE (22 Aug 2026)
 
-Those hours are in **Site Details** and are read by the footer, the Location  
-block, the Menu block's hours panel and the Contact block — one source, no  
-retyping. Not built: the standalone Opening Hours block, and the structured  
-day/time repeater (in `TODO.md` under Site Details).
+The hours live in **Site Details** and are read by the footer, the Location  
+block, the Menu block's hours panel, the Contact block and now the  
+**Opening hours block** (`acf/rf-hours`: eyebrow, heading, stacked or inline  
+layout, centre/left, optional note; its own hours field only as an override).  
+The structured day/time repeater is done too: hours are rows on Site Details,  
+with JSON-LD for Google and an "Open now" line.
 
 These are the opening hours:  
 Monday - Friday, 8:30 am – 3 pm  
@@ -217,7 +219,7 @@ Contact form instead — borderline.
 ## Status
 
 Done: **Menu**, **Events** (CPT + list + single), **Location**, **Contact  
-form**, and hours shared from Site Details. Decisions that were pending are  
+form**, **Opening hours**, and hours shared from Site Details. Decisions that were pending are  
 settled: Events = CPT, Menu = structured (+ PDF import), Forms = own code  
 with FluentSMTP for delivery.
 

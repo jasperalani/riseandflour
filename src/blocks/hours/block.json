@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "acf/rf-hours",
+  "title": "Opening hours",
+  "description": "The café's hours, pulled from Site Details so they're only ever typed once.",
+  "category": "rise-and-flour",
+  "icon": "clock",
+  "keywords": ["hours", "opening", "times", "open"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php"
+  },
+  "supports": {
+    "align": false,
+    "anchor": true,
+    "customClassName": true,
+    "jsx": false
+  }
+}

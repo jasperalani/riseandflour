@@ -12,7 +12,10 @@
 $rise_and_flour_full = is_front_page();
 
 $rise_and_flour_address  = rise_and_flour_option( 'footer_address', '14 Market Place<br>Cirencester GL7 2NW' );
-$rise_and_flour_hours    = rise_and_flour_option( 'footer_hours', 'Tue – Sat, 8am – 4pm<br>Sun, 9am – 2pm' );
+$rise_and_flour_hours    = rise_and_flour_hours_value();
+if ( ! $rise_and_flour_hours ) {
+	$rise_and_flour_hours = 'Tue – Sat, 8am – 4pm<br>Sun, 9am – 2pm';
+}
 $rise_and_flour_email    = rise_and_flour_option( 'footer_email', 'hello@riseandflour.co.uk' );
 $rise_and_flour_phone    = rise_and_flour_option( 'footer_phone', '01285 000 000' );
 $rise_and_flour_est_line = rise_and_flour_option( 'footer_est_line', '· Est. Cirencester ·' );
@@ -75,6 +78,7 @@ function rise_and_flour_footer_legal( $links ) {
 			<div>
 				<p class="site-footer__label"><?php esc_html_e( 'Hours', 'rise-and-flour' ); ?></p>
 				<p class="site-footer__text"><?php echo wp_kses( $rise_and_flour_hours, array( 'br' => array() ) ); ?></p>
+				<?php rise_and_flour_open_status( 'site-footer__status' ); ?>
 			</div>
 			<div>
 				<p class="site-footer__label"><?php esc_html_e( 'Say hello', 'rise-and-flour' ); ?></p>
