@@ -2,14 +2,16 @@
 
 // =============================================================
 // BLOCK: Opening hours
-// ACF fields: style (panel | framed | band), heading, tag, note.
+// ACF fields: style (panel | framed | band | band-wrap), heading, tag, note.
 // Hours come from Site Details (inc/hours.php).
 //
 //   panel  — cream-deep box, every group labelled, ranges as lines.
 //   framed — cream, double terracotta frame, day / time rows on
 //            dotted rules, italic note beneath.
-//   band   — ink strip, eyebrow + note left, times in ruled
-//            columns on the right.
+//   band   — ink strip edge to edge, eyebrow + note left, times in
+//            ruled columns on the right.
+//   band-wrap — the band boxed within the page column (adds the
+//            --band-wrap modifier on top of --band).
 // =============================================================
 
 .block-hours {
@@ -33,8 +35,6 @@
   color: var(--text-body);
   margin: 0;
 }
-
-.block-hours__status { margin-top: 14px; }
 
 // --- Panel ------------------------------------------------------
 .block-hours--panel .block-hours__inner {
@@ -70,7 +70,6 @@
   }
 
   .block-hours__note { margin-top: 40px; }
-  .block-hours__status { margin-top: 32px; }
 }
 
 // --- Framed -----------------------------------------------------
@@ -89,10 +88,13 @@
     // Inner hairline via an inset box-shadow, so it stays 6px inside the
     // outer border at every width. Half a pixel thinner than the outer.
     box-shadow: inset 0 0 0 6px var(--surface-page), inset 0 0 0 6.75px var(--rf-terracotta);
-    padding: 104px 120px 96px;
+    padding: 83px 96px 77px;
   }
 
-  .block-hours__eyebrow { margin-bottom: 64px; }
+  .block-hours__eyebrow {
+    font-size: 14px;
+    margin-bottom: 64px;
+  }
 
   .block-hours__rows {
     margin: 0 auto;
@@ -123,10 +125,9 @@
     }
   }
 
-  .block-hours__note { margin-top: 40px; }
-  .block-hours__status {
-    margin-top: 24px;
-    text-align: center;
+  .block-hours__note {
+    font-size: 20px;
+    margin-top: 40px;
   }
 }
 
@@ -143,24 +144,23 @@
 .block-hours--band .block-hours__inner {
   max-width: var(--wrap);
   margin-inline: auto;
-  padding: 96px var(--gutter);
+  padding: 48px var(--gutter);
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 48px 64px;
+  gap: 40px 56px;
   align-items: center;
 }
 
 .block-hours--band {
-  .block-hours__eyebrow { margin-bottom: 22px; }
-
-  .block-hours__note {
-    color: var(--rf-ink-faint);
-    max-width: 320px;
+  .block-hours__eyebrow {
+    font-size: 14px;
+    margin-bottom: 18px;
   }
 
-  .block-hours__status {
+  .block-hours__note {
+    font-size: 20px;
     color: var(--rf-ink-faint);
-    &.is-closed { color: var(--rf-ink-muted); }
+    max-width: 100%;
   }
 
   .block-hours__columns {
@@ -169,28 +169,42 @@
   }
 
   .block-hours__col {
-    padding: 6px 0 6px 40px;
+    padding: 4px 0 4px 26px;
     // 1.5px so the rule stays crisp when flex lands it on a half pixel.
     border-left: 1.5px solid var(--rf-terracotta);
   }
 
-  .block-hours__col + .block-hours__col { margin-left: 48px; }
+  .block-hours__col + .block-hours__col { margin-left: 56px; }
 
   .block-hours__col {
 
     dt {
-      @include caps-label(14px);
+      @include caps-label(12px);
       color: var(--rf-cream);
-      margin-bottom: 22px;
+      margin-bottom: 12px;
     }
 
     dd {
       margin: 0;
-      font-size: 26px;
+      font-size: 20px;
       line-height: 1;
       color: var(--rf-cream);
       white-space: nowrap;
     }
+  }
+}
+
+// Wrapped band: the ink box fills the page column, edges in line with
+// every other wrapped block.
+.block-hours--band-wrap {
+  max-width: var(--wrap);
+  padding-inline: var(--gutter);
+  background: none;
+
+  .block-hours__inner {
+    padding: 48px 56px;
+    background: var(--surface-inverse);
+    border-radius: var(--radius-sm);
   }
 }
 
@@ -203,8 +217,13 @@
 
   .block-hours--band .block-hours__inner {
     grid-template-columns: 1fr;
-    gap: 40px;
-    padding: 64px 32px;
+    gap: 36px;
+    padding: 48px 32px;
+  }
+
+  .block-hours--band-wrap {
+    padding-inline: 32px;
+    .block-hours__inner { padding: 44px 40px; }
   }
 
   .block-hours--band .block-hours__columns { flex-wrap: wrap; gap: 24px 0; }
@@ -223,7 +242,7 @@
   }
 
   .block-hours--framed {
-    .block-hours__inner { padding: 48px 24px 40px; }
+    .block-hours__inner { padding: 48px 34px 40px; }
     .block-hours__eyebrow { margin-bottom: 36px; }
     .block-hours__row {
       padding: 16px 0;
@@ -233,20 +252,51 @@
   }
 
   .block-hours--band {
-    .block-hours__inner { padding: 44px 20px; }
-
-    // Columns become stacked rows with a rule on the left of each.
-    .block-hours__columns {
-      flex-direction: column;
-      gap: 20px;
+    .block-hours__inner {
+      padding: 44px 20px;
+      gap: 0;
     }
 
+    // The aside dissolves so eyebrow, rows and note stack in that order:
+    // eyebrow on top, the note moves beneath the rows.
+    .block-hours__aside { display: contents; }
+
+    .block-hours__eyebrow {
+      order: 0;
+      margin-bottom: 28px;
+    }
+
+    .block-hours__columns {
+      order: 1;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    // Each column becomes a row: day on the left, time on the right,
+    // with the terracotta rule down its left edge.
     .block-hours__col {
-      padding: 2px 0 2px 20px;
-      dt { margin-bottom: 8px; }
-      dd { font-size: 22px; }
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 0 10px 20px;
+
+      dt { margin-bottom: 0; }
+      dd { font-size: 19px; }
     }
 
     .block-hours__col + .block-hours__col { margin-left: 0; }
+
+    .block-hours__note {
+      order: 2;
+      font-size: 18px;
+      margin-top: 32px;
+      & + .block-hours__note { margin-top: 12px; }
+    }
+  }
+
+  .block-hours--band-wrap {
+    padding-inline: 20px;
+    .block-hours__inner { padding: 36px 24px; }
   }
 }

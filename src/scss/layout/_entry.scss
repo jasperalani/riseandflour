@@ -86,7 +86,8 @@ $rf-blocks: '.hero, .block-image-text, .block-image, .block-text, .carousel, .bl
     color: var(--text-heading);
   }
 
-  figcaption {
+  // Core image / gallery captions only — the theme's blocks style their own.
+  > :not(#{$rf-blocks}) figcaption {
     @include caps-label(11px);
     margin-top: 12px;
     color: var(--text-muted);

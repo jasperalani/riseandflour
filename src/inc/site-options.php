@@ -116,7 +116,7 @@ function rise_and_flour_register_site_options() {
 					'label'        => __( 'Opening hours', 'rise-and-flour' ),
 					'name'         => 'hours_groups',
 					'type'         => 'repeater',
-					'instructions' => __( 'The one place hours are kept. The first group is the café’s main hours — it feeds the footer, the Location and Contact pages, the Opening hours block, the "Open now" line and Google. Further groups (e.g. "Cooked food served") show on the Menu page. With no rows here, the old free-text Hours field below is used instead.', 'rise-and-flour' ),
+					'instructions' => __( 'The one place hours are kept. The first group is the café’s main hours — it feeds the footer, the Location and Contact pages, the Opening hours block, the "Open now" line and Google. Further groups (e.g. "Cooked food served") show on the Menu page, in full in the panel-style Opening hours block, and as a sentence in the framed and band styles. With no rows here, the old free-text Hours field below is used instead.', 'rise-and-flour' ),
 					'layout'       => 'block',
 					'button_label' => __( 'Add group', 'rise-and-flour' ),
 					'min'          => 0,

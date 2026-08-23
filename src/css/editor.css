@@ -34,3 +34,21 @@
   outline: 1px dashed rgba(46, 62, 69, 0.25);
   outline-offset: -1px;
 }
+
+/* The settings sidebar is 280px by default — cramped for ACF repeaters and
+   side-by-side fields. Give it a quarter of the screen on anything wide
+   enough, never less than WordPress's own width. */
+@media (min-width: 782px) {
+  .interface-interface-skeleton__sidebar,
+  .interface-interface-skeleton__sidebar .interface-complementary-area {
+    width: max(280px, 25vw);
+  }
+
+  /* The panels inside carry their own fixed 280px; let them fill the
+     widened sidebar instead. */
+  .interface-complementary-area__fill,
+  #edit-post\:document,
+  #edit-post\:block {
+    width: 100% !important;
+  }
+}

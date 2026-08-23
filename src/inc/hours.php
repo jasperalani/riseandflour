@@ -226,6 +226,64 @@ function rise_and_flour_hours_pairs( $group = 0, $short_single = false ) {
 }
 
 /**
+ * An extra hours group as one sentence, for the Framed and Band styles:
+ * "Cooked food served until 2:30pm, Sundays 2pm." The first row gives the
+ * closing time; later rows are listed by day. Opening times are left out —
+ * the group reads against the main hours above it.
+ *
+ * @param int $group Group index (1 upwards; 0 is the main hours).
+ * @return string Empty if the group doesn't exist.
+ */
+function rise_and_flour_hours_group_sentence( $group ) {
+	$groups = rise_and_flour_hours_groups();
+	if ( ! isset( $groups[ $group ] ) ) {
+		return '';
+	}
+	$full  = rise_and_flour_day_names();
+	$label = $groups[ $group ]['label'] ? $groups[ $group ]['label'] : __( 'Kitchen open', 'rise-and-flour' );
+	$parts = array();
+
+	foreach ( $groups[ $group ]['rows'] as $i => $row ) {
+		if ( 0 === $i ) {
+			$part = $row['closed']
+				? __( 'closed', 'rise-and-flour' )
+				/* translators: %s: closing time, e.g. 2:30pm */
+				: sprintf( __( 'until %s', 'rise-and-flour' ), rise_and_flour_clock( $row['closes'] ) );
+		} else {
+			$days = $row['from'] === $row['to']
+				/* translators: %s: day name; the plural, as in "Sundays 2pm" */
+				? sprintf( __( '%ss', 'rise-and-flour' ), $full[ $row['from'] ] )
+				: rise_and_flour_hours_day_label( $row );
+			$part = $row['closed']
+				/* translators: %s: day(s), e.g. "Sundays" or "Sat – Sun" */
+				? sprintf( __( 'closed %s', 'rise-and-flour' ), $days )
+				: $days . ' ' . rise_and_flour_clock( $row['closes'] );
+		}
+		if ( $row['note'] ) {
+			$part .= ' (' . $row['note'] . ')';
+		}
+		$parts[] = $part;
+	}
+
+	return $label . ' ' . implode( ', ', $parts ) . '.';
+}
+
+/**
+ * Sentences for every group after the main one.
+ *
+ * @return string[]
+ */
+function rise_and_flour_hours_extra_sentences() {
+	$out = array();
+	foreach ( array_keys( rise_and_flour_hours_groups() ) as $i ) {
+		if ( $i > 0 ) {
+			$out[] = rise_and_flour_hours_group_sentence( $i );
+		}
+	}
+	return $out;
+}
+
+/**
  * The lines of one group, with any exceptions appended to the main one.
  *
  * @param int $group Group index; 0 is the main one the footer shows.

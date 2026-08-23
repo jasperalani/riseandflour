@@ -5,9 +5,9 @@
   "description": "Rise & Flour — WordPress theme",
   "license": "GPL-2.0-or-later",
   "scripts": {
-    "build": "sass scss/main.scss css/main.css --style=expanded --no-source-map",
+    "build": "sass scss/main.scss css/main.css --style=expanded --source-map --embed-sources",
     "build:min": "sass scss/main.scss css/main.css --style=compressed --no-source-map",
-    "watch": "sass --watch scss/main.scss:css/main.css --style=expanded --no-source-map"
+    "watch": "sass --watch scss/main.scss:css/main.css --style=expanded --source-map --embed-sources"
   },
   "devDependencies": {
     "sass": "^1.80.0"

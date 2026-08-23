@@ -8,8 +8,13 @@
  *            range per line ("Mon – Fri, 8:30am – 3pm").
  *   framed — terracotta double frame; the main group as day / time rows on
  *            dotted rules, with an italic note beneath.
- *   band   — ink strip; eyebrow and note on the left, the main group's
- *            rows as columns divided by terracotta rules on the right.
+ *   band   — ink strip edge to edge; eyebrow and note on the left, the
+ *            main group's rows as columns divided by terracotta rules.
+ *   band-wrap — the band as an ink box within the page column.
+ *
+ * In framed and band the note is the block's Note field, or — left blank —
+ * the further hours groups from Site Details as sentences ("Cooked food
+ * served until 2:30pm, Sundays 2pm.").
  *
  * ACF fields: style · heading · tag · note
  *
@@ -30,7 +35,9 @@ $rf = wp_parse_args(
 	)
 );
 
-$rf_style = in_array( $rf['style'], array( 'panel', 'framed', 'band' ), true ) ? $rf['style'] : 'framed';
+$rf_style = in_array( $rf['style'], array( 'panel', 'framed', 'band', 'band-wrap' ), true ) ? $rf['style'] : 'framed';
+// Both bands share the band markup; the wrapped one adds a modifier.
+$rf_band  = 0 === strpos( $rf_style, 'band' );
 $rf_tag   = in_array( $rf['tag'], array( 'h1', 'h2', 'h3' ), true ) ? $rf['tag'] : 'h2';
 
 $rf_heading = $rf['heading'];
@@ -40,12 +47,16 @@ if ( '' === $rf_heading ) {
 
 $rf_groups = rise_and_flour_hours_groups();
 $rf_pairs  = rise_and_flour_hours_pairs( 0 );
+$rf_notes  = '' !== $rf['note'] ? array( $rf['note'] ) : rise_and_flour_hours_extra_sentences();
 
 if ( ! $rf_pairs && ! $rf_groups ) {
 	return;
 }
 
-$rf_classes = array( 'block-hours', 'block-hours--' . $rf_style );
+$rf_classes = array( 'block-hours', 'block-hours--' . ( $rf_band ? 'band' : $rf_style ) );
+if ( 'band-wrap' === $rf_style ) {
+	$rf_classes[] = 'block-hours--band-wrap';
+}
 if ( $rf['classes'] ) {
 	$rf_classes[] = $rf['classes'];
 }
@@ -90,7 +101,6 @@ if ( $rf['classes'] ) {
 		<?php if ( $rf['note'] ) : ?>
 			<p class="block-hours__note"><?php echo esc_html( $rf['note'] ); ?></p>
 		<?php endif; ?>
-		<?php rise_and_flour_open_status( 'block-hours__status' ); ?>
 
 	<?php elseif ( 'framed' === $rf_style ) : ?>
 
@@ -105,25 +115,17 @@ if ( $rf['classes'] ) {
 			<?php endforeach; ?>
 		</dl>
 
-		<?php foreach ( rise_and_flour_hours_exceptions() as $rf_line ) : ?>
+		<?php foreach ( array_merge( $rf_notes, rise_and_flour_hours_exceptions() ) as $rf_line ) : ?>
 			<p class="block-hours__note"><?php echo esc_html( $rf_line ); ?></p>
 		<?php endforeach; ?>
-		<?php if ( $rf['note'] ) : ?>
-			<p class="block-hours__note"><?php echo esc_html( $rf['note'] ); ?></p>
-		<?php endif; ?>
-		<?php rise_and_flour_open_status( 'block-hours__status' ); ?>
 
 	<?php else : ?>
 
 		<div class="block-hours__aside">
 			<<?php echo esc_attr( $rf_tag ); ?> class="eyebrow block-hours__eyebrow"><?php echo esc_html( $rf_heading ); ?></<?php echo esc_attr( $rf_tag ); ?>>
-			<?php if ( $rf['note'] ) : ?>
-				<p class="block-hours__note"><?php echo esc_html( $rf['note'] ); ?></p>
-			<?php endif; ?>
-			<?php foreach ( rise_and_flour_hours_exceptions() as $rf_line ) : ?>
+			<?php foreach ( array_merge( $rf_notes, rise_and_flour_hours_exceptions() ) as $rf_line ) : ?>
 				<p class="block-hours__note"><?php echo esc_html( $rf_line ); ?></p>
 			<?php endforeach; ?>
-			<?php rise_and_flour_open_status( 'block-hours__status' ); ?>
 		</div>
 
 		<dl class="block-hours__columns">

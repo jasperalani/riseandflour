@@ -2,8 +2,11 @@
 /**
  * BLOCK: Image + Text.
  *
- * Future ACF fields: image · media_position · eyebrow · heading · body ·
- *                    link_text · link_url
+ * ACF fields: image · caption · media_position · eyebrow · heading · body ·
+ *             link_text · link_type · link_page · link_url
+ *
+ * The photo is cropped to 4:5 and sits on an offset terracotta rule, with
+ * the italic caption beneath, inside the rule.
  *
  * @package Rise_&_Flour
  *
@@ -14,13 +17,14 @@ $rf = wp_parse_args(
 	$args ?? array(),
 	array(
 		'image'          => null,
+		'caption'        => '',
 		'media_position' => 'left',
 		'eyebrow'        => '',
 		'heading'        => '',
 		'body'           => '',
 		'link_text'      => '',
 		'link_url'       => '',
-		'placeholder'    => __( 'Block image', 'rise-and-flour' ),
+		'placeholder'    => __( 'Block image — 4:5', 'rise-and-flour' ),
 		'classes'        => '',
 		'anchor'         => '',
 	)
@@ -42,16 +46,21 @@ if ( $rf['classes'] ) {
 	<?php echo $rf['anchor'] ? 'id="' . esc_attr( $rf['anchor'] ) . '"' : ''; ?>
 >
 
-	<div class="block-image-text__media">
-		<?php
-		rise_and_flour_media(
-			array(
-				'image' => $rf['image'],
-				'label' => $rf['placeholder'],
-			)
-		);
-		?>
-	</div>
+	<figure class="block-image-text__media">
+		<div class="block-image-text__frame">
+			<?php
+			rise_and_flour_media(
+				array(
+					'image' => $rf['image'],
+					'label' => $rf['placeholder'],
+				)
+			);
+			?>
+		</div>
+		<?php if ( $rf['caption'] ) : ?>
+			<figcaption class="block-image-text__caption"><?php echo esc_html( $rf['caption'] ); ?></figcaption>
+		<?php endif; ?>
+	</figure>
 
 	<div class="block-image-text__body">
 

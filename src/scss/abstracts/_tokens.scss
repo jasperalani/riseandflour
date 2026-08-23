@@ -54,7 +54,9 @@
   --ease: 160ms ease-out;
 
   // --- Layout ----------------------------------------------
-  --wrap: 1100px;
+  // Outer width of the page column, gutters included (border-box), so the
+  // content measure is 1100px — the design system's container width.
+  --wrap: 1196px;
   --gutter: 48px;
 }
 

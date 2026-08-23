@@ -76,15 +76,23 @@ blocks, annotated. It's a design reference, not part of the theme.
 ## Build
 
 `src/css/main.css` is compiled from `src/scss/` with Dart Sass and committed.
-Node isn't installed on this machine, so it was built via Docker:
+Edit the SCSS, never the CSS. The normal loop (Node installed):
+
+```bash
+cd src && npm install   # once
+npm run watch           # leave running while developing
+```
+
+Without Node, a one-off build works through Docker:
 
 ```bash
 docker run --rm -v "$PWD/src:/app" -w /app node:20-alpine \
-  npx -y sass scss/main.scss css/main.css --style=expanded --no-source-map
+  npx -y sass scss/main.scss css/main.css --style=expanded --source-map --embed-sources
 ```
 
-Once Node is installed locally, `cd src && npm install && npm run watch` is the
-normal loop. Edit the SCSS, never the CSS.
+The build also writes `src/css/main.css.map` with the SCSS sources embedded,
+so Chrome DevTools attributes each rule to its `.scss` partial (Settings →
+Sources → *Enable CSS source maps* must be on, which is the default).
 
 ## Theme structure
 
