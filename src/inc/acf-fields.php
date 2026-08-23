@@ -195,6 +195,75 @@ function rise_and_flour_register_fields() {
 					'default_value' => 'h2',
 					'allow_null'    => 0,
 				),
+				array(
+					'key'          => 'field_rf_text_link_text',
+					'label'        => __( 'Button text', 'rise-and-flour' ),
+					'name'         => 'link_text',
+					'type'         => 'text',
+					'instructions' => __( 'Optional. The button only shows when it has both text and a destination.', 'rise-and-flour' ),
+				),
+				array(
+					'key'           => 'field_rf_text_link_type',
+					'label'         => __( 'Link to', 'rise-and-flour' ),
+					'name'          => 'link_type',
+					'type'          => 'button_group',
+					'choices'       => array(
+						'page' => __( 'A page', 'rise-and-flour' ),
+						'url'  => __( 'A URL', 'rise-and-flour' ),
+					),
+					'default_value' => 'page',
+					'allow_null'    => 0,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => 'field_rf_text_link_text',
+								'operator' => '!=empty',
+							),
+						),
+					),
+				),
+				array(
+					'key'               => 'field_rf_text_link_page',
+					'label'             => __( 'Page', 'rise-and-flour' ),
+					'name'              => 'link_page',
+					'type'              => 'page_link',
+					'post_type'         => array( 'page', 'rf_event' ),
+					'allow_null'        => 1,
+					'allow_archives'    => 0,
+					'multiple'          => 0,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => 'field_rf_text_link_text',
+								'operator' => '!=empty',
+							),
+							array(
+								'field'    => 'field_rf_text_link_type',
+								'operator' => '==',
+								'value'    => 'page',
+							),
+						),
+					),
+				),
+				array(
+					'key'               => 'field_rf_text_link_url',
+					'label'             => __( 'Link URL', 'rise-and-flour' ),
+					'name'              => 'link_url',
+					'type'              => 'url',
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => 'field_rf_text_link_text',
+								'operator' => '!=empty',
+							),
+							array(
+								'field'    => 'field_rf_text_link_type',
+								'operator' => '==',
+								'value'    => 'url',
+							),
+						),
+					),
+				),
 				rise_and_flour_spacing_field( 'field_rf_text_spacing' ),
 			),
 			'location' => array(
@@ -339,6 +408,177 @@ function rise_and_flour_register_fields() {
 	);
 
 	/* ---------------------------------------------------------
+	 * Gallery
+	 * --------------------------------------------------------- */
+	acf_add_local_field_group(
+		array(
+			'key'      => 'group_rf_gallery',
+			'title'    => __( 'Gallery', 'rise-and-flour' ),
+			'fields'   => array(
+				array(
+					'key'   => 'field_rf_gal_eyebrow',
+					'label' => __( 'Eyebrow', 'rise-and-flour' ),
+					'name'  => 'eyebrow',
+					'type'  => 'text',
+				),
+				array(
+					'key'   => 'field_rf_gal_heading',
+					'label' => __( 'Heading', 'rise-and-flour' ),
+					'name'  => 'heading',
+					'type'  => 'text',
+				),
+				array(
+					'key'           => 'field_rf_gal_tag',
+					'label'         => __( 'Heading level', 'rise-and-flour' ),
+					'name'          => 'tag',
+					'type'          => 'button_group',
+					'choices'       => array(
+						'h1' => 'H1',
+						'h2' => 'H2',
+						'h3' => 'H3',
+					),
+					'default_value' => 'h2',
+					'allow_null'    => 0,
+				),
+				array(
+					'key'       => 'field_rf_gal_intro',
+					'label'     => __( 'Intro', 'rise-and-flour' ),
+					'name'      => 'intro',
+					'type'      => 'textarea',
+					'rows'      => 3,
+					'new_lines' => '',
+				),
+				array(
+					'key'           => 'field_rf_gal_images',
+					'label'         => __( 'Images', 'rise-and-flour' ),
+					'name'          => 'images',
+					'type'          => 'gallery',
+					'return_format' => 'id',
+					'preview_size'  => 'medium',
+					'insert'        => 'append',
+					'library'       => 'all',
+					'instructions'  => __( 'Drag to reorder. Square and 3:2 crop to fit; masonry keeps each photo’s own shape.', 'rise-and-flour' ),
+				),
+				array(
+					'key'           => 'field_rf_gal_columns',
+					'label'         => __( 'Columns', 'rise-and-flour' ),
+					'name'          => 'columns',
+					'type'          => 'button_group',
+					'instructions'  => __( 'Always two on phones.', 'rise-and-flour' ),
+					'choices'       => array(
+						2 => '2',
+						3 => '3',
+						4 => '4',
+					),
+					'default_value' => 3,
+					'allow_null'    => 0,
+				),
+				array(
+					'key'           => 'field_rf_gal_aspect',
+					'label'         => __( 'Aspect', 'rise-and-flour' ),
+					'name'          => 'aspect',
+					'type'          => 'button_group',
+					'choices'       => array(
+						'square'  => __( 'Square', 'rise-and-flour' ),
+						'wide'    => __( '3:2', 'rise-and-flour' ),
+						'masonry' => __( 'Masonry', 'rise-and-flour' ),
+					),
+					'default_value' => 'square',
+					'allow_null'    => 0,
+				),
+				rise_and_flour_spacing_field( 'field_rf_gal_spacing' ),
+			),
+			'location' => array(
+				array(
+					array(
+						'param'    => 'block',
+						'operator' => '==',
+						'value'    => 'acf/rf-gallery',
+					),
+				),
+			),
+		)
+	);
+
+	/* ---------------------------------------------------------
+	 * Founder
+	 * --------------------------------------------------------- */
+	acf_add_local_field_group(
+		array(
+			'key'      => 'group_rf_founder',
+			'title'    => __( 'Founder', 'rise-and-flour' ),
+			'fields'   => array(
+				rise_and_flour_image_field( 'field_rf_founder_image', __( 'Portrait', 'rise-and-flour' ) ),
+				array(
+					'key'   => 'field_rf_founder_name',
+					'label' => __( 'Name', 'rise-and-flour' ),
+					'name'  => 'name',
+					'type'  => 'text',
+				),
+				array(
+					'key'           => 'field_rf_founder_role',
+					'label'         => __( 'Role', 'rise-and-flour' ),
+					'name'          => 'role',
+					'type'          => 'text',
+					'instructions'  => __( 'Small caps line under the portrait.', 'rise-and-flour' ),
+					'default_value' => __( 'Founder', 'rise-and-flour' ),
+				),
+				array(
+					'key'           => 'field_rf_founder_eyebrow',
+					'label'         => __( 'Eyebrow', 'rise-and-flour' ),
+					'name'          => 'eyebrow',
+					'type'          => 'text',
+					'default_value' => __( 'Who we are', 'rise-and-flour' ),
+				),
+				array(
+					'key'   => 'field_rf_founder_heading',
+					'label' => __( 'Heading', 'rise-and-flour' ),
+					'name'  => 'heading',
+					'type'  => 'text',
+				),
+				array(
+					'key'           => 'field_rf_founder_tag',
+					'label'         => __( 'Heading level', 'rise-and-flour' ),
+					'name'          => 'tag',
+					'type'          => 'button_group',
+					'choices'       => array(
+						'h1' => 'H1',
+						'h2' => 'H2',
+						'h3' => 'H3',
+					),
+					'default_value' => 'h2',
+					'allow_null'    => 0,
+				),
+				array(
+					'key'       => 'field_rf_founder_body',
+					'label'     => __( 'Story', 'rise-and-flour' ),
+					'name'      => 'body',
+					'type'      => 'textarea',
+					'rows'      => 5,
+					'new_lines' => '',
+				),
+				array(
+					'key'          => 'field_rf_founder_quote',
+					'label'        => __( 'Quote', 'rise-and-flour' ),
+					'name'         => 'quote',
+					'type'         => 'text',
+					'instructions' => __( 'One line in italics beneath the story. Quote marks are added.', 'rise-and-flour' ),
+				),
+				rise_and_flour_spacing_field( 'field_rf_founder_spacing' ),
+			),
+			'location' => array(
+				array(
+					array(
+						'param'    => 'block',
+						'operator' => '==',
+						'value'    => 'acf/rf-founder',
+					),
+				),
+			),
+		)
+	);
+
+	/* ---------------------------------------------------------
 	 * Image
 	 * --------------------------------------------------------- */
 	acf_add_local_field_group(
@@ -371,12 +611,26 @@ function rise_and_flour_register_fields() {
 					'label'         => __( 'Height', 'rise-and-flour' ),
 					'name'          => 'height',
 					'type'          => 'button_group',
-					'instructions'  => __( 'Large is two and a half times Small — a full-screen photograph.', 'rise-and-flour' ),
+					'instructions'  => __( 'Large is twice the height of Small.', 'rise-and-flour' ),
 					'choices'       => array(
 						'small' => __( 'Small', 'rise-and-flour' ),
 						'large' => __( 'Large', 'rise-and-flour' ),
 					),
 					'default_value' => 'small',
+					'allow_null'    => 0,
+				),
+				array(
+					'key'           => 'field_rf_img_position',
+					'label'         => __( 'Focus', 'rise-and-flour' ),
+					'name'          => 'position',
+					'type'          => 'button_group',
+					'instructions'  => __( 'Which part of the photo to keep when it is cropped to fit.', 'rise-and-flour' ),
+					'choices'       => array(
+						'top'    => __( 'Top', 'rise-and-flour' ),
+						'middle' => __( 'Middle', 'rise-and-flour' ),
+						'bottom' => __( 'Bottom', 'rise-and-flour' ),
+					),
+					'default_value' => 'middle',
 					'allow_null'    => 0,
 				),
 				rise_and_flour_spacing_field( 'field_rf_img_spacing' ),
@@ -457,6 +711,20 @@ function rise_and_flour_register_fields() {
 						'wrap' => __( 'Wrap', 'rise-and-flour' ),
 					),
 					'default_value' => 'full',
+					'allow_null'    => 0,
+				),
+				array(
+					'key'           => 'field_rf_car_frame',
+					'label'         => __( 'Frame', 'rise-and-flour' ),
+					'name'          => 'frame',
+					'type'          => 'button_group',
+					'instructions'  => __( 'A terracotta rule around the focused photo, as on the Image + Text block. Gapped: just outside it. Offset: shifted down and to the left. Not shown on phones.', 'rise-and-flour' ),
+					'choices'       => array(
+						'none'   => __( 'None', 'rise-and-flour' ),
+						'gapped' => __( 'Gapped', 'rise-and-flour' ),
+						'offset' => __( 'Offset', 'rise-and-flour' ),
+					),
+					'default_value' => 'none',
 					'allow_null'    => 0,
 				),
 				array(

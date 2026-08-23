@@ -169,7 +169,7 @@ Blocks live under **Rise & Flour** in the block inserter:
 | Block | Fields |
 |---|---|
 | Hero | `image`, `show_logo`, `logo`, `caption` |
-| Text | `eyebrow`, `heading`, `body`, `variant` (default/intro), `align`, `tag` (h1–h3), `spacing` |
+| Text | `eyebrow`, `heading`, `body`, `variant` (default/intro), `align`, `tag` (h1–h3), `link_text`, `link_type` (page/url), `link_page`, `link_url`, `spacing` |
 | Image + Text | `image`, `media_position` (left/right), `eyebrow`, `heading`, `body`, `link_text`, `link_url`, `spacing` |
 | Image | `image`, `caption`, `width` (contained/full), `spacing` |
 | Carousel | `heading`, `slides` (repeater: image + caption), `size` (large/small), `pager` (dash/dot/diamond), `spacing` |
@@ -178,6 +178,8 @@ Blocks live under **Rise & Flour** in the block inserter:
 | Events | `eyebrow`, `heading`, `tag` (h1/h2), `intro`, `show` (both/upcoming/past), `limit` (upcoming), `past_batch` (past events per "Show more", default 3), `past_heading`, `empty_text`, `spacing` — lists the **Events** post type |
 | Contact form | `eyebrow`, `heading`, `tag` (h1/h2), `intro`, `recipient` (falls back to Site Details), `show_contact`, `phone_note`, `show_visit`, `extras` (repeater: label + text), `subjects` (one per line), `button_text`, `reply_note`, `success_text`, `spacing` |
 | Opening hours | `style` (panel / framed / band), `heading`, `tag` (h1–h3), `note`, `spacing` — hours come from Site Details → Hours; the panel lists every group, framed and band show the main one |
+| Founder | `image`, `name`, `role`, `eyebrow`, `heading`, `tag` (h1–h3), `body`, `quote`, `spacing` — round portrait in a double ring, name in the brand face |
+| Gallery | `eyebrow`, `heading`, `tag` (h1–h3), `intro`, `images` (gallery), `columns` (2/3/4), `aspect` (square / 3:2 / masonry), `spacing` — hairline rules between images; two columns on phones |
 
 ### Contact form
 

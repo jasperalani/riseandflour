@@ -1,0 +1,133 @@
+@use '../abstracts/mixins' as *;
+
+// =============================================================
+// BLOCK: Founder
+// ACF fields: image, name, role, eyebrow, heading, tag, body, quote.
+//
+// A round portrait in a double terracotta ring (thick outer line, hairline
+// inside — the framed hours block's frame, bent into a circle), role and
+// name centred beneath; eyebrow, heading, story and an italic quote
+// alongside. Text stacks under a smaller portrait on mobile.
+// =============================================================
+
+.block-founder {
+  @include wrap;
+  display: grid;
+  grid-template-columns: 400px minmax(0, 1fr);
+  gap: 64px 120px;
+  align-items: center;
+}
+
+// --- Portrait ------------------------------------------------
+.block-founder__portrait {
+  margin: 0;
+  text-align: center;
+}
+
+.block-founder__ring {
+  // Outer line, a band of page colour, then the hairline — all drawn on
+  // the ring box, with the photo sitting inside its padding.
+  padding: 18px;
+  border: 2px solid var(--rf-terracotta);
+  border-radius: var(--radius-round);
+  box-shadow: inset 0 0 0 10px var(--surface-page), inset 0 0 0 11px var(--rf-terracotta);
+}
+
+.block-founder__photo {
+  aspect-ratio: 1;
+  border-radius: var(--radius-round);
+  overflow: hidden;
+}
+
+.block-founder__caption { margin-top: 40px; }
+
+.block-founder__role { margin-bottom: 18px; }
+
+// The brand face for the name — as the logo and dish names. Caps-only and
+// wide-set, so a modest size and a touch more tracking.
+.block-founder__name {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  color: var(--text-heading);
+  margin: 0;
+}
+
+// --- Text ----------------------------------------------------
+.block-founder__body {
+  .eyebrow { margin-bottom: 24px; }
+
+  p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text-body);
+    margin: 0 0 24px;
+  }
+
+  // The eyebrow is a <p> too, so it must outrank the body copy above.
+  .eyebrow {
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--text-accent);
+  }
+
+  p:last-child { margin-bottom: 0; }
+}
+
+.block-founder__heading {
+  font-size: 28px;
+  line-height: 1.4;
+  margin: 0 0 28px;
+}
+
+.block-founder__quote {
+  font-style: italic;
+  color: var(--text-heading);
+}
+
+// --- Responsive ----------------------------------------------
+@include tablet {
+  .block-founder {
+    grid-template-columns: 320px minmax(0, 1fr);
+    gap: 48px 64px;
+    padding-inline: 32px;
+  }
+
+  .block-founder__ring { padding: 14px; }
+  .block-founder__caption { margin-top: 32px; }
+  .block-founder__name { font-size: 24px; }
+  .block-founder__heading { font-size: 24px; }
+}
+
+@include mobile {
+  .block-founder {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-inline: 20px;
+  }
+
+  .block-founder__ring {
+    width: min(260px, 70vw);
+    margin-inline: auto;
+    padding: 12px;
+    box-shadow: inset 0 0 0 7px var(--surface-page), inset 0 0 0 8px var(--rf-terracotta);
+  }
+
+  .block-founder__caption { margin-top: 28px; }
+  .block-founder__role { margin-bottom: 12px; }
+  .block-founder__name { font-size: 22px; }
+
+  .block-founder__body {
+    text-align: center;
+
+    .eyebrow { margin-bottom: 20px; }
+    p { font-size: 16px; }
+  }
+
+  .block-founder__heading {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+}

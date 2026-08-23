@@ -15,7 +15,7 @@
 @use 'abstracts/tokens';
 @use 'abstracts/mixins';
 
-@use 'base/reset';
+@use 'base/reset'; 
 @use 'base/typography';
 
 @use 'layout/header';
@@ -26,6 +26,8 @@
 @use 'blocks/hero'; 
 @use 'blocks/image-text';
 @use 'blocks/image';
+@use 'blocks/founder';
+@use 'blocks/gallery';
 @use 'blocks/text';
 @use 'blocks/carousel';
 @use 'blocks/menu';

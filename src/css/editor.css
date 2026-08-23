@@ -29,6 +29,12 @@
   background-image: none;
 }
 
+/* The image block's media slot is a fixed-height box; in the editor the
+   ACF image preview can overrun it, so clip it to the slot. */
+.editor-styles-wrapper .block-image__media {
+  overflow-y: hidden;
+}
+
 /* Placeholders should read clearly as "nothing set yet" while editing. */
 .editor-styles-wrapper .ph {
   outline: 1px dashed rgba(46, 62, 69, 0.25);

@@ -248,6 +248,52 @@
 
 .carousel__slide.is-active .carousel__media > * { transform: scale(var(--zoom)); }
 
+// --- Frame ---------------------------------------------------
+// The Image + Text block's terracotta rule, drawn on the stage wrap at the
+// focused slide's rectangle — left edge --focus-left, width --slide-w —
+// so it holds still while the photographs move and wipe beneath it.
+.carousel__stage-wrap { position: relative; }
+
+.carousel--frame-gapped,
+.carousel--frame-offset {
+  .carousel__stage-wrap::before {
+    content: '';
+    position: absolute;
+    border: 1.5px solid var(--rf-terracotta);
+    pointer-events: none;
+    z-index: 3; // over the photos
+  }
+}
+
+// Gapped: just outside the photo, cream (or ink) showing between.
+.carousel--frame-gapped {
+  --frame-gap: 5px;
+
+  .carousel__stage-wrap::before {
+    top: calc(-1 * var(--frame-gap));
+    left: calc(var(--focus-left) - var(--frame-gap));
+    width: calc(var(--slide-w) + 2 * var(--frame-gap));
+    height: calc(100% + 2 * var(--frame-gap));
+  }
+
+  .carousel__captions { margin-top: calc(10px + var(--frame-gap)); }
+}
+
+// Offset: the photo's own size, shifted down and to the left — the clean
+// edge, since the next slide peeks in on the right.
+.carousel--frame-offset {
+  --frame-offset: 20px;
+
+  .carousel__stage-wrap::before {
+    top: var(--frame-offset);
+    left: calc(var(--focus-left) - var(--frame-offset));
+    width: var(--slide-w);
+    height: 100%;
+  }
+
+  .carousel__captions { margin-top: calc(10px + var(--frame-offset)); }
+}
+
 // --- Captions ------------------------------------------------
 // Beneath the stage, spanning the focused slide: the slide is centred in
 // both sizes, so its left edge is --focus-left from the section's.
@@ -421,14 +467,12 @@
   }
 
   // Eyebrow and heading centred above; the arrows leave the head and
-  // join the pager on one bottom row — previous left, dots centred, next
-  // right. The head and its controls wrapper dissolve (display: contents)
-  // so the text, the two buttons and the pager can each be placed on the
-  // section's grid alongside the stage and captions.
+  // sit centred beneath the stage, with the dots centred under them. The
+  // head dissolves (display: contents) so the text and the controls can
+  // each be placed on the section's grid alongside the stage and captions.
   .carousel {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    align-items: center;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .carousel__head {
@@ -436,7 +480,7 @@
 
     // The text wrapper: first row, full width.
     > :not(.carousel__controls) {
-      grid-area: 1 / 1 / 2 / -1;
+      grid-row: 1;
       padding-inline: 20px;
       margin-bottom: 28px;
       text-align: center;
@@ -448,31 +492,28 @@
 
   // Explicit rows: the controls come before the stage in the DOM, and
   // auto-placement would otherwise slot them in above it.
-  .carousel__stage { grid-area: 2 / 1 / 3 / -1; }
-  .carousel__captions { grid-area: 3 / 1 / 4 / -1; }
+  .carousel__stage-wrap { grid-row: 2; }
 
-  // Bottom row. Each piece carries the gap above itself, since the row
-  // only exists with more than one slide and every piece then renders.
-  .carousel__pager {
-    grid-area: 4 / 2;
-    justify-content: center;
+  // Edge to edge leaves no room for a frame.
+  .carousel--frame-gapped,
+  .carousel--frame-offset {
+    .carousel__stage-wrap::before { display: none; }
+    .carousel__captions { margin-top: 8px; }
+  }
+  .carousel__captions { grid-row: 3; }
+
+  // Arrows, then dots, both centred. Each carries its own gap above, and
+  // both only render with more than one slide.
+  .carousel__controls {
+    grid-row: 4;
+    justify-self: center;
     margin-top: 28px;
   }
 
-  .carousel__controls { display: contents; }
-
-  .carousel__btn {
-    margin-top: 28px;
-
-    &[data-carousel-prev] {
-      grid-area: 4 / 1;
-      margin-left: 20px;
-    }
-
-    &[data-carousel-next] {
-      grid-area: 4 / 3;
-      margin-right: 20px;
-    }
+  .carousel__pager {
+    grid-row: 5;
+    justify-content: center;
+    margin-top: 24px;
   }
 
   .carousel__btn { --btn-size: 50px; }

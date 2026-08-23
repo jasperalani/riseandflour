@@ -122,21 +122,58 @@ rather not own form code, a thin wrapper block around a Contact Form 7 /
 WPForms shortcode with the theme's styling. Used for **Fifield Room hire**  
 and **careers**.
 
-### 6\. Photo grid - yes
+### 6\. Photo grid - yes — ✅ DONE (23 Aug 2026) as the Gallery block
 
 Replaces `ourfood.php`, which split the page content on `/&gt;` and shuffled  
 the images (!). Fields: `images` (gallery), `columns` (2 / 3 / 4),  
 `aspect` (square / 3:2 / natural masonry), `shuffle` toggle, optional  
 `lightbox`. Also useful on About.
 
+Built as `acf/rf-gallery`: eyebrow / heading / intro over the grid, an ACF  
+gallery field, `columns` 2–4 (two on phones), `aspect` square / 3:2 /  
+masonry, hairline terracotta rules through the gaps. Not built: `shuffle`  
+and `lightbox` — add to TODO if wanted.
+
 ## Tier 2 — strengthens Home / About
 
 ### 7\. Feature trio / "three things" - yes
 
-Three (or 2–4) short columns: icon or small image, caps label, a line of  
-body. "Coffee from X · Everything baked in-house · Dog friendly." Fields:  
-`items` repeater (`image`, `label`, `text`, `link`), `columns`. The classic  
-below-the-hero block the design doesn't have yet.
+Three (2–4) columns side by side on desktop, stacked on mobile — each a  
+small photo, a caps label and a line or two of body, like three Image +  
+Text blocks turned vertical and squeezed into one row:
+
+```
+· WHY COME ·                        (optional eyebrow, centred)
+
+ [photo 4:5]      [photo 4:5]      [photo 4:5]
+ COOKED HERE      GOOD COFFEE      THE FIFIELD ROOM
+ Short menu,      La Marzocco,     A back room for
+ made from        beans from X,    suppers and
+ scratch each     properly made.   parties.
+ morning.         → Menu           → Enquire
+```
+
+- **Image**: a photo cropped to a fixed ratio (square or 4:5, as the  
+  Image + Text block) — or none. No icons: the design has no icon  
+  language and clip-art would fight the Garamond / Montserrat feel.  
+- **Label**: Montserrat caps, eyebrow treatment but in ink.  
+- **Text**: one or two sentences, Garamond 16px, as the Image + Text body.  
+- **Link**: optional `link-caps` underline, page-or-URL picker as on  
+  Image + Text.  
+- **Columns**: 2, 3 or 4; three is the default, four only without images.
+
+Three `style` variants: **Photos** (the full version above); **Labels  
+only** (no images, a hairline terracotta rule above each column for  
+structure — a cheap "quick facts" strip under a hero); **Numbered** (a  
+large Garamond numeral in place of the photo — editorial, suits "our story  
+in three steps" on About).
+
+Fields: `eyebrow`, `heading`, `style`, `columns`, `items` repeater  
+(`image`, `label`, `text`, `link_text`, `link_type`, `link_page`,  
+`link_url`). Sits under the Home intro ("three reasons to come") or near  
+the top of About ("Cooked here · Good coffee · Room to hire"). Three  
+photos with nothing else is a different block — that's the Photo grid (6)  
+or Diptych (13).
 
 ### 8\. Quote / testimonial - yes, also think about a reviews block that shows off something like this: [https://oxinabox.co.uk/review-brunch-at-the-charming-rise-flour-artisan-cafe-in-milton-under-wychwood-where-youll-find-some-really-interesting-food-with-a-kiwi-twist/](https://oxinabox.co.uk/review-brunch-at-the-charming-rise-flour-artisan-cafe-in-milton-under-wychwood-where-youll-find-some-really-interesting-food-with-a-kiwi-twist/) (we can find more)
 
@@ -162,6 +199,15 @@ every page currently has no way to end with a button.
 
 `people` repeater (`photo`, `name`, `role`, `blurb`). Round crops, caps  
 roles. For About.
+
+### 11b. Founder - yes — ✅ DONE (23 Aug 2026)
+
+The single-person version of Team, built first (`acf/rf-founder`): a round  
+portrait in a double terracotta ring, role as a caps eyebrow and the name  
+in the brand face beneath it; beside it an eyebrow, heading, a short story  
+and an italic quote. Fields: `image`, `name`, `role`, `eyebrow`,  
+`heading`, `tag`, `body`, `quote`. Team (11) can reuse the portrait  
+treatment in a row when there's more than one person to show.
 
 ### 12\. Timeline / "our story" - yes i need to manually write the timeline for you but yes
 

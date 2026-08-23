@@ -13,8 +13,6 @@
   padding-inline: 24px;
   text-align: center;
 
-  .eyebrow { margin-bottom: 22px; }
-
   // h1 on a page's lead block, h2 elsewhere — same size either way.
   h1,
   h2,
@@ -32,6 +30,14 @@
 
   // The body field runs through wpautop, so it can be several paragraphs.
   p + p { margin-top: 20px; }
+
+  // The eyebrow is a <p> too, so it must outrank the body copy above.
+  .eyebrow {
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--text-accent);
+    margin: 0 0 22px;
+  }
 }
 
 .block-text__actions { margin-top: 30px; }

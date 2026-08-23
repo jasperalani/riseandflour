@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "acf/rf-gallery",
+  "title": "Gallery",
+  "description": "A grid of photographs with hairline rules between them — 2, 3 or 4 columns; square, 3:2 or masonry.",
+  "category": "rise-and-flour",
+  "icon": "grid-view",
+  "keywords": ["gallery", "grid", "photos", "images", "masonry"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php"
+  },
+  "supports": {
+    "align": false,
+    "anchor": true,
+    "customClassName": true,
+    "jsx": false
+  }
+}

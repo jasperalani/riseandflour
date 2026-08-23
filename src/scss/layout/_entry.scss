@@ -11,7 +11,7 @@
 // everything else the editor emits (paragraphs, headings, core blocks) sits in
 // a readable column. Keeping this list in one variable means adding a block
 // only touches one line.
-$rf-blocks: '.hero, .block-image-text, .block-image, .block-text, .carousel, .block-menu, .block-location, .block-events, .block-contact, .block-hours';
+$rf-blocks: '.hero, .block-image-text, .block-image, .block-text, .carousel, .block-menu, .block-location, .block-events, .block-contact, .block-hours, .block-founder, .block-gallery';
 
 .entry-content {
 

@@ -3,18 +3,30 @@
 // =============================================================
 // BLOCK: Image
 // ACF fields: image, caption, width (contained|full),
-// height (small|large). Large is 2.5× Small at every breakpoint.
+// height (small|large), position (top|middle|bottom).
+// Large is twice Small at every breakpoint.
 // =============================================================
 
 .block-image {
   @include wrap;
-  // margin-block only — the shorthand would clear the
-  // `margin-inline: auto` that `wrap` relies on to centre.
-  margin-block: 0;
+  // A <figure> has browser margins. Clear only the bottom one — the top
+  // belongs to the .section--* spacing classes, which this rule would
+  // otherwise override (same specificity, later in the cascade). The
+  // margin shorthand is avoided as it would clear `wrap`'s inline auto.
+  margin-bottom: 0;
 }
 
+// …and the top only at zero specificity, so "None" spacing is truly none
+// while any .section--* class still wins.
+:where(.block-image) { margin-top: 0; }
+
 .block-image__media { height: 520px; }
-.block-image--tall .block-image__media { height: 1300px; }
+.block-image--tall .block-image__media { height: 1040px; }
+
+// Which part of the photo survives the crop. Middle is object-fit's
+// default, so only the ends need a rule.
+.block-image--focus-top .media-fill { object-position: center top; }
+.block-image--focus-bottom .media-fill { object-position: center bottom; }
 
 .block-image__caption {
   @include caps-label(12px);
@@ -34,14 +46,14 @@
 @include tablet {
   .block-image { padding-inline: 32px; }
   .block-image__media { height: 420px; }
-  .block-image--tall .block-image__media { height: 1050px; }
+  .block-image--tall .block-image__media { height: 840px; }
   .block-image--full { padding-inline: 0; }
 }
 
 @include mobile {
   .block-image { padding-inline: 20px; }
   .block-image__media { height: 280px; }
-  .block-image--tall .block-image__media { height: 700px; }
+  .block-image--tall .block-image__media { height: 560px; }
   .block-image--full { padding-inline: 0; }
 
   .block-image__caption {

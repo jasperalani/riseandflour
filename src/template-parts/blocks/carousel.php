@@ -29,6 +29,7 @@ $rf = wp_parse_args(
 		// including content saved before the field existed, renders large.
 		'size'    => 'large',
 		'background' => 'full',
+		'frame'   => 'none',
 		// 'dash' (default), 'dot' or 'diamond' — the Pager style field.
 		'pager'   => 'dash',
 		'classes' => '',
@@ -46,6 +47,10 @@ if ( 'small' === $rf['size'] ) {
 
 if ( 'wrap' === $rf['background'] ) {
 	$rf['classes'] = trim( 'carousel--wrap ' . $rf['classes'] );
+}
+
+if ( in_array( $rf['frame'], array( 'gapped', 'offset' ), true ) ) {
+	$rf['classes'] = trim( 'carousel--frame-' . $rf['frame'] . ' ' . $rf['classes'] );
 }
 
 if ( in_array( $rf['pager'], array( 'dot', 'diamond' ), true ) ) {
@@ -100,6 +105,8 @@ $rf_total = count( $rf_slides );
 		</div>
 	<?php endif; ?>
 
+	<?php // The wrap carries the optional frame, drawn once at the focused slide's position while the slides move beneath it. ?>
+	<div class="carousel__stage-wrap">
 	<div class="carousel__stage" data-carousel-stage>
 		<div class="carousel__slides">
 			<?php foreach ( $rf_slides as $rf_i => $rf_slide ) : ?>
@@ -124,6 +131,7 @@ $rf_total = count( $rf_slides );
 				</div>
 			<?php endforeach; ?>
 		</div>
+	</div>
 	</div>
 
 	<?php // Beneath the stage, above the pager. One caption per slide, even when empty, so indexes line up. ?>

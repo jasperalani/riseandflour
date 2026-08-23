@@ -2,7 +2,8 @@
 /**
  * BLOCK: Image.
  *
- * ACF fields: image · caption · width (contained|full) · height (small|large)
+ * ACF fields: image · caption · width (contained|full) · height (small|large) ·
+ *             position (top|middle|bottom)
  *
  * @package Rise_&_Flour
  *
@@ -16,6 +17,7 @@ $rf = wp_parse_args(
 		'caption'     => '',
 		'width'       => 'contained',
 		'height'      => 'small',
+		'position'    => 'middle',
 		'placeholder' => __( 'Full-width image', 'rise-and-flour' ),
 		'classes'     => '',
 		'anchor'      => '',
@@ -30,6 +32,10 @@ if ( 'full' === $rf['width'] ) {
 
 if ( 'large' === $rf['height'] ) {
 	$rf_classes[] = 'block-image--tall';
+}
+
+if ( in_array( $rf['position'], array( 'top', 'bottom' ), true ) ) {
+	$rf_classes[] = 'block-image--focus-' . $rf['position'];
 }
 
 if ( $rf['classes'] ) {

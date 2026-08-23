@@ -2,7 +2,8 @@
 /**
  * BLOCK: Text.
  *
- * Future ACF fields: eyebrow · heading · body · align
+ * ACF fields: eyebrow · heading · body · variant · align · tag · link_text ·
+ *             link_type · link_page · link_url
  *
  * `variant` => 'intro' is the larger setting used directly beneath the hero.
  *
@@ -20,6 +21,8 @@ $rf = wp_parse_args(
 		'align'   => 'center',
 		'variant' => '',
 		'tag'     => 'h2',
+		'link_text' => '',
+		'link_url'  => '',
 		'classes' => '',
 		'anchor'  => '',
 	)
@@ -58,6 +61,12 @@ $rf_tag = in_array( $rf['tag'], array( 'h1', 'h2', 'h3' ), true ) ? $rf['tag'] :
 	<?php if ( $rf['body'] ) : ?>
 		<?php // wpautop so blank lines in the textarea become real paragraphs. ?>
 		<?php echo wp_kses_post( wpautop( $rf['body'] ) ); ?>
+	<?php endif; ?>
+
+	<?php if ( $rf['link_text'] && $rf['link_url'] ) : ?>
+		<div class="block-text__actions">
+			<a class="link-caps" href="<?php echo esc_url( $rf['link_url'] ); ?>"><?php echo esc_html( $rf['link_text'] ); ?></a>
+		</div>
 	<?php endif; ?>
 
 </section>
