@@ -70,6 +70,32 @@ list as they come up; move an item out when it's done. (Block ideas live in
   JS. Touches `template-parts/blocks/contact.php`, `_contact.scss`,
   `main.js`.
 
+- **Homepage header nav: bigger font size** (added 23 Aug 2026). The
+  overlay nav's links (13px caps, `.site-nav a` in `_header.scss`) read
+  small over the full-page hero. Decide whether the bump is overlay-only
+  or both header variants — they share `.site-nav`.
+
+- **"Sample menu" title on the Menu page** (added 23 Aug 2026). Somewhere
+  on the page (heading, note or a line near the PDF link) so visitors know
+  the menu changes and what's shown is representative. Probably just
+  editor content / block fields rather than theme work — check the Menu
+  block's `heading` / `intro` / `notes` fields first.
+
+- **Gift voucher page + Square** (added 23 Aug 2026). A vouchers page and
+  a way to buy: Square eGift Cards has a hosted storefront page — the
+  no-code route is an image-text/CTA block linking out to it (works with
+  the no-ecommerce rule since payment happens on Square, not the site).
+  Anything deeper (embedded checkout, Square Web Payments SDK) is real
+  ecommerce and needs a decision to relax that rule. Needs the café's
+  Square account to have eGift Cards enabled to get the storefront URL.
+
+- **Fifield Room page** (added 23 Aug 2026). The private-hire back room
+  (named for Joanna's village). Page from existing blocks: hero or Image
+  block of the room, Text intro, Gallery, capacity/pricing details, and a
+  contact/CTA for enquiries (the Contact block's `subjects` already lists
+  "Events & private hire"). Link it from About and the events/supper-club
+  copy once live.
+
 - **Careers / jobs page and footer link** (added 23 Aug 2026). The old
   theme had `careers.php`; the new site has no jobs page yet. Needs: a
   Careers page built from existing blocks (Text intro + the Careers /
