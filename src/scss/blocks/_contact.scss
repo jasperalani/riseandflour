@@ -30,11 +30,6 @@
   }
 }
 
-.block-contact__eyebrow {
-  &::before { content: '· '; }
-  &::after { content: ' ·'; }
-}
-
 .block-contact__intro {
   margin-top: 24px;
 

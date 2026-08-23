@@ -226,6 +226,64 @@ function rise_and_flour_register_site_options() {
 				),
 
 				array(
+					'key'   => 'field_rf_opt_tab_header',
+					'label' => __( 'Header', 'rise-and-flour' ),
+					'type'  => 'tab',
+				),
+				array(
+					'key'           => 'field_rf_opt_bar_logo',
+					'label'         => __( 'Mobile bar logo', 'rise-and-flour' ),
+					'name'          => 'mobile_bar_logo',
+					'type'          => 'button_group',
+					'instructions'  => __( 'What sits on the left of the floating nav bar on phones, on the front page. Inner pages always show the wordmark.', 'rise-and-flour' ),
+					'choices'       => array(
+						'round'  => __( 'Round logo', 'rise-and-flour' ),
+						'square' => __( 'Square logo', 'rise-and-flour' ),
+						'text'   => __( 'Rise & Flour text', 'rise-and-flour' ),
+					),
+					'default_value' => 'round',
+					'allow_null'    => 0,
+				),
+				array(
+					'key'               => 'field_rf_opt_bar_logo_round',
+					'label'             => __( 'Round logo image', 'rise-and-flour' ),
+					'name'              => 'mobile_bar_logo_round',
+					'type'              => 'image',
+					'return_format'     => 'id',
+					'preview_size'      => 'thumbnail',
+					'library'           => 'all',
+					'instructions'      => __( 'Shown at 44px on an ink background — use a cream or light version. Leave empty for the theme’s round cream stamp.', 'rise-and-flour' ),
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => 'field_rf_opt_bar_logo',
+								'operator' => '==',
+								'value'    => 'round',
+							),
+						),
+					),
+				),
+				array(
+					'key'               => 'field_rf_opt_bar_logo_square',
+					'label'             => __( 'Square logo image', 'rise-and-flour' ),
+					'name'              => 'mobile_bar_logo_square',
+					'type'              => 'image',
+					'return_format'     => 'id',
+					'preview_size'      => 'thumbnail',
+					'library'           => 'all',
+					'instructions'      => __( 'Shown at 44px tall on an ink background — use a cream or light version. Leave empty for the theme’s rectangular stamp.', 'rise-and-flour' ),
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => 'field_rf_opt_bar_logo',
+								'operator' => '==',
+								'value'    => 'square',
+							),
+						),
+					),
+				),
+
+				array(
 					'key'   => 'field_rf_opt_tab_legal',
 					'label' => __( 'Legal pages', 'rise-and-flour' ),
 					'type'  => 'tab',
@@ -256,3 +314,40 @@ function rise_and_flour_register_site_options() {
 	);
 }
 add_action( 'acf/init', 'rise_and_flour_register_site_options' );
+
+/**
+ * The brand mark for the mobile floating bar on the front page.
+ *
+ * Site Details → Header chooses a round logo, a square logo, or the
+ * "Rise & Flour" text as styled in the footer. Either image falls back to
+ * the theme's own stamp when none is uploaded.
+ */
+function rise_and_flour_mobile_bar_brand() {
+	$choice = rise_and_flour_option( 'mobile_bar_logo', 'round' );
+
+	if ( 'text' === $choice ) {
+		printf(
+			'<span class="site-header__stamp-text">%s</span>',
+			sprintf(
+				/* translators: %s: ampersand wrapped in a span */
+				esc_html__( 'Rise %s Flour', 'rise-and-flour' ),
+				'<span class="amp">&amp;</span>'
+			)
+		);
+		return;
+	}
+
+	$is_round = 'square' !== $choice;
+	$image_id = (int) rise_and_flour_option( $is_round ? 'mobile_bar_logo_round' : 'mobile_bar_logo_square' );
+
+	if ( $image_id && wp_attachment_is_image( $image_id ) ) {
+		echo wp_get_attachment_image( $image_id, 'medium', false, array( 'alt' => get_bloginfo( 'name' ) ) );
+		return;
+	}
+
+	printf(
+		'<img src="%1$s" alt="%2$s">',
+		esc_url( get_template_directory_uri() . '/assets/img/' . ( $is_round ? 'logo-round-cream-sm.png' : 'logo-rect-stamp-sm.png' ) ),
+		esc_attr( get_bloginfo( 'name' ) )
+	);
+}

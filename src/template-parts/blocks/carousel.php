@@ -12,7 +12,7 @@
  * the first) so there's no layout flash before main.js takes over, and the
  * block looks right in the editor where main.js never runs.
  *
- * ACF fields: heading · slides (repeater: image + caption)
+ * ACF fields: eyebrow · heading · slides (repeater: image + caption)
  *
  * @package Rise_&_Flour
  *
@@ -22,11 +22,13 @@
 $rf = wp_parse_args(
 	$args ?? array(),
 	array(
+		'eyebrow' => '',
 		'heading' => '',
 		'slides'  => array(),
 		// 'large' (default) or 'small' — see the Size field. Anything else,
 		// including content saved before the field existed, renders large.
 		'size'    => 'large',
+		'background' => 'full',
 		// 'dash' (default), 'dot' or 'diamond' — the Pager style field.
 		'pager'   => 'dash',
 		'classes' => '',
@@ -40,6 +42,10 @@ if ( empty( $rf['slides'] ) ) {
 
 if ( 'small' === $rf['size'] ) {
 	$rf['classes'] = trim( 'carousel--small ' . $rf['classes'] );
+}
+
+if ( 'wrap' === $rf['background'] ) {
+	$rf['classes'] = trim( 'carousel--wrap ' . $rf['classes'] );
 }
 
 if ( in_array( $rf['pager'], array( 'dot', 'diamond' ), true ) ) {
@@ -68,9 +74,12 @@ $rf_total = count( $rf_slides );
 >
 
 	<?php // Only emitted with something to show — an empty head would still carry its margin. ?>
-	<?php if ( $rf['heading'] || $rf_total > 1 ) : ?>
+	<?php if ( $rf['eyebrow'] || $rf['heading'] || $rf_total > 1 ) : ?>
 		<div class="carousel__head">
 			<div>
+				<?php if ( $rf['eyebrow'] ) : ?>
+					<p class="eyebrow carousel__eyebrow"><?php echo esc_html( $rf['eyebrow'] ); ?></p>
+				<?php endif; ?>
 				<?php if ( $rf['heading'] ) : ?>
 					<h2><?php echo esc_html( $rf['heading'] ); ?></h2>
 				<?php endif; ?>
@@ -115,17 +124,17 @@ $rf_total = count( $rf_slides );
 				</div>
 			<?php endforeach; ?>
 		</div>
+	</div>
 
-		<?php // One caption per slide, even when empty, so indexes line up. ?>
-		<div class="carousel__captions" aria-live="polite">
-			<?php foreach ( $rf_slides as $rf_i => $rf_slide ) : ?>
-				<p
-					class="carousel__caption<?php echo 0 === $rf_i ? ' is-active' : ''; ?>"
-					data-carousel-caption
-					aria-hidden="<?php echo 0 === $rf_i ? 'false' : 'true'; ?>"
-				><?php echo esc_html( $rf_slide['caption'] ); ?></p>
-			<?php endforeach; ?>
-		</div>
+	<?php // Beneath the stage, above the pager. One caption per slide, even when empty, so indexes line up. ?>
+	<div class="carousel__captions" aria-live="polite">
+		<?php foreach ( $rf_slides as $rf_i => $rf_slide ) : ?>
+			<p
+				class="carousel__caption<?php echo 0 === $rf_i ? ' is-active' : ''; ?>"
+				data-carousel-caption
+				aria-hidden="<?php echo 0 === $rf_i ? 'false' : 'true'; ?>"
+			><?php echo esc_html( $rf_slide['caption'] ); ?></p>
+		<?php endforeach; ?>
 	</div>
 
 	<?php if ( $rf_total > 1 ) : ?>

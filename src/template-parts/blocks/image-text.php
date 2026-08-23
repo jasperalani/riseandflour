@@ -2,11 +2,12 @@
 /**
  * BLOCK: Image + Text.
  *
- * ACF fields: image · caption · media_position · eyebrow · heading · body ·
- *             link_text · link_type · link_page · link_url
+ * ACF fields: image · caption · frame · media_position · eyebrow · heading ·
+ *             body · link_text · link_type · link_page · link_url
  *
- * The photo is cropped to 4:5 and sits on an offset terracotta rule, with
- * the italic caption beneath, inside the rule.
+ * The photo is cropped to 4:5 inside a terracotta rule — either gapped (a
+ * frame just outside the photo) or offset (shifted down and outward) — with
+ * the italic caption beneath.
  *
  * @package Rise_&_Flour
  *
@@ -18,6 +19,7 @@ $rf = wp_parse_args(
 	array(
 		'image'          => null,
 		'caption'        => '',
+		'frame'          => 'gapped',
 		'media_position' => 'left',
 		'eyebrow'        => '',
 		'heading'        => '',
@@ -34,6 +36,10 @@ $rf_classes = array( 'block-image-text' );
 
 if ( 'right' === $rf['media_position'] ) {
 	$rf_classes[] = 'block-image-text--media-right';
+}
+
+if ( 'offset' === $rf['frame'] ) {
+	$rf_classes[] = 'block-image-text--frame-offset';
 }
 
 if ( $rf['classes'] ) {

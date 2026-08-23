@@ -2,7 +2,7 @@
 
 // =============================================================
 // BLOCK: Image carousel
-// ACF fields: heading, slides (repeater of image + caption).
+// ACF fields: eyebrow, heading, slides (repeater of image + caption).
 //
 // One focused slide is centred on the page with the next peeking
 // in from the right. Every slide sits at the focused position and
@@ -13,12 +13,14 @@
 // the next slide travels into the space it vacates. Both ride the
 // same curve, so they never overlap mid-flight.
 //
-// Captions float over the image and roll vertically in the
-// direction of travel: "next" sends the old one down and brings
-// the new one down from above; "previous" does the reverse.
+// Captions sit beneath the image, left-aligned to its edge — small,
+// italic, muted, as under the Image + Text photo — and roll
+// vertically in the direction of travel: "next" sends the old one
+// down and brings the new one down from above; "previous" does the
+// reverse.
 //
-// The block sits on an ink band so cream captions stay legible
-// over both the photograph and the page around it.
+// The block sits on an ink band so the photographs read as a set
+// against the cream page around it.
 // =============================================================
 
 .carousel {
@@ -29,17 +31,15 @@
   --slide-w: calc(min(100%, var(--wrap)) - 2 * var(--gutter));
   --slide-h: min(calc((min(100vw, var(--wrap)) - 2 * var(--gutter)) * 2 / 3), 82vh);
   --slide-gap: 120px;
-  // How far the head and captions sit outside the focused slide's left
-  // edge. Large: not at all — the head shares the column edge…
+  // How far the head sits outside the focused slide's left edge. Large:
+  // not at all — the head shares the column edge.
   --caption-overhang: 0px;
-  // …and the captions tuck this far inside the image.
-  --caption-inset: var(--gutter);
   // Left edge of the focused slide — the anchor everything aligns to.
   // The stage is full width, so the next slide runs off the page edge;
   // beyond --wrap only a sliver of it shows past the column.
   --focus-left: calc((100% - var(--slide-w)) / 2);
-  // The one left edge the head and captions share: the caption overhang
-  // point, but never tighter than the page gutter.
+  // The head's left edge: the overhang point, but never tighter than the
+  // page gutter.
   --edge-min: var(--gutter);
   --edge: max(var(--edge-min), calc(var(--focus-left) - var(--caption-overhang)));
   // How far the focused image is zoomed in; 1 turns the effect off.
@@ -55,33 +55,24 @@
 }
 
 // Small: the original, more modest size with its own tokens. Same
-// mechanics, but the head and captions overhang the slide's left edge,
-// and the stage becomes a centred window framed by the block's own edges:
-// it spans exactly --caption-overhang either side of the slide, which is
-// where the head, captions and pager already sit. So the next slide's cut
-// line falls directly under the right-hand arrow button instead of
-// floating somewhere in the ink band, and the peek is a constant
-// overhang − gap (112px) at every desktop width.
-//
-// Inside that window the slide's left edge is --caption-overhang from the
-// stage's, so the captions' --edge is redeclared on the stage without the
-// gutter clamp (it resolves to 0 there); the head and pager keep the
-// section-level --edge, which lands on the same page x.
+// mechanics, but the head overhangs the slide's left edge, and the stage
+// becomes a centred window framed by the block's own edges: it spans
+// exactly --caption-overhang either side of the slide, which is where the
+// head and pager already sit. So the next slide's cut line falls directly
+// under the right-hand arrow button instead of floating somewhere in the
+// ink band, and the peek is a constant overhang − gap (112px) at every
+// desktop width.
 .carousel--small {
   --slide-w: min(62vw, 720px);
   --slide-h: 480px;
   --slide-gap: 28px;
   --caption-overhang: 140px;
-  --caption-inset: 0px;
   --stage-w: calc(var(--slide-w) + 2 * var(--caption-overhang));
 
   .carousel__stage {
-    --edge: calc(var(--focus-left) - var(--caption-overhang));
     max-width: var(--stage-w);
     margin-inline: auto;
   }
-
-  .carousel__captions { width: min(46vw, 480px); }
 
   // The peeking slide recedes under a heavier scrim so it reads as "up
   // next" rather than competing with the focused photo; it lifts to the
@@ -89,6 +80,26 @@
   .carousel__slide:not(.is-active):not(.is-passed)::after {
     opacity: 1;
     background: rgba(32, 60, 67, 0.45);
+  }
+}
+
+// Wrap: the ink band becomes a box within the page column, with the same
+// padding on every side. The slide fills the box inside that padding, so
+// the head and captions align to the slide with no extra gutter, and the
+// next slide runs off the box's edge just as it runs off the page in Full.
+.carousel--wrap {
+  --box-pad: 64px;
+  width: calc(100% - 2 * var(--gutter));
+  max-width: calc(var(--wrap) - 2 * var(--gutter));
+  margin-inline: auto;
+  padding: var(--box-pad);
+  border-radius: var(--radius-sm);
+  --edge-min: 0px;
+
+  // Large fills the box; Small keeps its own narrower framed slide.
+  &:not(.carousel--small) {
+    --slide-w: 100%;
+    --slide-h: min(calc((min(100vw, var(--wrap)) - 2 * var(--gutter) - 2 * var(--box-pad)) * 2 / 3), 82vh);
   }
 }
 
@@ -100,6 +111,8 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: 24px;
+
+  .carousel__eyebrow { margin-bottom: 16px; }
 
   h2,
   h3 {
@@ -236,36 +249,32 @@
 .carousel__slide.is-active .carousel__media > * { transform: scale(var(--zoom)); }
 
 // --- Captions ------------------------------------------------
+// Beneath the stage, spanning the focused slide: the slide is centred in
+// both sizes, so its left edge is --focus-left from the section's.
 .carousel__captions {
-  position: absolute;
-  z-index: 3;
-  left: calc(var(--edge) + var(--caption-inset));
-  top: 50%;
-  transform: translateY(-50%);
-  width: min(46vw, 560px);
+  margin: 10px 0 0 var(--focus-left);
+  width: var(--slide-w);
+  text-align: center;
   // Every caption occupies the same cell; only the active one shows.
   display: grid;
-  pointer-events: none;
+  // The roll must not spill into the stage above or the pager below.
+  overflow: hidden;
+
+  // Nothing to say on any slide → no row, no gap.
+  &:not(:has(.carousel__caption:not(:empty))) { display: none; }
 }
 
 .carousel__caption {
   grid-area: 1 / 1;
   margin: 0;
-  font-family: var(--font-sans);
-  font-size: clamp(22px, 2.4vw, 30px);
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: var(--tracking-caps);
-  text-transform: uppercase;
-  color: var(--rf-cream);
-  // A tight shadow for stroke contrast plus a soft one for lift, so the
-  // caption holds up over a bright photograph.
-  text-shadow:
-    0 1px 3px rgba(32, 60, 67, 0.5),
-    0 2px 18px rgba(32, 60, 67, 0.35);
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--rf-ink-faint);
   opacity: 0;
   // Upcoming captions wait above the line…
-  transform: translateY(-44px);
+  transform: translateY(-20px);
   transition: transform var(--caption-motion), opacity var(--caption-motion);
 
   &.is-active {
@@ -274,7 +283,7 @@
   }
 
   // …and passed ones have dropped below it.
-  &.is-passed { transform: translateY(44px); }
+  &.is-passed { transform: translateY(20px); }
 }
 
 // --- Pager ---------------------------------------------------
@@ -348,7 +357,6 @@
     --slide-w: calc(100% - 64px);
     --slide-h: min(calc((100vw - 64px) * 2 / 3), 82vh);
     --slide-gap: 90px;
-    --caption-inset: 32px;
     --edge-min: 32px;
     padding: 52px 0 48px;
   }
@@ -357,24 +365,30 @@
     --slide-w: min(66vw, 600px);
     --slide-h: 400px;
     --caption-overhang: 80px;
-    --caption-inset: 0px;
+  }
+
+  .carousel--wrap {
+    --box-pad: 40px;
+    width: calc(100% - 64px);
+    padding: var(--box-pad);
+
+    &:not(.carousel--small) {
+      --slide-w: 100%;
+      --slide-h: min(calc((100vw - 64px - 2 * var(--box-pad)) * 2 / 3), 82vh);
+    }
   }
 
   .carousel__head { margin-bottom: 32px; }
-
-  .carousel__captions { width: min(50vw, 420px); }
-  .carousel__caption { font-size: clamp(20px, 2.6vw, 26px); }
 }
 
 @include mobile {
   .carousel {
-    // A 20px gutter each side; the slide goes square-ish.
-    --slide-w: calc(100% - 40px);
-    --slide-h: min(calc(100vw - 40px), 60vh);
+    // Edge to edge, square-ish; the next slide is fully off-screen.
+    --slide-w: 100%;
+    --slide-h: min(100vw, 60vh);
     --slide-gap: 45px;
-    // No room to overhang in either size — captions tuck inside the image.
+    // No room to overhang in either size.
     --caption-overhang: 0px;
-    --caption-inset: 20px;
     --edge-min: 20px;
     padding: 44px 0 40px;
   }
@@ -391,33 +405,83 @@
     --stage-w: calc(var(--slide-w) + 2 * (var(--slide-gap) + var(--peek)));
   }
 
+  // No room for a box inside a box on a phone: Wrap reverts to the
+  // full-width band and looks identical to Full.
+  .carousel--wrap {
+    width: auto;
+    max-width: none;
+    padding: 44px 0 40px;
+    border-radius: 0;
+    --edge-min: 20px;
+
+    &:not(.carousel--small) {
+      --slide-w: 100%;
+      --slide-h: min(100vw, 60vh);
+    }
+  }
+
+  // Eyebrow and heading centred above; the arrows leave the head and
+  // join the pager on one bottom row — previous left, dots centred, next
+  // right. The head and its controls wrapper dissolve (display: contents)
+  // so the text, the two buttons and the pager can each be placed on the
+  // section's grid alongside the stage and captions.
+  .carousel {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+  }
+
   .carousel__head {
-    padding-inline: 20px;
-    // Controls drop beneath the heading rather than squeezing it.
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    margin-bottom: 28px;
+    display: contents;
+
+    // The text wrapper: first row, full width.
+    > :not(.carousel__controls) {
+      grid-area: 1 / 1 / 2 / -1;
+      padding-inline: 20px;
+      margin-bottom: 28px;
+      text-align: center;
+    }
 
     h2,
     h3 { font-size: 20px; }
   }
 
+  // Explicit rows: the controls come before the stage in the DOM, and
+  // auto-placement would otherwise slot them in above it.
+  .carousel__stage { grid-area: 2 / 1 / 3 / -1; }
+  .carousel__captions { grid-area: 3 / 1 / 4 / -1; }
+
+  // Bottom row. Each piece carries the gap above itself, since the row
+  // only exists with more than one slide and every piece then renders.
+  .carousel__pager {
+    grid-area: 4 / 2;
+    justify-content: center;
+    margin-top: 28px;
+  }
+
+  .carousel__controls { display: contents; }
+
+  .carousel__btn {
+    margin-top: 28px;
+
+    &[data-carousel-prev] {
+      grid-area: 4 / 1;
+      margin-left: 20px;
+    }
+
+    &[data-carousel-next] {
+      grid-area: 4 / 3;
+      margin-right: 20px;
+    }
+  }
+
   .carousel__btn { --btn-size: 50px; }
 
   .carousel__captions {
-    top: auto;
-    bottom: 24px;
-    transform: none;
-    width: calc(var(--slide-w) - 40px);
+    margin-top: 8px;
+    padding-inline: 20px;
   }
+  .carousel__caption { font-size: 16px; }
 
-  .carousel__caption {
-    font-size: 18px;
-    transform: translateY(-28px);
-    &.is-passed { transform: translateY(28px); }
-  }
-
-  .carousel__pager { margin-top: 28px; }
   .carousel__dash { width: 28px; }
 }

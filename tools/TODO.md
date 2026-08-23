@@ -70,6 +70,16 @@ list as they come up; move an item out when it's done. (Block ideas live in
   JS. Touches `template-parts/blocks/contact.php`, `_contact.scss`,
   `main.js`.
 
+- **Careers / jobs page and footer link** (added 23 Aug 2026). The old
+  theme had `careers.php`; the new site has no jobs page yet. Needs: a
+  Careers page built from existing blocks (Text intro + the Careers /
+  positions list block, BLOCK-IDEAS #20, or a Text block until that
+  exists) with an email-to-apply line, and a "Careers" link in the full
+  front-page footer — probably beside Privacy Policy / Terms of Use in the
+  baseline, or a `careers_page` post_object on Site Details → Legal pages
+  (rename the tab "Pages") so the link only prints once the page is
+  published, like Terms of Use.
+
 ## Menu
 
 - **Add images to the menu page.** Options, roughly in order of effort:

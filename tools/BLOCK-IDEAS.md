@@ -183,6 +183,21 @@ API (token maintenance — a pain) or a `images` repeater the café updates by
 hand with a "Follow us" link. Recommend the manual version; the API one  
 rots.
 
+### 14b. Producers / "Who we buy from" - yes (added 23 Aug 2026)
+
+Not "partners" or "suppliers" — call it **Producers** in the block name and  
+eyebrow ("· Our producers ·"), with "Who we buy from" as the plain-spoken  
+alternative heading. The people behind the ingredients, the  
+coffee roaster, the bread, the eggs. Eyebrow + heading + short intro, then  
+a row or grid of suppliers — each a logo (or a photo where there's no  
+logo), name, what they supply ("Coffee", "Sourdough"), a one-line note  
+and an optional link. Fields: `eyebrow`, `heading`, `intro`, `suppliers`  
+repeater (`logo`, `name`, `supplies`, `note`, `url`), `style` (logo strip |  
+cards). Logo strip is the cheap version for Home; cards with the note suit  
+About / Menu. Fits the café's "made in-house, changes with the season"  
+story and gives the Menu page something to link out to. Needs the café's  
+list of suppliers and their logos.
+
 ## Tier 3 — utilities and small wins
 
 ### 15\. Notice / announcement bar - yes good

@@ -38,10 +38,15 @@ a {
 // --- Shared type roles ---------------------------------------
 
 // The terracotta caps line that opens nearly every section.
+// Every eyebrow wears the brand's middle dots — · From the café · — so
+// editors type the words only. Blocks never add their own.
 .eyebrow {
   @include caps-label(12px);
   color: var(--text-accent);
   margin: 0 0 20px;
+
+  &::before { content: '· '; }
+  &::after { content: ' ·'; }
 }
 
 .lede {

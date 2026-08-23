@@ -6,7 +6,9 @@
  *
  *   --overlay : front page only. Absolutely positioned, so it sits over the
  *               full-page hero that follows it. Transparent, cream text, no
- *               wordmark — the hero's centred stamp is the logo.
+ *               wordmark — the hero's centred stamp is the logo. Carries a
+ *               small brand mark (Site Details → Header) that only shows
+ *               on mobile once the bar floats over page content.
  *   --stacked : every other page. Centred wordmark above the nav, ink text,
  *               hairline rule beneath.
  *
@@ -45,6 +47,10 @@ $rise_and_flour_variant  = $rise_and_flour_is_home ? 'site-header--overlay' : 's
 				);
 			}
 			?>
+		</a>
+	<?php else : ?>
+		<a class="site-header__stamp" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+			<?php rise_and_flour_mobile_bar_brand(); ?>
 		</a>
 	<?php endif; ?>
 

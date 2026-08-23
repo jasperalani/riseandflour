@@ -216,8 +216,8 @@
   margin-bottom: 56px;
 }
 
-// Eyebrows and panel labels wear the brand's middle dots: · Supper club ·
-.event__eyebrow,
+// Panel labels wear the brand's middle dots too (eyebrows get theirs from
+// the global .eyebrow rule): · Supper club ·
 .event__panel-label {
   &::before { content: '· '; }
   &::after { content: ' ·'; }

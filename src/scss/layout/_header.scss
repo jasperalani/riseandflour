@@ -118,14 +118,42 @@ body.admin-bar .site-header.is-floating {
 
   .nav-toggle-bar { background: var(--rf-cream); }
 
+  // The brand mark (Site Details → Header: round / square logo, or the
+  // footer-style text): hidden until the bar floats on mobile, where the
+  // hero's own logo has scrolled away and the ink bar needs one.
+  .site-header__stamp {
+    display: none;
+    line-height: 0;
+    color: var(--rf-ink-muted);
+    transition: color var(--ease);
+
+    &:hover { color: var(--rf-cream); }
+
+    img {
+      width: auto;
+      height: 44px;
+    }
+  }
+
+  .site-header__stamp-text {
+    @include caps-label(12px);
+    line-height: 44px;
+  }
+
   @include tablet {
     padding: 24px 32px;
   }
 
   @include mobile {
     display: flex;
+    align-items: center;
     justify-content: flex-end;
     padding: 18px 20px;
+
+    &.is-floating {
+      justify-content: space-between;
+      .site-header__stamp { display: block; }
+    }
   }
 }
 

@@ -226,6 +226,19 @@ function rise_and_flour_register_fields() {
 					'instructions' => __( 'Sits under the photo in italics. Keep it to one line. Photos are cropped to 4:5 (portrait).', 'rise-and-flour' ),
 				),
 				array(
+					'key'           => 'field_rf_it_frame',
+					'label'         => __( 'Frame', 'rise-and-flour' ),
+					'name'          => 'frame',
+					'type'          => 'button_group',
+					'instructions'  => __( 'Gapped: a rule just outside the photo. Offset: the rule shifted down and outward behind it.', 'rise-and-flour' ),
+					'choices'       => array(
+						'gapped' => __( 'Gapped', 'rise-and-flour' ),
+						'offset' => __( 'Offset', 'rise-and-flour' ),
+					),
+					'default_value' => 'gapped',
+					'allow_null'    => 0,
+				),
+				array(
 					'key'           => 'field_rf_it_media_position',
 					'label'         => __( 'Image side', 'rise-and-flour' ),
 					'name'          => 'media_position',
@@ -353,6 +366,19 @@ function rise_and_flour_register_fields() {
 					'default_value' => 'contained',
 					'allow_null'    => 0,
 				),
+				array(
+					'key'           => 'field_rf_img_height',
+					'label'         => __( 'Height', 'rise-and-flour' ),
+					'name'          => 'height',
+					'type'          => 'button_group',
+					'instructions'  => __( 'Large is two and a half times Small — a full-screen photograph.', 'rise-and-flour' ),
+					'choices'       => array(
+						'small' => __( 'Small', 'rise-and-flour' ),
+						'large' => __( 'Large', 'rise-and-flour' ),
+					),
+					'default_value' => 'small',
+					'allow_null'    => 0,
+				),
 				rise_and_flour_spacing_field( 'field_rf_img_spacing' ),
 			),
 			'location' => array(
@@ -375,6 +401,13 @@ function rise_and_flour_register_fields() {
 			'key'      => 'group_rf_carousel',
 			'title'    => __( 'Carousel', 'rise-and-flour' ),
 			'fields'   => array(
+				array(
+					'key'          => 'field_rf_car_eyebrow',
+					'label'        => __( 'Eyebrow', 'rise-and-flour' ),
+					'name'         => 'eyebrow',
+					'type'         => 'text',
+					'instructions' => __( 'Small terracotta line above the heading, e.g. "From the café".', 'rise-and-flour' ),
+				),
 				array(
 					'key'   => 'field_rf_car_heading',
 					'label' => __( 'Heading', 'rise-and-flour' ),
@@ -411,6 +444,19 @@ function rise_and_flour_register_fields() {
 						'small' => __( 'Small', 'rise-and-flour' ),
 					),
 					'default_value' => 'large',
+					'allow_null'    => 0,
+				),
+				array(
+					'key'           => 'field_rf_car_background',
+					'label'         => __( 'Background', 'rise-and-flour' ),
+					'name'          => 'background',
+					'type'          => 'button_group',
+					'instructions'  => __( 'Full: the ink band runs edge to edge. Wrap: an ink box within the page column, with the same padding all round.', 'rise-and-flour' ),
+					'choices'       => array(
+						'full' => __( 'Full width', 'rise-and-flour' ),
+						'wrap' => __( 'Wrap', 'rise-and-flour' ),
+					),
+					'default_value' => 'full',
 					'allow_null'    => 0,
 				),
 				array(

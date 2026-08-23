@@ -17,18 +17,21 @@
 // Trailing space before the footer.
 .section--last { margin-bottom: 130px; }
 
+// Smaller screens keep the desktop ratios (tight : default : loose : xl
+// ≈ 1 : 1.25 : 1.4 : 1.8) — roughly 0.8× on tablet, 0.7× on mobile — so
+// "extra" still reads as clearly more than "default" on a phone.
 @include tablet {
-  .section--tight { margin-top: 56px; }
-  .section--default { margin-top: 70px; }
+  .section--tight { margin-top: 58px; }
+  .section--default { margin-top: 72px; }
   .section--loose { margin-top: 80px; }
-  .section--xl { margin-top: 96px; }
-  .section--last { margin-bottom: 96px; }
+  .section--xl { margin-top: 104px; }
+  .section--last { margin-bottom: 104px; }
 }
 
 @include mobile {
-  .section--tight { margin-top: 44px; }
-  .section--default { margin-top: 52px; }
-  .section--loose { margin-top: 56px; }
-  .section--xl { margin-top: 64px; }
-  .section--last { margin-bottom: 64px; }
+  .section--tight { margin-top: 50px; }
+  .section--default { margin-top: 64px; }
+  .section--loose { margin-top: 70px; }
+  .section--xl { margin-top: 92px; }
+  .section--last { margin-bottom: 92px; }
 }

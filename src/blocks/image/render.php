@@ -14,6 +14,7 @@ get_template_part(
 		'image'       => get_field( 'image' ),
 		'caption'     => get_field( 'caption' ),
 		'width'       => get_field( 'width' ) ? get_field( 'width' ) : 'contained',
+		'height'      => get_field( 'height' ) ? get_field( 'height' ) : 'small',
 		'placeholder' => __( 'Set an image', 'rise-and-flour' ),
 		'classes'     => rise_and_flour_block_classes( $block ),
 		'anchor'      => rise_and_flour_block_anchor( $block ),

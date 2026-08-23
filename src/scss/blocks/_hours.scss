@@ -22,9 +22,6 @@
   @include caps-label(12px);
   color: var(--rf-terracotta);
   margin: 0;
-
-  &::before { content: '· '; }
-  &::after { content: ' ·'; }
 }
 
 .block-hours__note {

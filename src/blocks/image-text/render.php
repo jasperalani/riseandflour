@@ -20,6 +20,7 @@ get_template_part(
 	array(
 		'image'          => get_field( 'image' ),
 		'caption'        => get_field( 'caption' ),
+		'frame'          => get_field( 'frame' ) ? get_field( 'frame' ) : 'gapped',
 		'media_position' => get_field( 'media_position' ) ? get_field( 'media_position' ) : 'left',
 		'eyebrow'        => get_field( 'eyebrow' ),
 		'heading'        => get_field( 'heading' ),

@@ -2,7 +2,8 @@
 
 // =============================================================
 // BLOCK: Image
-// ACF fields (later): image, caption, width (contained|full).
+// ACF fields: image, caption, width (contained|full),
+// height (small|large). Large is 2.5× Small at every breakpoint.
 // =============================================================
 
 .block-image {
@@ -13,6 +14,7 @@
 }
 
 .block-image__media { height: 520px; }
+.block-image--tall .block-image__media { height: 1300px; }
 
 .block-image__caption {
   @include caps-label(12px);
@@ -32,12 +34,14 @@
 @include tablet {
   .block-image { padding-inline: 32px; }
   .block-image__media { height: 420px; }
+  .block-image--tall .block-image__media { height: 1050px; }
   .block-image--full { padding-inline: 0; }
 }
 
 @include mobile {
   .block-image { padding-inline: 20px; }
   .block-image__media { height: 280px; }
+  .block-image--tall .block-image__media { height: 700px; }
   .block-image--full { padding-inline: 0; }
 
   .block-image__caption {
