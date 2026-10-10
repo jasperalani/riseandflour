@@ -56,6 +56,16 @@ function rise_and_flour_register_site_options() {
 			'title'    => __( 'Footer', 'rise-and-flour' ),
 			'fields'   => array(
 				array(
+					'key'           => 'field_rf_opt_footer_stamp',
+					'label'         => __( 'Stamp image', 'rise-and-flour' ),
+					'name'          => 'footer_stamp',
+					'type'          => 'image',
+					'return_format' => 'id',
+					'preview_size'  => 'thumbnail',
+					'library'       => 'all',
+					'instructions'  => __( 'The logo on the left of the front-page footer, shown about 150px wide. Leave empty for the theme’s own stamp.', 'rise-and-flour' ),
+				),
+				array(
 					'key'           => 'field_rf_opt_address',
 					'label'         => __( 'Address', 'rise-and-flour' ),
 					'name'          => 'footer_address',

@@ -66,11 +66,27 @@ function rise_and_flour_footer_legal( $links ) {
 
 	<?php if ( $rise_and_flour_full ) : ?>
 		<div class="site-footer__inner">
-			<img
-				class="site-footer__stamp"
-				src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/logo-stamp.png' ); ?>"
-				alt="<?php esc_attr_e( 'Rise &amp; Flour stamp', 'rise-and-flour' ); ?>"
-			>
+			<?php
+			$rise_and_flour_stamp_id = (int) rise_and_flour_option( 'footer_stamp' );
+			if ( $rise_and_flour_stamp_id && wp_attachment_is_image( $rise_and_flour_stamp_id ) ) :
+				echo wp_get_attachment_image(
+					$rise_and_flour_stamp_id,
+					'medium',
+					false,
+					array(
+						'class' => 'site-footer__stamp',
+						'alt'   => __( 'Rise &amp; Flour stamp', 'rise-and-flour' ),
+						'sizes' => '150px',
+					)
+				);
+			else :
+				?>
+				<img
+					class="site-footer__stamp"
+					src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/logo-stamp.png' ); ?>"
+					alt="<?php esc_attr_e( 'Rise &amp; Flour stamp', 'rise-and-flour' ); ?>"
+				>
+			<?php endif; ?>
 			<div>
 				<p class="site-footer__label"><?php esc_html_e( 'Find us', 'rise-and-flour' ); ?></p>
 				<p class="site-footer__text"><?php echo wp_kses( $rise_and_flour_address, array( 'br' => array() ) ); ?></p>
