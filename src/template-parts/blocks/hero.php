@@ -44,7 +44,25 @@ $rf = wp_parse_args(
 
 	<?php if ( $rf['show_logo'] && $rf['logo'] ) : ?>
 		<div class="hero__logo">
-			<img src="<?php echo esc_url( $rf['logo'] ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
+			<?php
+			// A Media Library logo gets a srcset so the browser fetches a size
+			// near the 200–280px it is shown at, not the full upload.
+			$rf_logo_id = is_array( $rf['logo'] ) && isset( $rf['logo']['ID'] ) ? (int) $rf['logo']['ID'] : $rf['logo'];
+			if ( is_numeric( $rf_logo_id ) && wp_attachment_is_image( (int) $rf_logo_id ) ) :
+				echo wp_get_attachment_image(
+					(int) $rf_logo_id,
+					'medium_large',
+					false,
+					array(
+						'alt'     => get_bloginfo( 'name' ),
+						'sizes'   => '(max-width: 640px) 200px, 280px',
+						'loading' => false,
+					)
+				);
+			else :
+				?>
+				<img src="<?php echo esc_url( $rf['logo'] ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
+			<?php endif; ?>
 		</div>
 	<?php endif; ?>
 

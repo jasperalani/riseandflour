@@ -21,7 +21,7 @@ get_template_part(
 	array(
 		'image'       => get_field( 'image' ),
 		'show_logo'   => $rf_show_logo,
-		'logo'        => $rf_logo ? rise_and_flour_image_url( $rf_logo ) : get_template_directory_uri() . '/assets/img/logo-rect-stamp.png',
+		'logo'        => $rf_logo ? $rf_logo : get_template_directory_uri() . '/assets/img/logo-rect-stamp.png',
 		'caption'     => get_field( 'caption' ),
 		'placeholder' => __( 'Full-page hero — set an image', 'rise-and-flour' ),
 		'classes'     => rise_and_flour_block_classes( $block ),
