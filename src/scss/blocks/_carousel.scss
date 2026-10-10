@@ -332,6 +332,17 @@
   &.is-passed { transform: translateY(20px); }
 }
 
+// Autoplay's wrap from the last slide to the first: one frame with the
+// transitions off, so the reset is a cut rather than a big reshuffle.
+.carousel--no-anim {
+  .carousel__slide,
+  .carousel__caption {
+    transition: none !important;
+  }
+
+  .carousel__media > * { transition: none !important; }
+}
+
 // --- Pager ---------------------------------------------------
 // Dashes sit centred under the stage in both sizes.
 .carousel__pager {

@@ -46,6 +46,8 @@ get_template_part(
 		'size'    => get_field( 'size' ),
 		'background' => get_field( 'background' ),
 		'frame'   => get_field( 'frame' ),
+		'autoplay'       => null === get_field( 'autoplay' ) ? true : (bool) get_field( 'autoplay' ),
+		'autoplay_delay' => get_field( 'autoplay_delay' ) ? (float) get_field( 'autoplay_delay' ) : 5,
 		'pager'   => get_field( 'pager' ),
 		'classes' => rise_and_flour_block_classes( $block ),
 		'anchor'  => rise_and_flour_block_anchor( $block ),

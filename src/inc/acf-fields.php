@@ -714,6 +714,36 @@ function rise_and_flour_register_fields() {
 					'allow_null'    => 0,
 				),
 				array(
+					'key'           => 'field_rf_car_autoplay',
+					'label'         => __( 'Autoplay', 'rise-and-flour' ),
+					'name'          => 'autoplay',
+					'type'          => 'true_false',
+					'ui'            => 1,
+					'instructions'  => __( 'Advance by itself. It stops as soon as someone navigates, pauses while hovered, and stays off for visitors who prefer reduced motion.', 'rise-and-flour' ),
+					'default_value' => 1,
+				),
+				array(
+					'key'               => 'field_rf_car_autoplay_delay',
+					'label'             => __( 'Autoplay delay', 'rise-and-flour' ),
+					'name'              => 'autoplay_delay',
+					'type'              => 'number',
+					'instructions'      => __( 'Seconds each slide holds before the next.', 'rise-and-flour' ),
+					'default_value'     => 5,
+					'min'               => 2,
+					'max'               => 30,
+					'step'              => 0.5,
+					'append'            => __( 's', 'rise-and-flour' ),
+					'conditional_logic' => array(
+						array(
+							array(
+								'field'    => 'field_rf_car_autoplay',
+								'operator' => '==',
+								'value'    => '1',
+							),
+						),
+					),
+				),
+				array(
 					'key'           => 'field_rf_car_frame',
 					'label'         => __( 'Frame', 'rise-and-flour' ),
 					'name'          => 'frame',

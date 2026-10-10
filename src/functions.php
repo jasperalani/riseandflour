@@ -32,10 +32,9 @@ function rise_and_flour_setup() {
 	add_theme_support( 'responsive-embeds' );
 
 	// Load the site stylesheet into the editor so ACF block previews render
-	// as they will on the front end. The web fonts go in too — main.css only
-	// names them, and the front-end enqueue doesn't run in the editor.
+	// as they will on the front end. The web fonts are self-hosted and
+	// declared in main.css, so they come along with it.
 	add_theme_support( 'editor-styles' );
-	add_editor_style( 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap' );
 	add_editor_style( 'css/main.css' );
 
 	// The design has one fixed content width; no user-selectable widths.
@@ -84,18 +83,11 @@ function rise_and_flour_asset_version( $path ) {
  */
 function rise_and_flour_scripts() {
 
-	wp_enqueue_style(
-		'rise-and-flour-fonts',
-		'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap',
-		array(),
-		null // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- Google Fonts is versioned by URL.
-	);
-
 	// style.css holds only the theme header; this is the real stylesheet.
 	wp_enqueue_style(
 		'rise-and-flour-style',
 		get_template_directory_uri() . '/css/main.css',
-		array( 'rise-and-flour-fonts' ),
+		array(),
 		rise_and_flour_asset_version( 'css/main.css' )
 	);
 
@@ -110,22 +102,21 @@ function rise_and_flour_scripts() {
 add_action( 'wp_enqueue_scripts', 'rise_and_flour_scripts' );
 
 /**
- * Preconnect to the font CDN.
+ * Preload the two text faces nearly every page paints with.
  *
- * @param array  $hints    Resource hints.
- * @param string $relation Relation type.
- * @return array
+ * The browser otherwise only finds them after main.css has downloaded and
+ * parsed. The Garamond italic and Core Magic are used sparingly and load
+ * on demand.
  */
-function rise_and_flour_resource_hints( $hints, $relation ) {
-	if ( 'preconnect' === $relation ) {
-		$hints[] = array(
-			'href'        => 'https://fonts.gstatic.com',
-			'crossorigin' => '',
+function rise_and_flour_preload_fonts() {
+	foreach ( array( 'montserrat-latin.woff2', 'eb-garamond-latin.woff2' ) as $font ) {
+		printf(
+			'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
+			esc_url( get_template_directory_uri() . '/assets/fonts/' . $font )
 		);
 	}
-	return $hints;
 }
-add_filter( 'wp_resource_hints', 'rise_and_flour_resource_hints', 10, 2 );
+add_action( 'wp_head', 'rise_and_flour_preload_fonts', 1 );
 
 /**
  * Output an image, or a grey placeholder when none is set.

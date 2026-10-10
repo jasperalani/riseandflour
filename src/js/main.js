@@ -289,6 +289,78 @@
 
     // Stops the browser's native image-drag ghost interrupting a swipe.
     stage.addEventListener('dragstart', function (e) { e.preventDefault(); });
+
+    /* --- Autoplay -------------------------------------------- */
+    // data-carousel-autoplay carries the delay in ms (absent = off).
+    // It advances until the end, snaps back to the start without the
+    // travel animation, and goes round again. Any manual navigation
+    // stops it for good; hovering or leaving the viewport pauses it;
+    // visitors who prefer reduced motion never see it run.
+
+    var autoMs = parseInt(root.getAttribute('data-carousel-autoplay'), 10) || 0;
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!autoMs || reduceMotion) return;
+
+    var timer = null;
+    var inView = true;
+    var liveRegion = root.querySelector('[aria-live]');
+
+    // Screen readers shouldn't get a new caption read to them every few
+    // seconds; announcements come back once autoplay stops.
+    function setLive(polite) {
+      if (liveRegion) liveRegion.setAttribute('aria-live', polite ? 'polite' : 'off');
+    }
+
+    function snapTo(i) {
+      root.classList.add('carousel--no-anim');
+      goTo(i);
+      void stage.offsetHeight; // flush styles so the jump doesn't animate
+      root.classList.remove('carousel--no-anim');
+    }
+
+    function play() {
+      if (timer !== null) return;
+      setLive(false);
+      timer = setInterval(function () {
+        if (document.hidden || !inView) return;
+        if (index >= total - 1) snapTo(0);
+        else goTo(index + 1);
+      }, autoMs);
+    }
+
+    function pause() {
+      if (timer === null) return;
+      clearInterval(timer);
+      timer = null;
+    }
+
+    // The visitor has taken the wheel — don't fight them.
+    function stopForGood() {
+      pause();
+      setLive(true);
+      root.removeEventListener('pointerdown', stopForGood, true);
+      root.removeEventListener('keydown', stopForGood, true);
+      root.removeEventListener('focusin', stopForGood);
+      root.removeEventListener('mouseenter', pause);
+      root.removeEventListener('mouseleave', play);
+    }
+
+    // Capture phase, so these run whatever the target — arrows, dashes,
+    // a swipe on the stage, a tap on the peeking slide.
+    root.addEventListener('pointerdown', stopForGood, true);
+    root.addEventListener('keydown', stopForGood, true);
+    root.addEventListener('focusin', stopForGood);
+
+    root.addEventListener('mouseenter', pause);
+    root.addEventListener('mouseleave', play);
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        inView = entries[0].isIntersecting;
+      }, { threshold: 0.25 }).observe(root);
+    }
+
+    play();
   }
 
   /* -----------------------------------------------------------

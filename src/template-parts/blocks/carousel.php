@@ -30,6 +30,8 @@ $rf = wp_parse_args(
 		'size'    => 'large',
 		'background' => 'full',
 		'frame'   => 'none',
+		'autoplay'       => true,
+		'autoplay_delay' => 5,
 		// 'dash' (default), 'dot' or 'diamond' — the Pager style field.
 		'pager'   => 'dash',
 		'classes' => '',
@@ -70,12 +72,16 @@ foreach ( $rf['slides'] as $rf_slide ) {
 }
 
 $rf_total = count( $rf_slides );
+
+// Milliseconds between automatic advances; 0 turns autoplay off.
+$rf_autoplay = $rf['autoplay'] && $rf_total > 1 ? (int) round( max( 2, min( 30, (float) $rf['autoplay_delay'] ) ) * 1000 ) : 0;
 ?>
 
 <section
 	class="carousel <?php echo esc_attr( $rf['classes'] ); ?>"
 	<?php echo $rf['anchor'] ? 'id="' . esc_attr( $rf['anchor'] ) . '"' : ''; ?>
 	data-carousel
+	<?php echo $rf_autoplay ? 'data-carousel-autoplay="' . esc_attr( $rf_autoplay ) . '"' : ''; ?>
 >
 
 	<?php // Only emitted with something to show — an empty head would still carry its margin. ?>
