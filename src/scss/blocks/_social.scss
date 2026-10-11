@@ -63,7 +63,11 @@
   border-radius: var(--radius-round);
   background: var(--surface-inverse);
 
-  &:hover { background: var(--rf-terracotta); }
+  // Keep the icon white: the global a:hover would turn it terracotta too.
+  &:hover {
+    background: var(--rf-terracotta);
+    color: var(--rf-white);
+  }
 }
 
 // --- Band -------------------------------------------------------

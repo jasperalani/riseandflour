@@ -3818,6 +3818,7 @@ body.admin-bar .site-header.is-floating {
 }
 .block-social--circles .block-social__link:hover {
   background: var(--rf-terracotta);
+  color: var(--rf-white);
 }
 
 .block-social--band {
