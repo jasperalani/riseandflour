@@ -157,6 +157,7 @@ function rise_and_flour_allowed_blocks( $allowed, $context ) {
 		'acf/rf-hours',
 		'acf/rf-founder',
 		'acf/rf-gallery',
+		'acf/rf-social',
 		// Core escape hatches for one-off content.
 		'core/paragraph',
 		'core/heading',

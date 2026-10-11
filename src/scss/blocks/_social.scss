@@ -1,0 +1,96 @@
+@use '../abstracts/mixins' as *;
+
+// =============================================================
+// BLOCK: Social links
+// ACF fields: eyebrow, style (circles | band).
+// Addresses come from Site Details → Social.
+//
+//   circles — white line icons in ink circles on the cream page;
+//             the circle turns terracotta on hover.
+//   band    — bare white icons on an ink strip edge to edge;
+//             the icon turns terracotta on hover.
+// =============================================================
+
+.block-social {
+  @include wrap;
+  text-align: center;
+}
+
+.block-social__eyebrow { margin-bottom: 24px; }
+
+.block-social__list {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.block-social__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rf-white);
+  transition: background var(--ease), color var(--ease);
+}
+
+.block-social__icon {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.block-social__dot {
+  fill: currentColor;
+  stroke: none;
+}
+
+// --- Circles ----------------------------------------------------
+.block-social--circles .block-social__link {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-round);
+  background: var(--surface-inverse);
+
+  &:hover { background: var(--rf-terracotta); }
+}
+
+// --- Band -------------------------------------------------------
+// Runs edge to edge like the Opening hours band.
+.block-social--band {
+  max-width: none;
+  padding: 48px var(--gutter);
+  background: var(--surface-inverse);
+
+  .block-social__list { gap: 36px; }
+
+  .block-social__icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .block-social__link:hover { color: var(--rf-terracotta); }
+}
+
+// The editor-only note when Site Details has no addresses yet.
+.block-social__empty {
+  @include caps-label(11px);
+  padding: 24px;
+  text-align: center;
+  color: var(--text-muted);
+  border: 1px dashed var(--border-default);
+}
+
+@include mobile {
+  .block-social--circles .block-social__link {
+    width: 48px;
+    height: 48px;
+  }
+
+  .block-social--band { padding-block: 36px; }
+}

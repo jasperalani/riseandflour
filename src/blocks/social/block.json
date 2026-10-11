@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "acf/rf-social",
+  "title": "Social links",
+  "description": "Instagram and Facebook as white line icons, side by side. The links come from Site Details.",
+  "category": "rise-and-flour",
+  "icon": "share",
+  "keywords": ["social", "instagram", "facebook", "follow"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "render.php"
+  },
+  "supports": {
+    "align": false,
+    "anchor": true,
+    "customClassName": true,
+    "jsx": false
+  }
+}

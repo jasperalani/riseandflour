@@ -294,6 +294,26 @@ function rise_and_flour_register_site_options() {
 				),
 
 				array(
+					'key'   => 'field_rf_opt_tab_social',
+					'label' => __( 'Social', 'rise-and-flour' ),
+					'type'  => 'tab',
+				),
+				array(
+					'key'          => 'field_rf_opt_social_instagram',
+					'label'        => __( 'Instagram', 'rise-and-flour' ),
+					'name'         => 'social_instagram',
+					'type'         => 'url',
+					'instructions' => __( 'The full profile address, e.g. https://www.instagram.com/riseandflour/. Used by the Social links block; leave empty to hide the icon.', 'rise-and-flour' ),
+				),
+				array(
+					'key'          => 'field_rf_opt_social_facebook',
+					'label'        => __( 'Facebook', 'rise-and-flour' ),
+					'name'         => 'social_facebook',
+					'type'         => 'url',
+					'instructions' => __( 'The full page address. Leave empty to hide the icon.', 'rise-and-flour' ),
+				),
+
+				array(
 					'key'   => 'field_rf_opt_tab_legal',
 					'label' => __( 'Legal pages', 'rise-and-flour' ),
 					'type'  => 'tab',

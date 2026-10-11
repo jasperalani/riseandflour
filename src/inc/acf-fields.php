@@ -1330,6 +1330,50 @@ function rise_and_flour_register_fields() {
 	);
 
 	/* ---------------------------------------------------------
+	 * Social links
+	 * --------------------------------------------------------- */
+	acf_add_local_field_group(
+		array(
+			'key'      => 'group_rf_social',
+			'title'    => __( 'Social links', 'rise-and-flour' ),
+			'fields'   => array(
+				array(
+					'key'           => 'field_rf_soc_style',
+					'label'         => __( 'Style', 'rise-and-flour' ),
+					'name'          => 'style',
+					'type'          => 'button_group',
+					'instructions'  => __( 'Circles: each icon in an ink circle on the cream page. Band: bare icons on an ink strip edge to edge. The addresses are set under Site Details → Social.', 'rise-and-flour' ),
+					'choices'       => array(
+						'circles' => __( 'Circles', 'rise-and-flour' ),
+						'band'    => __( 'Band', 'rise-and-flour' ),
+					),
+					'default_value' => 'circles',
+					'allow_null'    => 0,
+					'wrapper'       => array( 'width' => '50' ),
+				),
+				array(
+					'key'          => 'field_rf_soc_eyebrow',
+					'label'        => __( 'Eyebrow', 'rise-and-flour' ),
+					'name'         => 'eyebrow',
+					'type'         => 'text',
+					'instructions' => __( 'Optional line above the icons, e.g. "Follow along".', 'rise-and-flour' ),
+					'wrapper'      => array( 'width' => '50' ),
+				),
+				rise_and_flour_spacing_field( 'field_rf_soc_spacing' ),
+			),
+			'location' => array(
+				array(
+					array(
+						'param'    => 'block',
+						'operator' => '==',
+						'value'    => 'acf/rf-social',
+					),
+				),
+			),
+		)
+	);
+
+	/* ---------------------------------------------------------
 	 * Events (list block)
 	 * --------------------------------------------------------- */
 	acf_add_local_field_group(
