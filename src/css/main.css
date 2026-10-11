@@ -3794,51 +3794,6 @@ body.admin-bar .site-header.is-floating {
   display: block;
 }
 
-.open-status {
-  font-family: var(--font-sans);
-  font-size: 11px;
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  font-weight: 500;
-  margin: 0;
-  color: var(--text-muted);
-}
-.open-status:empty {
-  display: none;
-}
-.open-status::before {
-  content: "";
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  margin-right: 10px;
-  border-radius: var(--radius-round);
-  background: currentColor;
-  vertical-align: 1px;
-}
-.open-status.is-open {
-  color: var(--rf-terracotta);
-}
-.open-status.is-open::before {
-  background: var(--rf-terracotta);
-}
-
-.site-footer__status {
-  margin-top: 12px;
-}
-.site-footer__status.is-closed {
-  color: var(--rf-ink-muted);
-}
-
-.block-location__status {
-  margin-top: 12px;
-}
-
-.block-hours__status {
-  margin-top: 16px;
-  justify-content: center;
-}
-
 .block-label {
   max-width: var(--wrap);
   margin-inline: auto;

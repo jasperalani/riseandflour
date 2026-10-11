@@ -10,9 +10,7 @@
  * ("Monday – Friday, 8:30am – 3pm") is generated, not typed.
  *
  * Because the times are real data the theme can also emit schema.org
- * openingHoursSpecification for Google, and print an "Open now · closes 3pm"
- * line. That line is computed in the browser (main.js) from a schedule the
- * page carries, so a cached page never says "open" after closing time.
+ * openingHoursSpecification for Google.
  *
  * Sites that predate this keep working: with no rows defined, the legacy
  * free-text hours field is used as before.
@@ -339,55 +337,6 @@ function rise_and_flour_hours_all_text() {
 		$blocks[] = implode( "\n", $lines );
 	}
 	return implode( "\n\n", $blocks );
-}
-
-/**
- * The main group's schedule as compact JSON for the "open now" script:
- * [{d:[1,2,3,4,5], o:"08:30", c:"15:00"}, …]. Closed days simply have no
- * entry.
- *
- * @return string JSON, or '' with no structured hours.
- */
-function rise_and_flour_hours_schedule_json() {
-	$groups = rise_and_flour_hours_groups();
-	if ( empty( $groups[0] ) ) {
-		return '';
-	}
-	$schedule = array();
-	foreach ( $groups[0]['rows'] as $row ) {
-		if ( $row['closed'] ) {
-			continue;
-		}
-		$schedule[] = array(
-			'd' => $row['days'],
-			'o' => $row['opens'],
-			'c' => $row['closes'],
-		);
-	}
-	return $schedule ? wp_json_encode( $schedule ) : '';
-}
-
-/**
- * Print the "Open now · closes 3pm" placeholder. Empty until main.js fills
- * it in the visitor's browser, so it's right even on a cached page.
- *
- * @param string $class Extra class for the element.
- */
-function rise_and_flour_open_status( $class = '' ) {
-	$schedule = rise_and_flour_hours_schedule_json();
-	if ( ! $schedule ) {
-		return;
-	}
-	printf(
-		'<p class="open-status %s" data-open-status data-schedule="%s" data-tz="%s" data-open="%s" data-closed="%s" data-today="%s" data-tomorrow="%s" aria-live="polite"></p>',
-		esc_attr( $class ),
-		esc_attr( $schedule ),
-		esc_attr( wp_timezone_string() ),
-		esc_attr__( 'Open now · closes %s', 'rise-and-flour' ),
-		esc_attr__( 'Closed · opens %s', 'rise-and-flour' ),
-		esc_attr__( 'today', 'rise-and-flour' ),
-		esc_attr__( 'tomorrow', 'rise-and-flour' )
-	);
 }
 
 /**

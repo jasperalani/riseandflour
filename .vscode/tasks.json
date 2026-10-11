@@ -1,0 +1,18 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      // Recompiles src/css/main.css on every .scss save. Starts by itself when
+      // the folder opens; the first time, VS Code asks to allow automatic tasks
+      // (or run "Tasks: Manage Automatic Tasks" → Allow).
+      "label": "Sass watch",
+      "type": "npm",
+      "script": "watch",
+      "path": "src",
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "silent", "panel": "dedicated" },
+      "runOptions": { "runOn": "folderOpen" }
+    }
+  ]
+}

@@ -94,7 +94,6 @@ function rise_and_flour_footer_legal( $links ) {
 			<div>
 				<p class="site-footer__label"><?php esc_html_e( 'Hours', 'rise-and-flour' ); ?></p>
 				<p class="site-footer__text"><?php echo wp_kses( $rise_and_flour_hours, array( 'br' => array() ) ); ?></p>
-				<?php rise_and_flour_open_status( 'site-footer__status' ); ?>
 			</div>
 			<div>
 				<p class="site-footer__label"><?php esc_html_e( 'Say hello', 'rise-and-flour' ); ?></p>

@@ -117,7 +117,6 @@ $rf_tel = preg_replace( '/[^0-9+]/', '', (string) $rf_phone );
 					<dt><?php esc_html_e( 'Hours', 'rise-and-flour' ); ?></dt>
 					<dd>
 						<?php echo $rf_lines( $rf_hours ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-						<?php rise_and_flour_open_status( 'block-location__status' ); ?>
 					</dd>
 				</div>
 			<?php endif; ?>
