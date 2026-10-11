@@ -21,10 +21,15 @@
 .block-social__list {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 20px;
   list-style: none;
   margin: 0;
   padding: 0;
+
+  // Outranks the page content's `li + li` spacing, which would drop the
+  // second icon below the first.
+  li { margin: 0; }
 }
 
 .block-social__link {
@@ -32,6 +37,7 @@
   align-items: center;
   justify-content: center;
   color: var(--rf-white);
+  border: 0;
   transition: background var(--ease), color var(--ease);
 }
 

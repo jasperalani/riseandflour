@@ -539,12 +539,12 @@ body.admin-bar .site-header.is-floating {
     margin-bottom: 92px;
   }
 }
-.entry-content > :not(.hero, .block-image-text, .block-image, .block-text, .carousel, .block-menu, .block-location, .block-events, .block-contact, .block-hours, .block-founder, .block-gallery) {
+.entry-content > :not(.hero, .block-image-text, .block-image, .block-text, .carousel, .block-menu, .block-location, .block-events, .block-contact, .block-hours, .block-founder, .block-gallery, .block-social) {
   max-width: 700px;
   margin-inline: auto;
   padding-inline: var(--gutter);
 }
-.entry-content > :not(.hero, .block-image-text, .block-image, .block-text, .carousel, .block-menu, .block-location, .block-events, .block-contact, .block-hours, .block-founder, .block-gallery) + :not(.hero, .block-image-text, .block-image, .block-text, .carousel, .block-menu, .block-location, .block-events, .block-contact, .block-hours, .block-founder, .block-gallery) {
+.entry-content > :not(.hero, .block-image-text, .block-image, .block-text, .carousel, .block-menu, .block-location, .block-events, .block-contact, .block-hours, .block-founder, .block-gallery, .block-social) + :not(.hero, .block-image-text, .block-image, .block-text, .carousel, .block-menu, .block-location, .block-events, .block-contact, .block-hours, .block-founder, .block-gallery, .block-social) {
   margin-top: 24px;
 }
 .entry-content .alignwide {
@@ -556,12 +556,12 @@ body.admin-bar .site-header.is-floating {
   margin-inline: calc(50% - 50vw);
 }
 @media (max-width: 1024px) {
-  .entry-content > :not(.hero, .block-image-text, .block-image, .block-text, .carousel, .block-menu, .block-location, .block-events, .block-contact, .block-hours, .block-founder, .block-gallery) {
+  .entry-content > :not(.hero, .block-image-text, .block-image, .block-text, .carousel, .block-menu, .block-location, .block-events, .block-contact, .block-hours, .block-founder, .block-gallery, .block-social) {
     padding-inline: 32px;
   }
 }
 @media (max-width: 640px) {
-  .entry-content > :not(.hero, .block-image-text, .block-image, .block-text, .carousel, .block-menu, .block-location, .block-events, .block-contact, .block-hours, .block-founder, .block-gallery) {
+  .entry-content > :not(.hero, .block-image-text, .block-image, .block-text, .carousel, .block-menu, .block-location, .block-events, .block-contact, .block-hours, .block-founder, .block-gallery, .block-social) {
     padding-inline: 20px;
   }
 }
@@ -613,7 +613,7 @@ body.admin-bar .site-header.is-floating {
   font-size: 20px;
   color: var(--text-heading);
 }
-:where(.entry-content) > :not(.hero, .block-image-text, .block-image, .block-text, .carousel, .block-menu, .block-location, .block-events, .block-contact, .block-hours, .block-founder, .block-gallery) figcaption {
+:where(.entry-content) > :not(.hero, .block-image-text, .block-image, .block-text, .carousel, .block-menu, .block-location, .block-events, .block-contact, .block-hours, .block-founder, .block-gallery, .block-social) figcaption {
   font-family: var(--font-sans);
   font-size: 11px;
   letter-spacing: var(--tracking-label);
@@ -3776,10 +3776,14 @@ body.admin-bar .site-header.is-floating {
 .block-social__list {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 20px;
   list-style: none;
   margin: 0;
   padding: 0;
+}
+.block-social__list li {
+  margin: 0;
 }
 
 .block-social__link {
@@ -3787,6 +3791,7 @@ body.admin-bar .site-header.is-floating {
   align-items: center;
   justify-content: center;
   color: var(--rf-white);
+  border: 0;
   transition: background var(--ease), color var(--ease);
 }
 
