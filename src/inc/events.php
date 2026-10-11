@@ -123,6 +123,9 @@ function rise_and_flour_event( $post = null ) {
 		return trim( (string) $value );
 	};
 
+	// On unless switched off — events saved before the toggle existed have no value.
+	$show_image = function_exists( 'get_field' ) ? get_field( 'show_image', $post->ID ) : get_post_meta( $post->ID, 'show_image', true );
+
 	return array(
 		'start'        => $start,
 		'end'          => $end,
@@ -138,6 +141,7 @@ function rise_and_flour_event( $post = null ) {
 		'capacity'     => $field( 'capacity' ),
 		'eyebrow'      => $field( 'eyebrow' ),
 		'subtitle'     => $field( 'subtitle' ),
+		'show_image'   => null === $show_image || '' === $show_image ? true : (bool) $show_image,
 		'panel_label'  => $field( 'panel_label' ),
 		'panel_note'   => $field( 'panel_note' ),
 		'courses'      => rise_and_flour_event_courses( $post->ID ),

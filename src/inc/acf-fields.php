@@ -1503,7 +1503,7 @@ function rise_and_flour_register_fields() {
 
 				array(
 					'key'   => 'field_rf_event_tab_titles',
-					'label' => __( 'Titles', 'rise-and-flour' ),
+					'label' => __( 'Titles & image', 'rise-and-flour' ),
 					'type'  => 'tab',
 				),
 				array(
@@ -1519,6 +1519,15 @@ function rise_and_flour_register_fields() {
 					'name'         => 'subtitle',
 					'type'         => 'text',
 					'instructions' => __( 'Italic line under the title, e.g. "An evening of late summer, served family-style".', 'rise-and-flour' ),
+				),
+				array(
+					'key'           => 'field_rf_event_show_image',
+					'label'         => __( 'Show featured image on the event page', 'rise-and-flour' ),
+					'name'          => 'show_image',
+					'type'          => 'true_false',
+					'ui'            => 1,
+					'default_value' => 1,
+					'instructions'  => __( 'The image beneath the date line. Turning it off keeps it on the events list.', 'rise-and-flour' ),
 				),
 
 				array(

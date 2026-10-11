@@ -1,4 +1,7 @@
-on: workflow_dispatch
+on:
+  push:
+    branches: [theme-redesign]
+  workflow_dispatch:
 name: 🚀 Deploy website
 jobs:
   web-deploy:

@@ -4,7 +4,7 @@
  *
  * Follows the "Supper Club" page from the design export: back link, centred
  * head (eyebrow · title · italic subtitle · bordered date strip), the
- * featured image, the write-up in a narrow column, an ink "On the night"
+ * featured image (unless switched off on the event), the write-up in a narrow column, an ink "On the night"
  * panel listing the courses/lines, and a terracotta reserve button with a
  * line beneath. Every piece of text comes from the event's fields.
  *
@@ -68,7 +68,7 @@ get_header();
 					<?php endif; ?>
 				</header>
 
-				<?php if ( has_post_thumbnail() ) : ?>
+				<?php if ( $rise_and_flour_event['show_image'] && has_post_thumbnail() ) : ?>
 					<div class="event__media">
 						<?php
 						rise_and_flour_media(
